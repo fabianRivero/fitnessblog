@@ -1,0 +1,30 @@
+.nav-links {
+  width: 40%;
+  top: 4rem;
+  background-color: #ff9776;
+  display: none;
+  margin: 0;
+    a {
+      display: inline-block;
+      padding: 15px 20px;
+      &:hover, &:focus{
+        background-color: #ff9776;
+      }
+    }
+}
+
+.expanded { /**Es para cuando se clickea el hamburger y se "expande" el nav-links**/
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+@include breakpoint(tablethorizontal) {
+  .nav-links {
+    margin-left: 15vw;
+    display: block;
+    position: static;
+    width: auto;
+    background: none;
+  } 
+}
