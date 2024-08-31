@@ -1,0 +1,32 @@
+#searchresults{
+    position: absolute;
+    top: 568px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    background: red;
+    z-index: 11;
+    display: block;
+    li{
+        list-style: none;
+        a{
+            display: block;
+            color: #777777;
+            padding: 8px 15px;
+            #icon{
+                width: 10px;
+                height: auto;
+                margin-left: 10px;
+            }
+            &:hover{
+                background: #f3f3f3;
+            }
+        }
+
+    }
+}
+
+.shownResults{
+    display: block;
+}
+

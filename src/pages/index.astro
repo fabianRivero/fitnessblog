@@ -1,22 +1,23 @@
 ---
-import Header from "../components/Header.astro";
-import "../scripts/stylesImport.js"
+import HeroImage from "../components/HeroImage.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		
-		<title>Astro</title>
-	</head>
-	<body>
-		<Header />
-		<h1>Astro</h1>
-		<script>
-			import "../scripts/hamburger.js"
-		</script>
-	</body>
-</html>
+<BaseLayout>
+	<HeroImage />
+<main id="main">
+	<section class="page-introduction">
+		<h2>Bienvenido al nuestro blog!</h2>
+		<p>La mejor información sobre fitness y bienestar en un solo lugar</p>
+	</section>
+
+	<section class="last-articles">
+		<h2>Blogs recientes</h2>
+		<article class="latest 1"></article>
+		<article class="latest"></article>
+		<article class="latest"></article>
+		<article class="latest"></article>
+	</section>
+</main>
+</BaseLayout>
+

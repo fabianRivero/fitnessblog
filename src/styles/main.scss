@@ -19,21 +19,30 @@
 
 // 4. Layout-related sections
 @import
-  'layout/header',
+  
   'layout/footer';
 
 // 5. Components
 @import
-  'components/button',
   'components/hamburger',
+  'components/header',
+  'components/heroimage',
   'components/navigation',
-  'components/searcher';
+  'components/searcherBox',
+  'components/searchresults';
 
 // 6. Page-specific styles
 @import
-  'pages/home';
+  'pages/index';
 
 // 7. Themes
 @import
   'themes/default';
 
+*{
+  margin: 0;
+  padding: 0;
+  a{
+    text-decoration: none;
+  }
+}

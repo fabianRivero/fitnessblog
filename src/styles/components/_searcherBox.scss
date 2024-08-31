@@ -1,0 +1,28 @@
+#searcherbox{
+    display: flex;
+    position: fixed;
+    top: 368px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 5;    
+    transition: all 600ms;
+    input{
+        display: block;
+        width: 87%;
+        justify-content: center;
+        padding: 10px;
+        font-size: 15px;
+        outline: 0;
+    }
+    @include breakpoint(tablethorizontal) { 
+        display: none;
+    }
+}
+
+.extended{
+    top: 450px;
+    display: "block";
+}
+
+
