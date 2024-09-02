@@ -1,12 +1,10 @@
 #searchresults{
     position: absolute;
-    top: 568px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1200px;
-    background: red;
-    z-index: 11;
-    display: block;
+    top: 532px;
+    width: 100%;
+    background: rgb(233, 233, 233);
+    z-index: 5;
+    display: none;
     li{
         list-style: none;
         a{

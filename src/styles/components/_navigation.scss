@@ -30,7 +30,6 @@
 
 @include breakpoint(tablet) {
   .nav-links {
-    margin-left: 1vw;
     display: block;
     position: static;
     width: auto;
@@ -51,7 +50,7 @@
 @include breakpoint(tablethorizontal) {
   .nav-links {
     a{
-      padding: 10px 30px;
+      padding: 10px 26px;
       
     }
   } 

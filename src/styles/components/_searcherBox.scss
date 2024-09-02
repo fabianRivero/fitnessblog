@@ -1,15 +1,17 @@
 #searcherbox{
     display: flex;
-    position: fixed;
+    position: absolute;
     top: 368px;
     width: 100%;
     background-color: #fff;
-    padding: 20px;
+    padding: 17px 0px;
+    border-bottom: 0.3px solid black;
     z-index: 5;    
     transition: all 600ms;
     input{
         display: block;
-        width: 87%;
+        margin-left: 2.5vw;
+        width: 90%;
         justify-content: center;
         padding: 10px;
         font-size: 15px;
@@ -20,9 +22,5 @@
     }
 }
 
-.extended{
-    top: 450px;
-    display: "block";
-}
 
 

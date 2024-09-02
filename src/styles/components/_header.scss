@@ -9,15 +9,15 @@
         position: relative;
         display: inline-block;
         width: 42px;
-        margin-top: 5px;
+        margin-top: 10px;
         height: auto;
         z-index: 7;
-        @include breakpoint(tablet) { 
-            margin-right: 10px;
-        }
         @include breakpoint(tablethorizontal) { 
-            margin-top: 4px;
+            margin-right: 60px;
             width: 50px;
+        }
+        @include breakpoint(desktop) { 
+            margin-right: 3vw;
         }
     }
 

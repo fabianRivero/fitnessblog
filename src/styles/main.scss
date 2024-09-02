@@ -24,10 +24,12 @@
 
 // 5. Components
 @import
+  'components/footer',
   'components/hamburger',
   'components/header',
   'components/heroimage',
   'components/navigation',
+  'components/newsletter',
   'components/searcherBox',
   'components/searchresults';
 
@@ -42,6 +44,7 @@
 *{
   margin: 0;
   padding: 0;
+  font-family: "Kanit", sans-serif;
   a{
     text-decoration: none;
   }

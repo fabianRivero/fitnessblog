@@ -12,7 +12,7 @@
     }
 
     @include breakpoint(tablethorizontal) {
-        object-position: center -40px;
+        object-position: center -15px;
     }
 
     @include breakpoint(desktop) {

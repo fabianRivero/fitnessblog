@@ -5,9 +5,11 @@ const button = document.getElementById("icon-button");
 const singleIcon = document.getElementById("singleicon");
 const heroimage = document.getElementById("heroimage");
 
+
 //el addeventlistener
 singleIcon.addEventListener("click", mostrar_buscador);
 heroimage.addEventListener("click", ocultar_buscador);
+window.addEventListener('resize', ocultar_buscador);
 
 //lo que efectua el addeventlistener
 function mostrar_buscador() {
@@ -15,8 +17,7 @@ function mostrar_buscador() {
         inputSearch.value = "";
         searcherbox.classList.toggle('extended');
         searcherbox.style.top = '450px';
-        searcherbox.style.display = 'block';
-        searchresults.style.display = "none"; 
+        searcherbox.style.display = 'block'; 
         inputSearch.focus();
     }else{
         searcherbox.style.top = '368px';
@@ -35,7 +36,6 @@ function ocultar_buscador(){
         searcherbox.classList.toggle('extended');
     }
 }
-
 
 
 //para que se haga el filtro de busqueda
