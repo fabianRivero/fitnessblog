@@ -1,15 +1,23 @@
 const searcherbox = document.getElementById("searcherbox");
 const inputSearch = document.getElementById("inputSearch");
-const searchresults = document.getElementById("searchresults");
+const searchresultsIndex = document.getElementById("searchresultsIndex");
 const button = document.getElementById("icon-button");
 const singleIcon = document.getElementById("singleicon");
-const heroimage = document.getElementById("heroimage");
+const content = document.getElementById("content");
+const headerSearch = document.getElementById("headerSearch");
 
 
 //el addeventlistener
 singleIcon.addEventListener("click", mostrar_buscador);
-heroimage.addEventListener("click", ocultar_buscador);
+content.addEventListener("click", ocultar_buscador);
+inputSearch.addEventListener("focus", mostrar_resultados);
 window.addEventListener('resize', ocultar_buscador);
+window.addEventListener('resize', ocultar_resultados);
+
+//el addeventlistener para el buscador para tablet horizontal para adelante
+headerSearch.addEventListener("focus", mostrar_resultados);
+headerSearch.addEventListener("click", mostrar_resultados);
+content.addEventListener("click", ocultar_resultados);
 
 //lo que efectua el addeventlistener
 function mostrar_buscador() {
@@ -22,7 +30,7 @@ function mostrar_buscador() {
     }else{
         searcherbox.style.top = '368px';
         inputSearch.value = "";
-        searchresults.style.display = "none"; 
+        searchresultsIndex.style.display = "none"; 
         searcherbox.classList.toggle('extended');
     }
 }
@@ -32,9 +40,20 @@ function ocultar_buscador(){
     if(searcherbox.className === 'extended'){
         searcherbox.style.top = '368px';
         inputSearch.value = "";
-        searchresults.style.display = "none"; 
+        searchresultsIndex.style.display = "none"; 
         searcherbox.classList.toggle('extended');
     }
+}
+
+//para que aparezca los resultados de busqueda
+function mostrar_resultados(){
+    setTimeout(() => {
+        searchresultsIndex.style.display = "block";
+    }, 500);
+}
+//para ocultar los resultados de busqueda
+function ocultar_resultados(){
+    searchresultsIndex.style.display = "none";
 }
 
 

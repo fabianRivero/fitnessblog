@@ -1,8 +1,8 @@
 const hamburger = document.querySelector('.hamburger');
 const hamburgerLines = document.querySelectorAll(".line");
 const navLinks = document.querySelector('.nav-links');
-const heroImage = document.getElementById("heroimage"); 
-const main = document.getElementById("main");
+const content = document.getElementById("content");
+const header = document.getElementById("header")
 
 function extendHamburger() {
   navLinks.classList.toggle('expanded');
@@ -33,7 +33,8 @@ function contractHamburger(){
 }
 
 hamburger.addEventListener('click', extendHamburger);
-heroImage.addEventListener('click', contractHamburger);
-main.addEventListener('click', contractHamburger);
+content.addEventListener('click', contractHamburger);
+
+
 
 

@@ -1,7 +1,20 @@
 ---
+import Articles from "../components/Articles.astro";
+import Categories from "../components/Categories.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-
+    <Categories />
+    <Articles />
 </BaseLayout>
+
+<script>
+    import "../scripts/searcherScriptForGeneral.js";
+</script>
+
+<style>
+    #searchresults{ 
+        top: 100px;    
+    }
+</style>

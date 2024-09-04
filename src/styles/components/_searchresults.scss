@@ -1,10 +1,16 @@
-#searchresults{
+#searchresultsIndex{
     position: absolute;
-    top: 532px;
+    top: 530px;
     width: 100%;
     background: rgb(233, 233, 233);
     z-index: 5;
     display: none;
+    @include breakpoint(tablethorizontal) {
+        top: 44px;
+        width: 25vw;
+        right: 10%;
+        z-index: 7;
+      }
     li{
         list-style: none;
         a{
@@ -14,7 +20,43 @@
             #icon{
                 width: 10px;
                 height: auto;
-                margin-left: 10px;
+                margin-right: 10px;
+            }
+            &:hover{
+                background: #f3f3f3;
+            }
+        }
+
+    }
+}
+
+.shownResults{
+    display: block;
+}
+
+#searchresultsGeneral{
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    background: rgb(233, 233, 233);
+    z-index: 5;
+    display: none;
+    @include breakpoint(tablethorizontal) {
+        top: 44px;
+        width: 25vw;
+        right: 10%;
+        z-index: 7;
+      }
+    li{
+        list-style: none;
+        a{
+            display: block;
+            color: #777777;
+            padding: 8px 15px;
+            #icon{
+                width: 10px;
+                height: auto;
+                margin-right: 10px;
             }
             &:hover{
                 background: #f3f3f3;

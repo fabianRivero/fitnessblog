@@ -18,16 +18,15 @@ import Newsletter from "../components/Newsletter.astro";
 	</head>
 	<body>
 		<Header />
+		<div id = "content">
 		<SearcherBox />
 		<SearchResults />
-	
-
 		<slot />
 		<Newsletter />
 		<Footer/>
+		</div>
 	</body>
 	<script>
 		import "../scripts/hamburger.js";
-		import "../scripts/searcherScript.js";
 	</script>
 </html>
