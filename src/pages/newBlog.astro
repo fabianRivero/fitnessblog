@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Categories from "../components/Categories.astro";
+
+---
+
+<BaseLayout>
+  <div class="blogEditor">
+    <div class="title container">Título:<br/>
+       <input class="input" type="text" id="blogTitle" value="1">
+    </div>
+    <div class="tags container">Tags:<br/>
+        <Categories />
+    </div>
+    <div class="articleImage container">Imagen de articulo:<br/> 
+    <!--
+    Aqui va el input para imagenes, por el momento vamos a poner un espacio par aun string de direccion de una imagen
+      -->
+    <input class="input" type="text" id="articleImage" value="2">
+    </div>
+
+    <div class="content container">
+      Contenido: <br/>
+    <!--
+    Aqui va el editor de texto, por el momento vamos a poner un espacio para texto plano
+      -->
+    <textarea class="input" id="blogContent" value="3"></textarea>
+    </div>
+
+    <div class="submit">
+      Enviar blog
+    </div>
+
+    <div class="submitMessage">
+      <p>¿Estas seguro de enviar este blog?</p>
+
+      <div class="answer">
+        <div class="yes button">Si</div>
+        <div class="no button">No</div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script>
+  import '../scripts/tagsClicked.js';
+  import "../scripts/newBlogCreation.js"
+</script>

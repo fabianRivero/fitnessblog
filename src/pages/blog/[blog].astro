@@ -1,0 +1,25 @@
+---
+import Articles from "../../components/Articles.astro";
+import Categories from "../../components/Categories.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { GetStaticPaths } from "astro";
+
+
+export const getStaticPaths = (() => {
+        
+    return [
+        {params: { blog: "Como armar tu rutina de acuedo a tus objetivos y contexto" } },
+    ];
+}) satisfies GetStaticPaths;
+---
+
+<BaseLayout>
+    <h3>Categorias:</h3>
+    <Categories />
+    <Articles />
+</BaseLayout>
+
+<script>
+    import "../scripts/searcherScriptForGeneral.js";
+</script>
+

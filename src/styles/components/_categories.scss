@@ -1,56 +1,52 @@
-#tags{
-    margin-left: 2vw;
-    ul{
+    #tags{
+        margin-left: 5vw;
         display: flex;
         list-style: none;
         align-items: center;
-        gap: 4px;
-        font-size: 12px;
+        gap: 6px;
         .categorie{
             border: solid 0.7px black;
             padding: 1px 5px;
-            font-size: 10px;
+            font-size: 11px;
             border-radius: 12px;
             margin-top: 5px;
             background-color: #ffffff;
-            a{
-                color: black;
-            }
+
             &:hover{
                 background-color: #b8b8b8;
                 cursor: pointer;
             }
-            }
+        }
+        .clicked{
+            background-color: #b8b8b8;
+        }
     }
     @include breakpoint(tablet) {
-        margin-left: 3vw;
-        ul{
-            gap: 6px;
-            font-size: 14px;
+        #tags{
+            gap: 7px;
             .categorie{
                 border: solid 0.7px black;
                 padding: 2px 6px;
-                font-size: 12px;
+                font-size: 13px;
                 margin-top: 7px;
             }
         }
     }
     @include breakpoint(tablethorizontal) {
-        ul{
-            gap: 7px;
-            font-size: 18px;
+        #tags{
+            gap: 8px;
             .categorie{
                 font-size: 14px;
             }
         }
     }
+    
     @include breakpoint(desktop) {
-        ul{
-            gap: 8px;
-            font-size: 19px;
-            .categorie{
-                font-size: 15px;
-            }
+       #tags{
+        gap: 9px;
+        .categorie{
+            font-size: 15px;
         }
+       }
     }
-}
+    

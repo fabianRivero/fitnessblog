@@ -28,7 +28,10 @@
                 }
             }
         }
-   
+        .date{
+            padding-top: 5px;
+            font-size: 11px;
+        }
         div{ 
             ul{
                 display: flex;
@@ -78,6 +81,9 @@
                 img{
                     margin-bottom: 0px;
                 }
+            }
+            .date{
+                padding-top: 0px;
             }
             div{ 
                 ul{

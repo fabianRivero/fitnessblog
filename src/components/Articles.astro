@@ -2,40 +2,47 @@
 const ARTICLES =[
 {
     title: 'Como hacer dieta para aumentar masa muscular',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
+    date: "05/09/2024",
+    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
     link: '#',
-    image: "../../public/pic5.jpeg",
+    cardImage: "../../public/pic5.jpeg",
     tags: ['Masa muscular', 'Dietas']
 },
 {
     title: 'Mejores ejercicios para hombros',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
+    date: "04/09/2024",
+    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
     link: '#',
-    image: "../../public/hombros.jpeg",
+    cardImage: "../../public/hombros.jpeg",
     tags: ['Masa muscular', 'Fuerza', "Rutinas"]
 },
 {
     title: 'Los alimentos con mas proteina',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
+    date: "03/09/2024",
+    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
     link: '#',
-    image: "../../public/pic5.jpeg",
+    cardImage: "../../public/pic5.jpeg",
     tags: ['Dietas']
 },
 {
     title: 'Quema 500 calorias en 30 minutos con estas rutinas HIIT',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
+    date: "02/09/2024",
+    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
     link: '#',
-    image: "../../public/hiit.jpeg",
+    cardImage: "../../public/hiit.jpeg",
     tags: ['Adelgazamiento', 'Rutinas']
 },
 {
-    title: 'Como armar tu rutina de acuerdo a tus objetivos y tu contexto',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
+    title: 'Como armar tu rutina de acuerdo a tus objetivos y contexto',
+    date: "01/09/2024",
+    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
     link: '#',
-    image: "../../public/pic1.jpeg",
+    cardImage: "../../public/pic1.jpeg",
     tags: ["Rutinas"]
 }
-]
+];
+
+
 ---
 
 <div class="articles">
@@ -44,11 +51,11 @@ const ARTICLES =[
         ARTICLES.map((article) => ( 
             <article class="article">
                 <div class="imgContainer">
-                    <img src= {article.image} alt=""/>
+                    <img src= {article.cardImage} alt=""/>
                 </div>
-                <div>
+                <span class="date">fecha de publicacion: {article.date}</span>
+                <div>    
                     <ul>
-                        <h4>Temas:</h4>
                         {
                             article.tags.map((tag) => ( 
                                 <li class="tag">{tag}</li>
@@ -56,7 +63,6 @@ const ARTICLES =[
                         }
                     </ul>
                     <h2>{article.title}</h2>
-                    <span>{article.description}</span>
                 </div>
             </article>
         ))
