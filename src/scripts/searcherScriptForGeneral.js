@@ -5,7 +5,7 @@ const button = document.getElementById("icon-button");
 const singleIcon = document.getElementById("singleicon");
 const content = document.getElementById("content");
 const headerSearch = document.getElementById("headerSearch");
-
+const adminpage = document.querySelector('.adminPage');
 
 //el addeventlistener
 singleIcon.addEventListener("click", mostrar_buscador);
@@ -13,6 +13,7 @@ content.addEventListener("click", ocultar_buscador);
 inputSearch.addEventListener("focus", mostrar_resultados);
 window.addEventListener('resize', ocultar_buscador);
 window.addEventListener('resize', ocultar_resultados);
+adminpage.addEventListener('click', ocultar_resultados);
 
 //el addeventlistener para el buscador para tablet horizontal para adelante
 headerSearch.addEventListener("focus", mostrar_resultados);

@@ -1,0 +1,97 @@
+#adminHeader{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-left: 10px;
+    height: 10px;
+
+    #ctn-searcher{
+        z-index: 7;
+        @include breakpoint(tablethorizontal) { 
+            display: flex;
+        }
+        #headerSearch{
+            display: none;
+            @include breakpoint(tablethorizontal) { 
+                display: inline-block;
+                width: 25vw;
+                outline: 0;
+            }
+        }
+
+        #ctn-singleicon{
+            display: block;
+            margin-right: 4vw;
+            #singleicon{
+                width: 18px;
+                cursor: pointer;
+            } 
+            @include breakpoint(tablethorizontal) { 
+                display: none;
+
+            }
+        }
+
+        #ctn-button-icon{
+            display: none;
+            @include breakpoint(tablethorizontal) { 
+                display: block;
+                margin-right: 4vw;
+                background-color: rgb(204, 197, 197);
+                border: 0.5px solid black;
+                border-left: 0.5px;
+                border-radius : 0px 10px 10px 0px;
+                display: flex;
+                #icon-button{
+                    margin-right: 2px;
+                    margin-bottom: 1.1px;
+                    margin-top: 1.1px;
+                    width: 13px;
+                    padding: 2px;
+                    cursor: pointer;
+                    transition: all 300ms;
+                    
+                } 
+                &:hover{
+                    background-color: white;
+                }
+            }
+  
+        }
+    
+    }
+}
+
+.adminPages{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    gap: 20px;
+    .adminPage{
+        border: 1px solid black;
+        padding: 5px 15px;
+        color: black;
+        &:hover{
+            background-color: rgb(207, 207, 207);
+            cursor: pointer;
+        }
+    }
+}
+
+.adminPage{
+    
+    #searchresultsGeneral{
+        @include breakpoint(tablethorizontal) {
+            left: 0.8%;
+            top: 34px;
+          }
+    }
+}
+
+.adminFooter{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+}

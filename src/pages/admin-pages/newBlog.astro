@@ -1,13 +1,15 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Categories from "../components/Categories.astro";
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import Categories from "../../components/Categories.astro";
 
 ---
 
-<BaseLayout>
+
+<AdminLayout>
+  <h2 class="pageTitle">Editor de blog</h2>
   <div class="blogEditor">
     <div class="title container">Título:<br/>
-       <input class="input" type="text" id="blogTitle" value="1">
+       <input class="input" type="text" id="blogTitle" value="">
     </div>
     <div class="tags container">Tags:<br/>
         <Categories />
@@ -16,7 +18,7 @@ import Categories from "../components/Categories.astro";
     <!--
     Aqui va el input para imagenes, por el momento vamos a poner un espacio par aun string de direccion de una imagen
       -->
-    <input class="input" type="text" id="articleImage" value="2">
+    <input class="input" type="text" id="articleImage" value="">
     </div>
 
     <div class="content container">
@@ -24,7 +26,7 @@ import Categories from "../components/Categories.astro";
     <!--
     Aqui va el editor de texto, por el momento vamos a poner un espacio para texto plano
       -->
-    <textarea class="input" id="blogContent" value="3"></textarea>
+    <textarea class="input" id="blogContent" value=""></textarea>
     </div>
 
     <div class="submit">
@@ -40,10 +42,19 @@ import Categories from "../components/Categories.astro";
       </div>
     </div>
 
+    
+    <div class="submitMessage">
+      <p>¡Blog creado!</p>
+
+      <div class="answer">
+        <div class="return button"><a href="./">Volver a pagina principal</a></div>
+      </div>
+    </div>
+
   </div>
-</BaseLayout>
+</AdminLayout>
 
 <script>
-  import '../scripts/tagsClicked.js';
-  import "../scripts/newBlogCreation.js"
+  import '../../scripts/tagsClicked.js';
+  import "../../scripts/newBlogCreation.js";
 </script>

@@ -4,7 +4,7 @@ import id from "./idCreator.js"
 let title = document.querySelector("#blogTitle");
 let image = document.querySelector("#articleImage");
 let content = document.querySelector("#blogContent");
-let message = document.querySelector(".submitMessage");
+let messages = document.querySelectorAll(".submitMessage");
 let submit = document.querySelector(".submit");
 let noButton = document.querySelector(".no");
 let yesButton = document.querySelector(".yes");
@@ -17,16 +17,19 @@ submit.addEventListener("click", showMessage);
 noButton.addEventListener("click", rejectMessage);
 yesButton.addEventListener("click", createNewBlog);
 
+
+
 function showMessage(){
-    message.style.display = "block";
+    messages[0].style.display = "block";
 }
 
 function rejectMessage(){
-    message.style.display = "none";
+    messages[0].style.display = "none";
+    console.log(localStorage)
 }
 
 function createNewBlog(){
-    message.style.display = "none";
+    messages[0].style.display = "none";
     const selectedTags = Array.from(document.querySelectorAll(".clicked"));
     let validArray = [];
     
@@ -41,17 +44,23 @@ function createNewBlog(){
         date.getFullYear(),
     ];
 
+    const blogDate = `${day}/${month}/${year}`;
+
+    const blogId = id();
+    console.log(blogId)
+
     const newBlog = new Blog(
-        id(), 
+        blogId, 
         title.value, 
-        `${day}/${month}/${year}`, 
+        blogDate, 
         validArray, 
         image.value, 
         content.value,
     );
 
     console.log(newBlog);
-    
+    localStorage.setItem(`blog: ${title.value}, ${blogDate}`, JSON.stringify(newBlog));
+
     title.value = "";
     image.value = "";
     content.value = "";
@@ -61,4 +70,8 @@ function createNewBlog(){
     for (const tag of tagsClicked) {
         tag.classList.toggle("clicked");
     }
+    
+    messages[1].style.display = "block";
 }
+
+    
