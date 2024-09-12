@@ -1,71 +1,47 @@
 ---
-const ARTICLES =[
-{
-    title: 'Como hacer dieta para aumentar masa muscular',
-    date: "05/09/2024",
-    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
-    link: '#',
-    cardImage: "../../public/pic5.jpeg",
-    tags: ['Masa muscular', 'Dietas']
-},
-{
-    title: 'Mejores ejercicios para hombros',
-    date: "04/09/2024",
-    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
-    link: '#',
-    cardImage: "../../public/hombros.jpeg",
-    tags: ['Masa muscular', 'Fuerza', "Rutinas"]
-},
-{
-    title: 'Los alimentos con mas proteina',
-    date: "03/09/2024",
-    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
-    link: '#',
-    cardImage: "../../public/pic5.jpeg",
-    tags: ['Dietas']
-},
-{
-    title: 'Quema 500 calorias en 30 minutos con estas rutinas HIIT',
-    date: "02/09/2024",
-    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
-    link: '#',
-    cardImage: "../../public/hiit.jpeg",
-    tags: ['Adelgazamiento', 'Rutinas']
-},
-{
-    title: 'Como armar tu rutina de acuerdo a tus objetivos y contexto',
-    date: "01/09/2024",
-    content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto laboriosam dolores magni dignissimos itaque libero ipsa corrupti vitae natus. Doloremque vel atque sit illum placeat non exercitationem iure, quisquam dolorem.',
-    link: '#',
-    cardImage: "../../public/pic1.jpeg",
-    tags: ["Rutinas"]
-}
-];
-
-
 ---
 
 <div class="articles">
 
-    {
-        ARTICLES.map((article) => ( 
-            <article class="article">
-                <div class="imgContainer">
-                    <img src= {article.cardImage} alt=""/>
-                </div>
-                <span class="date">fecha de publicacion: {article.date}</span>
-                <div>    
-                    <ul>
-                        {
-                            article.tags.map((tag) => ( 
-                                <li class="tag">{tag}</li>
-                            ))
-                        }
-                    </ul>
-                    <h2>{article.title}</h2>
-                </div>
-            </article>
-        ))
-    }
 </div>
  
+
+<script>
+    import { blogRecopilator } from "../scripts/blogRecopilator";
+    
+    const articles = document.querySelector(".articles");
+
+        blogRecopilator().map((blog) => {
+            const article = document.createElement("article");
+            article.className = "article";
+            const title = document.createElement("h2");
+            article.innerHTML = 
+            `
+            <div class="imgContainer">
+                <img src= ${blog.cardImage} alt=""/>
+            </div>
+            <span class="date">fecha de publicacion: ${blog.publicationDate}</span>
+            `
+            articles.appendChild(article);
+
+            const tagsDiv = document.createElement("div");
+            const ul = document.createElement("ul");
+
+            blog.tags.map((tag) => {
+                const li = document.createElement("li");
+                li.className = "tag";
+                li.innerHTML =
+                `
+                ${tag}
+                `;
+                ul.appendChild(li);
+            })
+
+            title.innerHTML = `${blog.title}`
+
+            tagsDiv.appendChild(ul);
+            tagsDiv.appendChild(title);
+            article.appendChild(tagsDiv);
+            articles.appendChild(article);
+        })
+</script>

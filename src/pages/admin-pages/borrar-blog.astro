@@ -1,5 +1,3 @@
-
-
 <div class="click">
     click
 </div>
@@ -8,6 +6,7 @@
     import blogRecopilator from "../../scripts/blogRecopilator.js";
     let click = document.querySelector(".click");
     click.addEventListener("click", blogRecopilator);
+    click.addEventListener("click", function(){console.log(blogRecopilator())});
 </script>
 
 <style lang="scss">

@@ -1,10 +1,11 @@
 ---
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import Categories from "../../components/Categories.astro";
+import ImagesForBlogArticles from "../../components/ImagesForBlogArticles.astro";
 
 ---
 
-
+<div class="greyScreen"></div>
 <AdminLayout>
   <h2 class="pageTitle">Editor de blog</h2>
   <div class="blogEditor">
@@ -16,9 +17,10 @@ import Categories from "../../components/Categories.astro";
     </div>
     <div class="articleImage container">Imagen de articulo:<br/> 
     <!--
-    Aqui va el input para imagenes, por el momento vamos a poner un espacio par aun string de direccion de una imagen
+    Aqui va el input para imagenes, por el momento vamos a poner diferentes opciones para escoger
       -->
-    <input class="input" type="text" id="articleImage" value="">
+      <ImagesForBlogArticles />  
+    
     </div>
 
     <div class="content container">
@@ -57,4 +59,5 @@ import Categories from "../../components/Categories.astro";
 <script>
   import '../../scripts/tagsClicked.js';
   import "../../scripts/newBlogCreation.js";
+  import "../../scripts/imageSelected.js";
 </script>
