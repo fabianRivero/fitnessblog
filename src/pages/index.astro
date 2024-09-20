@@ -6,6 +6,7 @@ import SearchResults from "../components/SearchResults.astro";
 import Footer from "../components/Footer.astro";
 import "../scripts/stylesImport.js"
 import Newsletter from "../components/Newsletter.astro";
+import LatestBlogs from "../components/LatestBlogs.astro";
 ---
 <html lang="en">
 	<head>
@@ -27,14 +28,7 @@ import Newsletter from "../components/Newsletter.astro";
 			<h2>Bienvenido al nuestro blog!</h2>
 			<p>La mejor información sobre fitness y bienestar en un solo lugar</p>
 		</section>
-
-		<section class="last-articles">
-			<h3>Blogs recientes</h3>
-			<article class="latest 1"></article>
-			<article class="latest"></article>
-			<article class="latest"></article>
-			<article class="latest"></article>
-		</section>
+		<LatestBlogs/>
 		</main>
 		<Newsletter />
 		<Footer/>

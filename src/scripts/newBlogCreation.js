@@ -1,6 +1,3 @@
-import Blog from "./classes/blog.js"
-import id from "./idCreator.js"
-
 let title = document.querySelector("#blogTitle");
 let checkboxes = document.querySelectorAll("#checkbox");
 let content = document.querySelector("#blogContent");
@@ -17,8 +14,6 @@ submit.addEventListener("click", showMessage);
 noButton.addEventListener("click", rejectMessage);
 yesButton.addEventListener("click", createNewBlog);
 
-
-
 function showMessage(){
     messages[0].style.display = "block";
     greyScreen.style.display = "block";
@@ -30,7 +25,8 @@ function rejectMessage(){
     greyScreen.style.display = "none";
 }
 
-function createNewBlog(){
+async function createNewBlog(){
+
     messages[0].style.display = "none";
     const selectedTags = Array.from(document.querySelectorAll(".clicked"));
     let validArray = [];
@@ -38,17 +34,6 @@ function createNewBlog(){
     for (let tag of selectedTags) {
         validArray.push(tag.innerText);
     };
-
-    const date = new Date();
-    const [day, month, year] = [
-        date.getDate(),
-        date.getMonth(),
-        date.getFullYear(),
-    ];
-
-    const blogDate = `${day}/${month}/${year}`;
-
-    const blogId = id();
 
     const img = () => {
         let selected;
@@ -60,18 +45,20 @@ function createNewBlog(){
         return selected;
     };
 
-    const newBlog = new Blog(
-        blogId, 
-        title.value, 
-        blogDate, 
-        validArray, 
-        img(), 
-        content.value,
-        date,
-    );
-
-    console.log(newBlog);
-    localStorage.setItem(`blog: ${title.value}, ${blogDate}`, JSON.stringify(newBlog));
+    const response = await fetch('http://localhost:4000/api/blogs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+            title: title.value,
+            tags: validArray,
+            cardImage: img(),
+            content: content.value
+        }),
+    });
+    const jsonresponse = await response.json(); 
+    console.log(jsonresponse);
 
     title.value = "";
     content.value = "";
@@ -83,6 +70,7 @@ function createNewBlog(){
     }
     
     messages[1].style.display = "block";
+    
 }
 
     

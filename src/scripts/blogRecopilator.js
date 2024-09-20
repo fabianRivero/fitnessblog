@@ -17,8 +17,8 @@ export function blogRecopilator(){
                 blogList.push(blog);
             };
             
-            const orderedBlogList = blogList.sort((a, b) => a.extendedDate > b.extendedDate);
-            return orderedBlogList.reverse();
+            const orderedBlogList = blogList.sort((a, b) => a.extendedDate > b.extendedDate).reverse();
+            return orderedBlogList;
         } 
     };   
     

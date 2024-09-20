@@ -31,41 +31,36 @@
         .date{
             padding-top: 5px;
             font-size: 11px;
+            display: block;
         }
-        div{ 
-            ul{
-                display: flex;
-                font-size: 13px;
-                gap: 4px;
-                align-items: center;
-                list-style: none;
-                h4{
-                    margin-top: 3px;
-                }
-                .tag{
-                border: solid 0.9px black;
-                padding: 1px 5px;
-                border-radius: 12px;
-                margin-top: 5px;
-                background-color: #ffffff;
-                &:hover{
-                    background-color: #b8b8b8;
-                    cursor: pointer;
-                }
-                }
+        ul{
+            display: flex;
+            font-size: 13px;
+            gap: 4px;
+            align-items: center;
+            list-style: none;
+            .tag{
+            border: solid 0.9px black;
+            padding: 1px 5px;
+            border-radius: 12px;
+            margin-top: 5px;
+            background-color: #ffffff;
+            &:hover{
+                background-color: #b8b8b8;
+                cursor: pointer;
             }
-            h2{
-                margin-top: 5px;
-                font-size: 17px;
-                &:hover{
-                    cursor: pointer;
-                }
-            }
-            span{
-                display: none;
             }
         }
-
+        h2{
+            margin-top: 5px;
+            font-size: 17px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        span{
+            display: none;
+        }
     }
     @include breakpoint(tablet) {
         flex-direction: row;
@@ -85,37 +80,30 @@
             .date{
                 padding-top: 0px;
             }
-            div{ 
+            
                 ul{
                     display: flex;
                     font-size: 12px;
                     gap: 3px;
                     align-items: center;
                     list-style: none;
-                    h4{
-                        font-size: 15px;
-                        margin-top: 4px;
-                    }
                 }
-            }
+            
     
         }
     }
     @include breakpoint(desktop) {
         .article{
             width: 17vw;
-            div{ 
+            
                 ul{
                     font-size: 9px;
                     gap: 3px;
-                    h4{
-                        font-size: 14px;
-                    }
                 }
                 h2{
                     font-size: 16px;
                 }
-            }
+            
     
         }
     }

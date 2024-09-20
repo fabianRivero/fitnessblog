@@ -1,0 +1,152 @@
+.latestBlogsTitle{
+    margin-top: 20px;
+    margin-left: 55px;
+    @include breakpoint(tablethorizontal) {
+        margin-left: 0%;
+        text-align: center;
+    }  
+}
+.page-introduction{
+    margin-top: -7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 30px;
+    color: rgb(235, 235, 235);
+    background-image: linear-gradient(rgb(63, 63, 63), rgb(85, 85, 85));
+    h2{
+        font-size: 26px;
+    }
+    p{
+        font-size: 12px;
+    }
+    @include breakpoint(tablethorizontal) {
+        margin-top: -15px;
+        h2{
+            font-size: 34px;
+        }
+        p{
+            font-size: 20px;
+        }
+    }   
+}
+.latest-articles{
+    display: flex;
+    flex-direction: column;
+    padding: 25px 40px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    .article{
+        padding: 20px 25px;
+        border: solid 0.5px black;
+        height: 45vh;
+        width: 72vw;
+        background-color: #dfdfdf;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .imgContainer{
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: 200px;
+                margin-bottom: 5px;
+                object-fit: contain;
+                transition: 500ms;
+                &:hover{
+                    -webkit-transform:scale(1.06);transform:scale(1.06);
+                    cursor: pointer;
+                }
+            }
+        }
+        .date{
+            padding-top: 5px;
+            font-size: 11px;
+        }
+        div{ 
+            ul{
+                display: flex;
+                font-size: 13px;
+                gap: 4px;
+                align-items: center;
+                list-style: none;
+                h4{
+                    margin-top: 3px;
+                }
+                .tag{
+                border: solid 0.9px black;
+                padding: 1px 5px;
+                border-radius: 12px;
+                margin-top: 5px;
+                background-color: #ffffff;
+                &:hover{
+                    background-color: #b8b8b8;
+                    cursor: pointer;
+                }
+                }
+            }
+            h2{
+                margin-top: 5px;
+                font-size: 17px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            span{
+                display: none;
+            }
+        }
+
+    }
+    @include breakpoint(tablet) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        .article{
+            width: 36.8vw;
+            .date{
+                font-size: 12px;
+            }
+        }
+    }
+    @include breakpoint(tablethorizontal) {
+        .article{
+            width: 28vw;
+            .imgContainer{
+                img{
+                    margin-bottom: 0px;
+                }
+            }
+            .date{
+                padding-top: 0px;
+            }
+            div{ 
+                ul{
+                    display: flex;
+                    font-size: 12px;
+                    gap: 3px;
+                    align-items: center;
+                    list-style: none;
+                    .tag{
+                        font-size: 12px;
+                    }
+                }
+            }
+    
+        }
+    }
+    @include breakpoint(desktop) {
+        .article{
+            div{ 
+                ul{
+                    font-size: 9px;
+                    gap: 3px;
+                }
+                h2{
+                    font-size: 22px;
+                }
+            }
+    
+        }
+    }
+}
