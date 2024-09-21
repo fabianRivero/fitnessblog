@@ -19,6 +19,7 @@ if (blogs.length <= 6) {
     { 
     latestBlogs.map((blog) => (
     <article class="article">
+        <a href="">
         <div class="imgContainer">
            <img src= {blog.cardImage} alt=""/>
         </div>
@@ -31,7 +32,7 @@ if (blogs.length <= 6) {
             }
         </ul>
         <h2>{blog.title}</h2>
-
+        </a>
     </article>   
     ))
 

@@ -1,19 +1,34 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import type { GetStaticPaths } from "astro";
 
-export const getStaticPaths = (() => {
-        
-    return [
-        {params: { blog: "blog1" } },
-    ];
-});
+export async function getStaticPaths() {
+    let response = await fetch('http://localhost:4000/api/blogs');
+    let data = await response.json();
+    let blogs = data.blogs;
+
+    return blogs.map(({ linkTitle, title, cardImage, publicationDate, content }) => {
+        return{
+            params: {blog: linkTitle},
+            props: {title, cardImage, publicationDate, content},
+        }
+    })
+};
 
 const { blog } = Astro.params;
+const { title, cardImage, publicationDate, content } = Astro.props;
+
 ---
 
 <BaseLayout>
+    <div class="blogPost">
+    <h1 class="blogTitle">{title}</h1>
 
+    <span class="blogDate">publicado el {publicationDate}</span>
+    
+    <img src= `../${cardImage}` alt="">
+
+    <div class="blogContent">{content}</div>
+    </div>
 </BaseLayout>
 
 

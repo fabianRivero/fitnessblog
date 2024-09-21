@@ -38,7 +38,8 @@
 // 6. Page-specific styles
 @import
   'pages/index',
-  'pages/newBlog';
+  'pages/admin_pages/newBlog',
+  'pages/blog/blogPost';
 
 // 7. Themes
 @import

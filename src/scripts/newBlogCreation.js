@@ -28,6 +28,7 @@ function rejectMessage(){
 async function createNewBlog(){
 
     messages[0].style.display = "none";
+    let linkTitle = title.value.replace(/ /g, "_"); 
     const selectedTags = Array.from(document.querySelectorAll(".clicked"));
     let validArray = [];
     
@@ -52,6 +53,7 @@ async function createNewBlog(){
         },
         body: JSON.stringify({
             title: title.value,
+            linkTitle: linkTitle,
             tags: validArray,
             cardImage: img(),
             content: content.value

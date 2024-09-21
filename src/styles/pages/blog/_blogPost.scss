@@ -1,0 +1,13 @@
+.blogPost{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    .blogDate{
+        margin-bottom: 30px;
+        font-size: 12px;
+    }
+    .blogContent{
+        margin-top: 40px;
+        font-size: 16px;
+    }
+}

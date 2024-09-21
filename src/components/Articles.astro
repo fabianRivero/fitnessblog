@@ -2,12 +2,14 @@
 const response = await fetch('http://localhost:4000/api/blogs');
 const data = await response.json();
 const blogs = data.blogs;
+import { getStaticPaths } from "../pages/blog/[blog].astro";
 ---
 
 <div class="articles"> 
     { 
     blogs.map((blog) => (
     <article class="article">
+        <a href={`http://localhost:4321/blog/${blog.linkTitle}`}>
         <div class="imgContainer">
            <img src= {blog.cardImage} alt=""/>
         </div>
@@ -20,7 +22,7 @@ const blogs = data.blogs;
             }
         </ul>
         <h2>{blog.title}</h2>
-
+        </a>
     </article>   
     ))
 
