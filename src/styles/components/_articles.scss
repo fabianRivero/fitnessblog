@@ -6,22 +6,24 @@
     align-items: center;
     justify-content: center;
     .article{
-        a{
-            border: solid 0.5px black;
-            height: 45vh;
-            width: 72vw;
-            background-color: #dfdfdf;
+        width: 72vw;
+        height: 360px;
+        border: solid 0.5px black;
+        background-color: #dfdfdf; 
+        .articleContainer{
+            color: black;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: black;
-            padding: 20px 25px;
-            width: 100%;
-            height: 100%;
-        
-        .imgContainer{
+            justify-content: center;
+            .id{
+                font-size: 11px;
+            }
+            .imgContainer{
             overflow: hidden;
             img{
+                padding-top: 20px;
                 width: 100%;
                 height: 200px;
                 margin-bottom: 5px;
@@ -59,6 +61,7 @@
         h2{
             margin-top: 5px;
             font-size: 17px;
+            padding-bottom: 20px;
             &:hover{
                 cursor: pointer;
             }
@@ -78,39 +81,38 @@
     @include breakpoint(tablethorizontal) {
         .article{
             width: 24vw;
-            .imgContainer{
-                img{
-                    margin-bottom: 0px;
+            a{
+                .imgContainer{
+                    img{
+                        margin-bottom: 0px;
+                    }
                 }
-            }
-            .date{
-                padding-top: 0px;
-            }
-            
-                ul{
-                    display: flex;
-                    font-size: 12px;
-                    gap: 3px;
-                    align-items: center;
-                    list-style: none;
+                .date{
+                    padding-top: 0px;
                 }
-            
-    
+                
+                    ul{
+                        display: flex;
+                        font-size: 12px;
+                        gap: 3px;
+                        align-items: center;
+                        list-style: none;
+                    }
+            }
         }
     }
     @include breakpoint(desktop) {
         .article{
             width: 17vw;
-            
-                ul{
-                    font-size: 9px;
-                    gap: 3px;
-                }
-                h2{
-                    font-size: 16px;
-                }
-            
-    
+            a{  
+                    ul{
+                        font-size: 9px;
+                        gap: 3px;
+                    }
+                    h2{
+                        font-size: 16px;
+                    }
+            }
         }
     }
 }

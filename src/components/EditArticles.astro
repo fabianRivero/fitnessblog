@@ -3,15 +3,17 @@ const response = await fetch('http://localhost:4000/api/blogs');
 const data = await response.json();
 const blogs = data.blogs;
 ---
-
 <div class="articles"> 
     { 
     blogs.map((blog) => (
-    <div class="checkbox-and-article">
+        <div class="editBlog">
         <article class="article">
-            <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
+            <p class="linkTitle">{blog.linkTitle}</p>
+            <p class="linkId">{blog.id}</p>
+            <div class="articleContainer">
+            
             <div class="imgContainer">
-            <img src= {`../${blog.cardImage}`} alt=""/>
+            <img src= {`../../${blog.cardImage}`} alt=""/>
             </div>
             <span class="date">fecha de publicacion: {blog.publicationDate}</span>
             <ul>
@@ -22,10 +24,10 @@ const blogs = data.blogs;
                 }
             </ul>
             <h2>{blog.title}</h2>
-            </a>
+        </div>
         </article>
-    </div>   
+        <a href={`http://localhost:4321/blog/${blog.linkTitle}`}>Ir al blog</a>
+    </div>
     ))
     }
 </div> 
-

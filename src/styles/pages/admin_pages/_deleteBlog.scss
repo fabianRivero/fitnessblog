@@ -1,0 +1,74 @@
+.id{
+    font-size: 14px;
+}
+.submmitButton-container{
+    display: flex;
+    justify-content: center;
+    .submmitButton{
+        border: 1px solid black;
+        width: 220px;
+        padding: 8px 5px;
+        text-align: center;
+        &:hover{
+            cursor: pointer;
+            background-color: rgb(207, 207, 207);
+        }
+    }
+}
+
+.confirmationWindow{
+    position: fixed;
+    border: 1px black solid;
+    background-color: white;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    left: 30vw;
+    bottom: 50vh;
+    display: none;
+    .answer{
+        display: flex;
+        gap: 100px;
+        justify-content: center;
+        .Button{
+            border: 1px solid black;
+            padding: 5px 15px;
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(207, 207, 207);
+            }
+        }
+    }
+}
+
+.submitMessage{
+    border: 1px solid black;
+    padding: 10px 10px;
+    max-width: 300px;
+    align-self: center;
+    top: 200px;
+    left: 35vw;
+    position: fixed;
+    background-color: white;
+    display: none;
+    .answer{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        .button{
+            border: 1px solid black;
+            padding: 2px 10px;
+            align-self: center;
+            text-align: center;
+            a{
+                color: black;
+            }
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(207, 207, 207);
+            }
+        }
+    }
+}

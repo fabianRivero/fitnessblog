@@ -1,0 +1,25 @@
+.editBlog{
+    .article{
+        .linkArticle{
+            font-size: 11px;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+div{
+    .confirmationWindow{
+        padding: 20px 20px;
+        p{
+            margin-bottom: 30px;
+        }
+        .yes{
+            a{
+                color: black;
+            }
+        }
+    }
+}
+    

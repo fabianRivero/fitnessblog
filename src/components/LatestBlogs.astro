@@ -8,7 +8,7 @@ if (blogs.length <= 6) {
         latestBlogs.push(blog);
     };
 }else{
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
         latestBlogs.push(blogs[i]);
     };
 };
@@ -18,22 +18,24 @@ if (blogs.length <= 6) {
 <div class="articles"> 
     { 
     latestBlogs.map((blog) => (
-    <article class="article">
-        <a href="">
-        <div class="imgContainer">
-           <img src= {blog.cardImage} alt=""/>
-        </div>
-        <span class="date">fecha de publicacion: {blog.publicationDate}</span>
-        <ul>
-            {
-                blog.tags.map((tag) => (
-                    <li class="tag">{tag}</li>
-                ))
-            }
-        </ul>
-        <h2>{blog.title}</h2>
-        </a>
-    </article>   
+    <div class="checkbox-and-article">
+        <article class="article">
+            <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
+            <div class="imgContainer">
+            <img src= {`../${blog.cardImage}`} alt=""/>
+            </div>
+            <span class="date">fecha de publicacion: {blog.publicationDate}</span>
+            <ul>
+                {
+                    blog.tags.map((tag) => (
+                        <li class="tag">{tag}</li>
+                    ))
+                }
+            </ul>
+            <h2>{blog.title}</h2>
+            </a>
+        </article>
+    </div>   
     ))
 
     }

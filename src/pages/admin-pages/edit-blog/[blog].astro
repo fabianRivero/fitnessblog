@@ -1,0 +1,111 @@
+---
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import ImagesForBlogArticles from "../../../components/ImagesForBlogArticles.astro";
+import Categories from '../../../components/Categories.astro';
+
+export async function getStaticPaths() {
+    let response = await fetch('http://localhost:4000/api/blogs');
+    let data = await response.json();
+    let blogs = data.blogs;
+
+    return blogs.map(({ id, linkTitle, title, cardImage, tags, publicationDate, content }) => {
+        return{
+            params: {blog: linkTitle},
+            props: {id, title, cardImage, tags, publicationDate, content},
+        }
+    })
+};
+
+const { blog } = Astro.params;
+const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
+---
+<!-- VOY HACIENDO EL TEMA DE CONCORDAR LOS TAGS DEL BLOG A EDITAR AL EDITOR  -->
+
+
+<div class="greyScreen"></div>
+<AdminLayout>
+  <h2 class="pageTitle">Editor de blog</h2>
+  <div class="contentContainer">
+    <div class="arrows">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="arrowRight" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="arrowLeft hidden" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+      </svg>
+    </div>
+  <div class="previousValues">
+      <div><h3>ID:</h3><br/>
+        <p class="id">{id}</p>
+      </div>
+      <div class="title container"><h3>Titulo previo:</h3><br/>
+        <p class="titleValue">{title}</p>
+    </div>
+    <div class="tags container"><h3>Tags previos:</h3><br/>   
+          {tags}
+        <!-- <Categories /> -->
+    </div>
+    <div class="articleImage container"><h3>Imagen de articulo previo:</h3><br/> 
+      <img src=`../../../${cardImage}` alt="">
+    </div>
+
+    <div class="content container">
+    <h3>Contenido previo:</h3> <br/>
+    <p>{content}</p>
+    </div>
+  </div>
+<!-- ###### -->
+  <div class="blogEditor">
+      <div class="title container">Titulo:<br/>
+       <input type="text" value='' id="blogTitle" class="input"/>
+    </div>
+    <div class="tags container">Tags:<br/>   
+        <Categories />
+    </div>
+    <div class="articleImage container">Imagen de articulo:<br/> 
+    <!--
+    Aqui va el input para imagenes, por el momento vamos a poner diferentes opciones para escoger
+      -->
+      <ImagesForBlogArticles />  
+    
+    </div>
+
+    <div class="content container">
+      Contenido: <br/>
+    <!--
+    Aqui va el editor de texto, por el momento vamos a poner un espacio para texto plano
+      -->
+    <textarea class="input" id="blogContent" value=""></textarea>
+    </div>
+
+    <div class="submit">
+      Aceptar cambios
+    </div>
+
+    <div class="submitMessage">
+      <p>¿Estas seguro de los cambios realizados?</p>
+
+      <div class="answer">
+        <div class="yes button">Si</div>
+        <div class="no button">No</div>
+      </div>
+    </div>
+
+    
+    <div class="submitMessage">
+      <p>¡Blog editado correctamente!</p>
+
+      <div class="answer">
+        <div class="return button"><a href="./">Volver a pagina principal</a></div>
+      </div>
+    </div>
+
+    </div>
+</div>
+</AdminLayout>
+
+<script>
+  import '../../../scripts/tagsClicked.js';
+  import "../../../scripts/blogEdition.js";
+  import "../../../scripts/imageSelected.js";
+</script>

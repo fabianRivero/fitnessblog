@@ -1,0 +1,38 @@
+.contentContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;    
+    .arrows{
+        height: fit-content;
+        .hidden{
+            display: none;
+
+        }
+        svg{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
+    .previousValues{
+        padding: 20px 10px;
+        border-right: 1px solid black;
+        min-width: 50vw;
+        display: none;   
+        img{
+            width: 150px;
+        }
+        @include breakpoint(tablet) {
+            min-width: 42vw;    
+        }
+        @include breakpoint(tablethorizontal) {
+            min-width: 30vw;    
+        }
+    }
+    
+    
+}
+
+
+    

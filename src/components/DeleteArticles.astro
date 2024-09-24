@@ -8,8 +8,11 @@ const blogs = data.blogs;
     { 
     blogs.map((blog) => (
     <div class="checkbox-and-article">
+        <input type="checkbox" class="" id="eraseCheckbox">
         <article class="article">
-            <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
+            <p class="id">{blog.id}</p>
+            <a href={`http://localhost:4321/blog/${blog.linkTitle}`}>
+            <div class="articleContainer">
             <div class="imgContainer">
             <img src= {`../${blog.cardImage}`} alt=""/>
             </div>
@@ -22,6 +25,7 @@ const blogs = data.blogs;
                 }
             </ul>
             <h2>{blog.title}</h2>
+        </div>
             </a>
         </article>
     </div>   
