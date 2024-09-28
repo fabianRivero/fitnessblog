@@ -1,8 +1,8 @@
 ---
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import SearcherBox from "../../components/SearcherBox.astro";
-import SearchResults from "../../components/SearchResults.astro";
 import DeleteArticles from "../../components/DeleteArticles.astro";
+import Categories from "../../components/Categories.astro";
 ---
 <div class="greyScreen"></div>
 <AdminLayout>
@@ -26,7 +26,7 @@ import DeleteArticles from "../../components/DeleteArticles.astro";
         </div>
     </header>
     <SearcherBox />
-    <SearchResults />
+    <Categories />
     <DeleteArticles />
     
     <div class="confirmationWindow">
@@ -52,6 +52,7 @@ import DeleteArticles from "../../components/DeleteArticles.astro";
 </AdminLayout>
 
 <script>
-    import "../../scripts/deleteBlogs.js"
-    import "../../scripts/searcherScriptForGeneral.js"
+    import "../../scripts/deleteBlogs.js";
+    import "../../scripts/searcherScriptForUDBlogs.js";
+    import "../../scripts/categorieFilter.js";
 </script>

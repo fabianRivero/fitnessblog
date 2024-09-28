@@ -46,6 +46,8 @@ async function createNewBlog(){
         return selected;
     };
 
+    const contentResult = tinymce.activeEditor.getContent()
+
     const response = await fetch('http://localhost:4000/api/blogs', {
         method: 'POST',
         headers: {
@@ -56,7 +58,7 @@ async function createNewBlog(){
             linkTitle: linkTitle,
             tags: validArray,
             cardImage: img(),
-            content: content.value
+            content: contentResult
         }),
     });
     const jsonresponse = await response.json(); 
@@ -75,4 +77,11 @@ async function createNewBlog(){
     
 }
 
-    
+tinymce.init({
+    selector: 'textarea#blogContent',
+    branding: false,
+    menubar: false,
+    toolbar: "undo redo | styles forecolor | bold italic | alignleft aligncenter alignright alignjustify | image",
+    statusbar: false,
+    plugins: "image",
+  });

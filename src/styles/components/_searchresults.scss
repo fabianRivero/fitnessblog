@@ -1,4 +1,4 @@
-#searchresultsIndex{
+#searchResultsIndex{
     position: absolute;
     top: 530px;
     width: 100%;
@@ -13,8 +13,9 @@
       }
     li{
         list-style: none;
-        a{
-            display: block;
+
+        .searchResult{
+            display: none;
             color: #777777;
             padding: 8px 15px;
             #icon{
@@ -26,15 +27,16 @@
                 background: #f3f3f3;
             }
         }
-
+        .selected{
+            display: block;
+        }
     }
 }
-
 .shownResults{
     display: block;
 }
 
-#searchresultsGeneral{
+#searchResultsGeneral{
     position: absolute;
     top: 120px;
     width: 100%;
@@ -49,8 +51,8 @@
       }
     li{
         list-style: none;
-        a{
-            display: block;
+        .searchResult{
+            display: none;
             color: #777777;
             padding: 8px 15px;
             #icon{
@@ -62,11 +64,9 @@
                 background: #f3f3f3;
             }
         }
-
+        .selected{
+            display: block;
+        }
     }
-}
-
-.shownResults{
-    display: block;
 }
 

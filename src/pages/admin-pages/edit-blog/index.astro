@@ -3,6 +3,7 @@ import AdminLayout from "../../../layouts/AdminLayout.astro";
 import SearcherBox from "../../../components/SearcherBox.astro";
 import SearchResults from "../../../components/SearchResults.astro";
 import EditArticles from "../../../components/EditArticles.astro";
+import Categories from "../../../components/Categories.astro";
 ---
 <div class="greyScreen"></div>
 <AdminLayout>
@@ -25,6 +26,7 @@ import EditArticles from "../../../components/EditArticles.astro";
             </div>
         </div>
     </header>
+    <Categories />
     <SearcherBox />
     <SearchResults />
     <EditArticles />
@@ -49,6 +51,7 @@ import EditArticles from "../../../components/EditArticles.astro";
 </AdminLayout>
 
 <script>
-    import "../../../scripts/searcherScriptForGeneral.js"
-     import "../../../scripts/editBlog.js"
+    import "../../../scripts/editBlog.js";
+    import "../../../scripts/searcherScriptForUDBlogs.js";
+    import "../../../scripts/categorieFilter.js";
 </script>

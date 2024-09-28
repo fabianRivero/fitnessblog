@@ -27,7 +27,14 @@ const { title, cardImage, publicationDate, content } = Astro.props;
     
     <img src= `../${cardImage}` alt="">
 
-    <div class="blogContent">{content}</div>
+    <div class="blogContent">
+        {content}
+    </div>
+
+    <script>
+    const contentHTML = document.querySelector(".blogContent");
+    contentHTML.innerHTML = contentHTML.textContent
+    </script>
 
     <div class="division"></div>
 

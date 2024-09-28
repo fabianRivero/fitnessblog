@@ -4,10 +4,11 @@ const data = await response.json();
 const blogs = data.blogs;
 ---
 
+
 <div class="articles"> 
     { 
     blogs.map((blog) => (
-    <div class="checkbox-and-article">
+    <div class="article-container">
         <article class="article">
             <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
             <div class="imgContainer">
