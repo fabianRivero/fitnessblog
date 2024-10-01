@@ -13,7 +13,7 @@ const blogs = data.blogs;
             <div class="articleContainer">
             
             <div class="imgContainer">
-            <img src= {`../../${blog.cardImage}`} alt=""/>
+            <img src= {`${blog.cardImage}`} alt=""/>
             </div>
             <span class="date">fecha de publicacion: {blog.publicationDate}</span>
             <ul>
@@ -27,6 +27,7 @@ const blogs = data.blogs;
         </div>
         </article>
         <a href={`http://localhost:4321/blog/${blog.linkTitle}`}>Ir al blog</a>
+        <p>{blog.description}</p>
     </div>
     ))
     }

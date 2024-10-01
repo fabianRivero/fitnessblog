@@ -22,7 +22,7 @@ if (blogs.length <= 6) {
         <article class="article">
             <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
             <div class="imgContainer">
-            <img src= {`../${blog.cardImage}`} alt=""/>
+            <img src= {`${blog.cardImage}`} alt=""/>
             </div>
             <span class="date">fecha de publicacion: {blog.publicationDate}</span>
             <ul>
@@ -33,6 +33,7 @@ if (blogs.length <= 6) {
                 }
             </ul>
             <h2>{blog.title}</h2>
+            <p>{blog.description}</p>
             </a>
         </article>
     </div>   

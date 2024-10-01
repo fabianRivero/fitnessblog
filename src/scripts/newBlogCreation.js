@@ -1,10 +1,10 @@
 let title = document.querySelector("#blogTitle");
-// let articleImageUrl = document.querySelector("#articleImage");
+let articleImageUrl = document.querySelector("#articleImage");
 let articleImage = document.querySelector(".articleImage");
-// let option1 = articleImage.querySelector("#option1");
-// let option2 = articleImage.querySelector("#option2");
-// let firstOption = articleImage.querySelector(".first-option");
-// let secondOption = articleImage.querySelector(".second-option");
+let option1 = articleImage.querySelector("#option1");
+let option2 = articleImage.querySelector("#option2");
+let firstOption = articleImage.querySelector(".first-option");
+let secondOption = articleImage.querySelector(".second-option");
 let checkboxes = document.querySelectorAll("#checkbox");
 let imageOptions = document.querySelector(".imageOptions");
 let description = document.querySelector(".description");
@@ -18,30 +18,30 @@ let greyScreen = document.querySelector(".greyScreen");
 
 title.value = "";
 content.value = "";
-// articleImageUrl.value = "";
+articleImageUrl.value = "";
 descriptionContent.value = "";
 
-// option1.addEventListener("click", function(){
-//     if(option1.checked){
-//         firstOption.style.display = 'block';
-//         secondOption.style.display = 'none';
-//     }
-//     if(option2.checked){
-//         firstOption.style.display = 'none';
-//         secondOption.style.display = 'block';
-//     }     
-// });
+option1.addEventListener("click", function(){
+    if(option1.checked){
+        firstOption.style.display = 'block';
+        secondOption.style.display = 'none';
+    }
+    if(option2.checked){
+        firstOption.style.display = 'none';
+        secondOption.style.display = 'block';
+    }     
+});
 
-// option2.addEventListener("click", function(){
-//     if(option1.checked){
-//         firstOption.style.display = 'block';
-//         secondOption.style.display = 'none';
-//     }
-//     if(option2.checked){
-//         firstOption.style.display = 'none';
-//         secondOption.style.display = 'block';
-//     }     
-// });
+option2.addEventListener("click", function(){
+    if(option1.checked){
+        firstOption.style.display = 'block';
+        secondOption.style.display = 'none';
+    }
+    if(option2.checked){
+        firstOption.style.display = 'none';
+        secondOption.style.display = 'block';
+    }     
+});
 
 
 submit.addEventListener("click", showMessage);
@@ -71,18 +71,18 @@ async function createNewBlog(){
 
     const img = () => {
         let selected;
-        // if(option1.checked){
+        if(option1.checked){
             console.log("usando1")
             for(const checkbox of checkboxes){
                 if (checkbox.checked) {
-                    selected = checkbox.value;
+                    selected = `../${checkbox.value}`;
                 };
-            // };
+            };
         };
-        // if(option2.checked){
-        //     console.log("usando2")
-        //     selected = articleImageUrl.value;
-        // };
+        if(option2.checked){
+            console.log("usando2")
+            selected = articleImageUrl.value;
+        };
         console.log(selected);
         return selected; 
     };
@@ -109,7 +109,7 @@ async function createNewBlog(){
     title.value = "";
     content.value = "";
     descriptionContent.value = "";
-    // articleImageUrl.value = "";
+    articleImageUrl.value = "";
     
     let tagsClicked = document.querySelectorAll(".clicked");
 
