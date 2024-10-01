@@ -58,6 +58,24 @@
 
     .articleImage{
         max-width: 87vw;
+
+        .imageOptions{
+            display: flex;
+            list-style: none;
+            gap: 7px;
+            margin-bottom: 10px;
+            li{
+                border: solid 0.7px black;
+                padding: 1px 5px;
+                font-size: 11px;
+                border-radius: 12px;
+                background-color: #ffffff;
+                &:hover{
+                    background-color: #b8b8b8;
+                    cursor: pointer;
+                }
+            }
+        }
         
         .images{
             display: flex;
@@ -71,7 +89,9 @@
                 height: 150px;
             }
         }
-
+        .second-option{
+            display: none;
+        }
     }
 }
 
