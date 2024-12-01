@@ -20,12 +20,16 @@
 // 4. Layout-related sections
 @import
   'layout/adminLayout',
-  'layout/footer';
+  'layout/footer',
+  'layout/userRegistration';
 
 // 5. Components
 @import
+  'components/react/blogComments',
+  'components/react/blogPunctuation',
   'components/articles',
   'components/categories',
+  'components/comments',
   'components/editArticles',
   'components/footer',
   'components/hamburger',
@@ -34,6 +38,7 @@
   'components/navigation',
   'components/newsletter',
   'components/searcherBox',
+  'components/pageList',
   'components/searchresults';
 
 // 6. Page-specific styles

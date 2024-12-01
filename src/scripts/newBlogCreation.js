@@ -1,3 +1,5 @@
+import authorization from "./authVerificator";
+
 let title = document.querySelector("#blogTitle");
 let articleImageUrl = document.querySelector("#articleImage");
 let articleImage = document.querySelector(".articleImage");
@@ -12,6 +14,8 @@ let descriptionContent = description.querySelector("#blogDescription");
 let content = document.querySelector("#blogContent");
 let messages = document.querySelectorAll(".submitMessage");
 let submit = document.querySelector(".submit");
+let reject = document.querySelector(".reject");
+let returnLogin = document.querySelector("return-login");
 let noButton = document.querySelector(".no");
 let yesButton = document.querySelector(".yes");
 let greyScreen = document.querySelector(".greyScreen");
@@ -20,6 +24,15 @@ title.value = "";
 content.value = "";
 articleImageUrl.value = "";
 descriptionContent.value = "";
+
+tinymce.init({
+    selector: 'textarea#blogContent',
+    branding: false,
+    menubar: false,
+    toolbar: "undo redo | styles forecolor | bold italic | alignleft aligncenter alignright alignjustify | image",
+    statusbar: false,
+    plugins: "image",
+  });
 
 option1.addEventListener("click", function(){
     if(option1.checked){
@@ -44,13 +57,20 @@ option2.addEventListener("click", function(){
 });
 
 
-submit.addEventListener("click", showMessage);
+submit.addEventListener("click", submitFunction);
 noButton.addEventListener("click", rejectMessage);
 yesButton.addEventListener("click", createNewBlog);
 
-function showMessage(){
-    messages[0].style.display = "block";
-    greyScreen.style.display = "block";
+function submitFunction(){
+    let key = localStorage.getItem("key");
+    console.log(key)
+    if (!key){
+        reject.style.display = "block";
+        greyScreen.style.display = "block";
+    } else{
+        messages[0].style.display = "block";
+        greyScreen.style.display = "block";    
+    };
 }
 
 function rejectMessage(){
@@ -59,9 +79,9 @@ function rejectMessage(){
 }
 
 async function createNewBlog(){
-
     messages[0].style.display = "none";
-    let linkTitle = title.value.replace(/ /g, "_"); 
+    let blogTitle = title.value.trim();
+    let linkTitle = blogTitle.replace(/ /g, "_"); 
     const selectedTags = Array.from(document.querySelectorAll(".clicked"));
     let validArray = [];
     
@@ -72,7 +92,6 @@ async function createNewBlog(){
     const img = () => {
         let selected;
         if(option1.checked){
-            console.log("usando1")
             for(const checkbox of checkboxes){
                 if (checkbox.checked) {
                     selected = `../${checkbox.value}`;
@@ -80,21 +99,21 @@ async function createNewBlog(){
             };
         };
         if(option2.checked){
-            console.log("usando2")
             selected = articleImageUrl.value;
         };
-        console.log(selected);
         return selected; 
     };
-    const contentResult = tinymce.activeEditor.getContent()
-    console.log(img())
+    const contentResult = tinymce.activeEditor.getContent();
+    const token = authorization();
+
     const response = await fetch('http://localhost:4000/api/blogs', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': `Bearer ${token}`, 
         },
         body: JSON.stringify({
-            title: title.value,
+            title: blogTitle,
             linkTitle: linkTitle,
             tags: validArray,
             cardImage: img(),
@@ -102,7 +121,6 @@ async function createNewBlog(){
             description: descriptionContent.value
         }),
     });
-    console.log("aaa")
     const jsonresponse = await response.json(); 
     console.log(jsonresponse);
 
@@ -118,14 +136,4 @@ async function createNewBlog(){
     }
     
     messages[1].style.display = "block";
-    
-}
-
-tinymce.init({
-    selector: 'textarea#blogContent',
-    branding: false,
-    menubar: false,
-    toolbar: "undo redo | styles forecolor | bold italic | alignleft aligncenter alignright alignjustify | image",
-    statusbar: false,
-    plugins: "image",
-  });
+};

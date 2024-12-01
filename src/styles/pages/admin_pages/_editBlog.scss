@@ -19,7 +19,9 @@
         padding: 20px 10px;
         border-right: 1px solid black;
         min-width: 50vw;
-        display: none;   
+        overflow: scroll;
+        display: none;
+
         img{
             width: 150px;
         }

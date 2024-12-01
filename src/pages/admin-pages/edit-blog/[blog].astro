@@ -51,7 +51,13 @@ const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
 
     <div class="content container">
     <h3>Contenido previo:</h3> <br/>
-    <p>{content}</p>
+    <p class="previousContent">
+      {content}
+    </p>
+    <script>
+      const previousContent = document.querySelector(".previousContent");
+      previousContent.innerHTML = previousContent.textContent;
+    </script>
     </div>
   </div>
 <!-- ###### -->

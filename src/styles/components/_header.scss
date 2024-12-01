@@ -4,24 +4,15 @@
     align-items: center;
     margin-right: 4vw;
     margin-left: 10px;
-    #logo{
-        position: relative;
-        display: inline-block;
-        width: 42px;
-        margin-top: 10px;
-        height: auto;
-        z-index: 7;
-        @include breakpoint(tablethorizontal) { 
-            margin-right: 60px;
-            width: 50px;
-        }
-        @include breakpoint(desktop) { 
-            margin-right: 3vw;
-        }
-    }
 
     #ctn-searcher{
         z-index: 7;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .results-container{
+            max-height: 24px;            
+        }
         @include breakpoint(tablethorizontal) { 
             display: flex;
         }
@@ -73,6 +64,17 @@
             }
   
         }
-    
+    }
+    .user-action-buttons{
+        display: flex;
+        gap: 10px;
+        .login-button, .signup-button, .logout-button{
+            z-index: 7;
+            padding: 3px;
+            cursor: pointer;
+            &:hover{
+                background-color: rgb(153, 153, 153);
+            }
+        }
     }
 }

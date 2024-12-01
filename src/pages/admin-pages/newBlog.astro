@@ -2,6 +2,7 @@
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import Categories from "../../components/Categories.astro";
 import ImagesForBlogArticles from "../../components/ImagesForBlogArticles.astro";
+import RejectMessage from "../../components/RejectMessage.astro";
 
 ---
 
@@ -9,7 +10,7 @@ import ImagesForBlogArticles from "../../components/ImagesForBlogArticles.astro"
 <AdminLayout>
   <h2 class="pageTitle">Editor de blog</h2>
   <div class="blogEditor">
-    <div class="title container">Título:<br/>
+    <div class="title container">Titulo:<br/>
        <input class="input" type="text" id="blogTitle" value="">
     </div>
     <div class="tags container">Tags:<br/>
@@ -42,6 +43,8 @@ import ImagesForBlogArticles from "../../components/ImagesForBlogArticles.astro"
     <div class="submit">
       Enviar blog
     </div>
+
+    <RejectMessage />
 
     <div class="submitMessage">
       <p>¿Estas seguro de enviar este blog?</p>

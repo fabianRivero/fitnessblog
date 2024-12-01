@@ -1,0 +1,25 @@
+---
+import "../scripts/stylesImport.js"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />		
+		<title>Astro</title>
+	</head>
+
+	<body>
+		<div class="frontpage-container">
+			<div class="frontImage">
+				<img src="https://cdn.pixabay.com/photo/2017/08/16/09/39/dumbbells-2646970_1280.jpg" alt="">
+			</div>
+			<div class="formContainer">
+				<slot />
+			</div>
+		</div>
+	</body>
+
+</html>

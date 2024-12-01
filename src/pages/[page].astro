@@ -1,0 +1,74 @@
+---
+import Articles from '../components/Articles.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import HeroImage from '../components/HeroImage.astro';
+import IndexPagesList from '../components/IndexPagesList.astro';
+import Newsletter from '../components/Newsletter.astro';
+import SearcherBox from '../components/SearcherBox.astro';
+import SearchResults from '../components/SearchResults.astro';
+import "../scripts/stylesImport.js";
+
+
+export async function getStaticPaths() {
+    let response = await fetch('http://localhost:4000/api/blogs');
+    let data = await response.json();
+    const pages = data.pages;
+    const pagesArray = []; 
+
+
+    for (let i = 1; i <= pages; i++) {
+        pagesArray.push(i)        
+    }
+
+    return pagesArray.map(( page ) => {
+        return{
+            params: {page: `page${page}`},
+            props: {page},
+            fallback: false
+        };
+    })
+};
+
+const { page } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<title>Astro</title>
+	</head>
+	<body>
+		<Header />
+		<div id = "content">
+		<SearcherBox />
+		<SearchResults />
+		<HeroImage />
+		<main id="main">
+		<section class="page-introduction">
+			<h2>Bienvenido al nuestro blog!</h2>
+			<p>La mejor información sobre fitness y bienestar en un solo lugar</p>
+		</section>
+		<h3 class="latestBlogsTitle">Ultimos blogs</h3>
+		<IndexPagesList />
+		<Articles page={page}/>
+		</main>
+		<Newsletter />
+		<Footer/>
+		</div>
+	</body>
+	<script>
+		import "../scripts/hamburger.js";
+		import "../scripts/searcherScriptForIndex.js";
+	</script>
+
+	<style lang="scss">
+		#main{
+			padding-top: 400px;
+		}
+	</style>
+</html>

@@ -1,0 +1,6 @@
+<script>
+	import authorization from "../scripts/authVerificator.js";
+	if (!authorization()) {
+		window.location.href = '/login';
+	}
+</script>

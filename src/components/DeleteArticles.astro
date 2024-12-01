@@ -1,5 +1,6 @@
 ---
-const response = await fetch('http://localhost:4000/api/blogs');
+const { page } = Astro.props;
+const response = await fetch(`http://localhost:4000/api/blogs?page=${page}`);
 const data = await response.json();
 const blogs = data.blogs;
 ---

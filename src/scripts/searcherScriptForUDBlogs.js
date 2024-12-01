@@ -4,14 +4,12 @@ const button = document.getElementById("icon-button");
 const singleIcon = document.getElementById("singleicon");
 const content = document.getElementById("content");
 const headerSearch = document.getElementById("headerSearch");
-const articles = document.querySelectorAll('.article-container')
-//const adminpage = document.querySelector('.adminPage');
+const articles = document.querySelectorAll('.article-container');
 
 //el addeventlistener
 singleIcon.addEventListener("click", mostrar_buscador);
 content.addEventListener("click", ocultar_buscador);
 window.addEventListener('resize', ocultar_buscador);
-//adminpage.addEventListener('click', ocultar_resultados);
 
 //el addeventlistener para el buscador para tablet horizontal para adelante
 
@@ -56,6 +54,16 @@ document.addEventListener('keyup', (e) =>{
             : article.className ="article-container not-selected";
         }
         if (document.getElementById("inputSearch").value.length === 0) {
+            article.className ="article-container";
+        }
+
+        if(e.target.matches('#headerSearch')){
+            const articleTitle = article.querySelector('h2').textContent.toLowerCase();
+            articleTitle.includes(e.target.value)
+            ? article.className = "article-container selected"
+            : article.className ="article-container not-selected";
+        }
+        if (document.getElementById("headerSearch").value.length === 0) {
             article.className ="article-container";
         }
     }

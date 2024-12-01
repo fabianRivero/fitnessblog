@@ -63,16 +63,28 @@ function ocultar_resultados(){
 document.addEventListener('keyup', (e) =>{
 
     if(e.target.matches('#inputSearch')){
-
         document.querySelectorAll('.searchResult').forEach((resultado) =>{
         resultado.textContent.toLowerCase().includes(e.target.value)
-        ? resultado.classList.add("selected")
-        : resultado.classList.remove("selected");
+        ? resultado.className = "searchResult selected"
+        : resultado.className ="searchResult";
         })
     }
     if (document.getElementById("inputSearch").value.length === 0) {
         for (const resultado of document.querySelectorAll('.searchResult')) {
-            resultado.classList.remove("selected");
+            resultado.className ="searchResult";
+        }
+    }
+
+    if(e.target.matches('#headerSearch')){
+        document.querySelectorAll('.searchResult').forEach((resultado) =>{
+        resultado.textContent.toLowerCase().includes(e.target.value)
+        ? resultado.className = "searchResult selected"
+        : resultado.className ="searchResult";
+        })
+    }
+    if (document.getElementById("headerSearch").value.length === 0) {
+        for (const resultado of document.querySelectorAll('.searchResult')) {
+            resultado.className ="searchResult";
         }
     }
 })

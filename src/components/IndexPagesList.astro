@@ -1,0 +1,19 @@
+---
+const response = await fetch(`http://localhost:4000/api/blogs`);
+const data = await response.json();
+const pages = data.pages;
+const pagesArray = []; 
+
+for (let i = 1; i <= pages; i++) {
+    pagesArray.push(i)        
+}
+
+---
+
+<div class="pageslist"> 
+    { 
+    pagesArray.map((page) => (
+    <a href={`/page${page}`} class="page-button">{page}</a>   
+    ))
+    }
+</div> 

@@ -1,0 +1,18 @@
+.comments-title{
+    margin-top: 2vh;
+}
+
+.comments{
+    margin-top: 1vh;
+    width: 95%;
+    border: 0.5px solid grey;
+    .comment{
+        border: 0.5px solid grey;
+        padding: 12px;
+        .comment-header{
+            display: flex;
+            justify-content: space-between;     
+            margin-bottom: 10px;       
+        }
+    }
+}

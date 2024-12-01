@@ -10,15 +10,21 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.6.2",
+    "@astrojs/react": "^3.6.3",
     "@nanostores/react": "^0.7.3",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.14.5",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "jquery": "^3.7.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "nanostores": "^0.11.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.77.8",
-    "tinymce": "^7.3.0"
+    "tinymce": "^7.3.0",
+    "uuid": "^11.0.3"
   }
 }

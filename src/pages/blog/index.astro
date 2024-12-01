@@ -1,13 +1,15 @@
 ---
 import Articles from "../../components/Articles.astro";
 import Categories from "../../components/Categories.astro";
+import BlogPagesList from "../../components/BlogPagesList.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 ---
 
 <BaseLayout>
     <Categories />
-    <Articles />
+    <BlogPagesList />
+    <Articles page="1"/>
 </BaseLayout>
 
 <script>

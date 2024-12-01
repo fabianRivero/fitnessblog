@@ -27,6 +27,34 @@
             background-color: rgb(207, 207, 207);
         }
     }
+    .reject{
+        border: 1px solid black;
+        padding: 10px 10px;
+        max-width: 200px;
+        align-self: center;
+        top: 200px;
+        position: fixed;
+        background-color: white;
+        display: none;
+        .answer{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            .button{
+                border: 1px solid black;
+                padding: 2px 10px;
+                align-self: center;
+                text-align: center;
+                a{
+                    color: black;
+                }
+                &:hover{
+                    cursor: pointer;
+                    background-color: rgb(207, 207, 207);
+                }
+            }
+        }
+    }
     .submitMessage{
         border: 1px solid black;
         padding: 10px 10px;

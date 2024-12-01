@@ -1,21 +1,38 @@
 ---
-import AdminLayout from "../../layouts/AdminLayout.astro";
-import SearcherBox from "../../components/SearcherBox.astro";
-import DeleteArticles from "../../components/DeleteArticles.astro";
-import Categories from "../../components/Categories.astro";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import SearcherBox from "../../../components/SearcherBox.astro";
+import DeleteArticles from "../../../components/DeleteArticles.astro";
+import Categories from "../../../components/Categories.astro";
+import DeletePagesList from "../../../components/DeletePagesList.astro";
+
+export async function getStaticPaths() {
+    let response = await fetch('http://localhost:4000/api/blogs');
+    let data = await response.json();
+    const pages = data.pages;
+    const pagesArray = []; 
+
+
+    for (let i = 1; i <= pages; i++) {
+        pagesArray.push(i)        
+    }
+
+    return pagesArray.map(( page ) => {
+        return{
+            params: {page: `page${page}`},
+            props: {page},
+            fallback: false
+        };
+    })
+};
+
+const { page } = Astro.props;
+
 ---
 <div class="greyScreen"></div>
 <AdminLayout>
     <header id="adminHeader">  
         <div id="ctn-searcher">
             <input type="text" placeholder="Buscar" id="headerSearch">
-            <div id="ctn-button-icon">
-                <svg id="icon-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 
-                    12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 
-                    208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
-                    </svg>
-            </div>
             <div id="ctn-singleicon">
                 <svg id="singleicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 
@@ -27,7 +44,8 @@ import Categories from "../../components/Categories.astro";
     </header>
     <SearcherBox />
     <Categories />
-    <DeleteArticles />
+    <DeletePagesList />
+    <DeleteArticles page={page}/>
     
     <div class="confirmationWindow">
         <p>¿Estas seguro que quieres eliminar los blogs seleccionados?</p>
@@ -52,7 +70,7 @@ import Categories from "../../components/Categories.astro";
 </AdminLayout>
 
 <script>
-    import "../../scripts/deleteBlogs.js";
-    import "../../scripts/searcherScriptForUDBlogs.js";
-    import "../../scripts/categorieFilter.js";
+    import "../../../scripts/deleteBlogs.js";
+    import "../../../scripts/searcherScriptForUDBlogs.js";
+    import "../../../scripts/categorieFilter.js";
 </script>

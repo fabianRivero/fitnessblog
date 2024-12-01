@@ -1,6 +1,9 @@
 ---
-import "../scripts/stylesImport.js"
+import Authorization from "../components/Authorization.astro";
+import "../scripts/stylesImport.js";
 ---
+
+<Authorization />
 
 <html lang="en">
 	<head>
@@ -17,7 +20,7 @@ import "../scripts/stylesImport.js"
 		<slot />
     <div id = "content" class="adminPage">
         <footer class="adminFooter">
-            <a href="/admin-pages" class="adminHome">Ir a menú principal</a>
+            <a href="/admin-pages" class="adminHome">Ir a menu principal</a>
         </footer>
     </div>
 	</body>
@@ -28,3 +31,7 @@ import "../scripts/stylesImport.js"
     top: 90px;    
 }
 </style>
+
+<script>
+import "../scripts/tokenExpiration.js";
+</script>

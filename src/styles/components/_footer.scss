@@ -2,7 +2,7 @@ footer{
     padding: 15px 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     @include breakpoint(tablethorizontal) {
         padding: 0px 25px;           
@@ -35,8 +35,17 @@ footer{
             
         }
     }
+    #logo{
+        position: relative;
+        display: inline-block;
+        width: 42px;
+        height: auto;
+        @include breakpoint(tablethorizontal) { 
+            width: 50px;
+        }
+    }
 
-    
+
     .copyright{
         margin-right: 10px;
         margin-top: 30px;

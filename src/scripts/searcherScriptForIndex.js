@@ -23,9 +23,9 @@ content.addEventListener("click", ocultar_resultados);
 function mostrar_buscador() {
     if(searcherbox.className === ''){
         inputSearch.value = "";
-        searcherbox.classList.toggle('extended');
         searcherbox.style.top = '450px';
         searcherbox.style.display = 'block'; 
+        searcherbox.classList.toggle('extended');
         inputSearch.focus();
     }else{
         searcherbox.style.top = '368px';
@@ -41,15 +41,13 @@ function ocultar_buscador(){
         searcherbox.style.top = '368px';
         inputSearch.value = "";
         searchResultsIndex.style.display = "none"; 
-        searcherbox.classList.toggle('extended');
+        searcherbox.className = "";
     }
 }
 
 //para que aparezca los resultados de busqueda
 function mostrar_resultados(){
-
-        searchResultsIndex.style.display = "block";
-    
+    searchResultsIndex.style.display = "block";
 }
 
 //para ocultar los resultados de busqueda
@@ -61,19 +59,29 @@ function ocultar_resultados(){
 //para que se haga el filtro de busqueda
 document.addEventListener('keyup', (e) =>{
 
-
     if(e.target.matches('#inputSearch')){
-
         document.querySelectorAll('.searchResult').forEach((resultado) =>{
             resultado.textContent.toLowerCase().includes(e.target.value)
-            ? resultado.classList.add("selected")
-            : resultado.classList.remove("selected");
+            ? resultado.className = "searchResult selected"
+            : resultado.className ="searchResult";
         })
+        if (document.getElementById("inputSearch").value.length === 0) {
+            for (const resultado of document.querySelectorAll('.searchResult')) {
+                resultado.className ="searchResult";
+            }
+        }
     }
-    if (document.getElementById("inputSearch").value.length === 0) {
-        console.log(document.getElementById("inputSearch").value.length)
-        for (const resultado of document.querySelectorAll('.searchResult')) {
-            resultado.classList.remove("selected");
+
+    if(e.target.matches('#headerSearch')){
+        document.querySelectorAll('.searchResult').forEach((resultado) =>{
+            resultado.textContent.toLowerCase().includes(e.target.value)
+            ? resultado.className = "searchResult selected"
+            : resultado.className ="searchResult";
+        })
+        if (document.getElementById("headerSearch").value.length === 0) {
+            for (const resultado of document.querySelectorAll('.searchResult')) {
+                resultado.className ="searchResult";
+            }
         }
     }
 })

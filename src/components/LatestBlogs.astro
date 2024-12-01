@@ -1,43 +1,70 @@
 ---
 const response = await fetch('http://localhost:4000/api/blogs');
 const data = await response.json();
+const pages = data.pages;
+const page = data.page;
 const blogs = data.blogs;
 const latestBlogs = [];
-if (blogs.length <= 6) {
-    for (const blog of blogs) {
-        latestBlogs.push(blog);
-    };
-}else{
-    for (let i = 0; i < 8; i++) {
-        latestBlogs.push(blogs[i]);
-    };
-};
+const pagesArray = []; 
 
+for (let i = 1; i < pages; i++) {
+    pagesArray.push(i)        
+}
+
+for (const blog of blogs) {
+    latestBlogs.push(blog);
+}
 ---
 <h3 class="latestBlogsTitle">Ultimos blogs</h3>
+
+<div>
+    {
+        latestBlogs.map((blog) => (
+        <div class="article-container">
+            <article class="article">
+                <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
+                <div class="imgContainer">
+                <img src= {`${blog.cardImage}`} alt=""/>
+                </div>
+                <span class="date">fecha de publicacion: {blog.publicationDate}</span>
+                <ul>
+                    {
+                        blog.tags.map((tag) => (
+                            <li class="tag">{tag}</li>
+                        ))
+                    }
+                </ul>
+                <h2>{blog.title}</h2>
+                <p>{blog.description}</p>
+                </a>
+            </article>
+        </div>   
+        ))
+    }
+</div>
+
 <div class="articles"> 
     { 
-    latestBlogs.map((blog) => (
-    <div class="article-container">
-        <article class="article">
-            <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
-            <div class="imgContainer">
-            <img src= {`${blog.cardImage}`} alt=""/>
-            </div>
-            <span class="date">fecha de publicacion: {blog.publicationDate}</span>
-            <ul>
-                {
-                    blog.tags.map((tag) => (
-                        <li class="tag">{tag}</li>
-                    ))
-                }
-            </ul>
-            <h2>{blog.title}</h2>
-            <p>{blog.description}</p>
-            </a>
-        </article>
-    </div>   
-    ))
-
+        latestBlogs.map((blog) => (
+            <div class="article-container">
+                <article class="article">
+                    <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
+                    <div class="imgContainer">
+                    <img src= {`${blog.cardImage}`} alt=""/>
+                    </div>
+                    <span class="date">fecha de publicacion: {blog.publicationDate}</span>
+                    <ul>
+                        {
+                            blog.tags.map((tag) => (
+                                <li class="tag">{tag}</li>
+                            ))
+                        }
+                    </ul>
+                    <h2>{blog.title}</h2>
+                    <p>{blog.description}</p>
+                    </a>
+                </article>
+            </div>   
+        ))
     }
 </div> 

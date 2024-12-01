@@ -1,0 +1,27 @@
+.frontpage-container{
+    display: flex;    
+    justify-content: center;
+    margin-top: 15vh;
+    .frontImage{
+        display: none;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;        
+        margin-top: 20px;
+    }
+    .login-button{
+        border: 1px solid black;
+        margin-top: 15px;
+        text-align: center;
+        cursor: pointer;
+        color: black;
+        padding: 5px 10px;
+        &:hover{
+            background-color: rgb(207, 207, 207);
+        }
+    }
+    #error{
+        color: red;
+    }
+}

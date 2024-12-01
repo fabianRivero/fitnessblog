@@ -13,8 +13,8 @@
     }
     .article-container{
         .article{
-            width: 72vw;
             height: 360px;
+            width: 80vw;
             border: solid 0.5px black;
             background-color: #dfdfdf; 
             .articleContainer{
@@ -30,26 +30,26 @@
                 .imgContainer{
                 overflow: hidden;
                 img{
-                    padding-top: 20px;
-                    width: 100%;
-                    height: 200px;
-                    margin-bottom: 5px;
+                    padding: 10px 10px 5px 10px;
+                    width: 94%;
+                    margin-top: 5px;
+                    height: 180px;
                     object-fit: contain;
                     transition: 500ms;
+                    cursor: pointer;
                     &:hover{
-                        -webkit-transform:scale(1.06);transform:scale(1.06);
-                        cursor: pointer;
+                        -webkit-transform:scale(1.03);transform:scale(1.03);
                     }
                 }
             }
             .date{
-                padding-top: 5px;
-                font-size: 11px;
+                padding-top: 4px;
+                font-size: 10px;
                 display: block;
             }
             ul{
                 display: flex;
-                font-size: 13px;
+                font-size: 10px;
                 gap: 4px;
                 align-items: center;
                 list-style: none;
@@ -59,21 +59,18 @@
                 border-radius: 12px;
                 margin-top: 5px;
                 background-color: #ffffff;
-                &:hover{
-                    background-color: #b8b8b8;
-                    cursor: pointer;
-                }
                 }
             }
             h2{
                 margin-top: 5px;
                 font-size: 17px;
-                &:hover{
-                    cursor: pointer;
-                }
             }
             span{
                 display: none;
+            }
+            p{
+                font-size: 14px;
+                padding: 8px 14px;
             }
         }
         }
@@ -83,44 +80,63 @@
     @include breakpoint(tablet) {
         flex-direction: row;
         flex-wrap: wrap;
-        .article{
-            width: 36.8vw;
+        .article-container{
+            .article{
+                width: 36.8vw;
+                .articleContainer{
+                    width: 90%;
+                    padding: 0px 15px;
+                    color: black;
+                ul{
+                    display: flex;
+                    font-size: 8.6px;
+                    gap: 3px;
+                    align-items: center;
+                    list-style: none;
+                    .tag{
+                    padding: 1px 4px;
+                    }
+                }
+                h2{
+                    font-size: 16px;
+                }
+                p{
+                    font-size: 13px;
+                    padding: 8px 10px;
+                }
+                }   
+            }
         }
     }
     @include breakpoint(tablethorizontal) {
-        .article{
-            width: 24vw;
-            a{
-                .imgContainer{
-                    img{
-                        margin-bottom: 0px;
+        .article-container{
+            .article{
+                width: 26vw;
+                .articleContainer{
+                    padding: 0px 10px;
+                ul{
+                    font-size: 8px;
+                    gap: 2px;
+                    .tag{
+                    padding: 1px 3px;
                     }
                 }
-                .date{
-                    padding-top: 0px;
+                h2{
+                    margin-top: 10px;
+                    font-size: 15px;
                 }
-                
-                    ul{
-                        display: flex;
-                        font-size: 12px;
-                        gap: 3px;
-                        align-items: center;
-                        list-style: none;
-                    }
+                p{
+                    font-size: 11px;
+                    padding: 8px 10px;
+                }
+                }   
             }
         }
     }
     @include breakpoint(desktop) {
-        .article{
-            width: 17vw;
-            a{  
-                    ul{
-                        font-size: 9px;
-                        gap: 3px;
-                    }
-                    h2{
-                        font-size: 16px;
-                    }
+        .article-container{
+            .article{
+                width: 15vw;
             }
         }
     }

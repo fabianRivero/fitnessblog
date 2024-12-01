@@ -1,0 +1,25 @@
+.comment-section {
+    .h2comment{
+        margin-top: 30px;
+    }
+    textarea {
+        width: 95%;
+        height: 100px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+}
