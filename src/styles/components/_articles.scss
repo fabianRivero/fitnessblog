@@ -72,6 +72,37 @@
                 font-size: 14px;
                 padding: 8px 14px;
             }
+            .checked{
+                svg{
+                    color: rgb(239, 184, 16);
+                }
+            }
+            .star.half {
+                position: relative;
+              }
+              
+              .star.half::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%; /* Mitad de la estrella */
+                height: 100%;
+                background-color: gold;
+                clip-path: polygon(
+                  50% 0%,
+                  61% 35%,
+                  98% 35%,
+                  68% 57%,
+                  79% 91%,
+                  50% 70%,
+                  21% 91%,
+                  32% 57%,
+                  2% 35%,
+                  39% 35%
+                );
+                z-index: 1;
+              }
         }
         }
 

@@ -1,0 +1,18 @@
+.pagination{
+    display: flex;
+    padding: 10px;
+    justify-self: center;
+    gap: 15px;
+    .pageUrl{
+        border: 0.1px black solid;
+        padding: 5px;
+        width: 70px;
+        text-align: center;
+        color: black;
+        cursor: pointer;
+    }
+    .pageUrl:hover{
+        color: white;
+        background-color: grey;
+    }
+}

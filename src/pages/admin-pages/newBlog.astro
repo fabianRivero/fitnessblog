@@ -1,7 +1,6 @@
 ---
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import Categories from "../../components/Categories.astro";
-import ImagesForBlogArticles from "../../components/ImagesForBlogArticles.astro";
 import RejectMessage from "../../components/RejectMessage.astro";
 
 ---
@@ -16,18 +15,8 @@ import RejectMessage from "../../components/RejectMessage.astro";
     <div class="tags container">Tags:<br/>
         <Categories />
     </div>
-    <div class="articleImage container">Imagen de articulo:<br/> 
-      <ul class="imageOptions">
-
-        <input type="radio" id="option1" name="option" value="" class="" checked/>
-        <li class="option 1"><label for="option1">Lista de imagenes</label></li>
-
-        <input type="radio" id="option2" name="option" value="" class=""/>
-        <li class="option 2"><label for="option2">Imagen por url</label></li>
-      </ul>
-
-      <ImagesForBlogArticles />  
-      <input class="second-option" type="text" id="articleImage" value="" placeholder="ingresa la url de la imagen">
+    <div class="articleImage container">Imagen de articulo:<br/>  
+      <input class="imageUrl" type="text" id="articleImage" value="" placeholder="ingresa la url de la imagen">
     </div>
 
     <div class="description container">Descripcion:<br/>
@@ -70,5 +59,4 @@ import RejectMessage from "../../components/RejectMessage.astro";
 <script>
   import '../../scripts/tagsClicked.js';
   import "../../scripts/newBlogCreation.js";
-  import "../../scripts/imageSelected.js";
 </script>

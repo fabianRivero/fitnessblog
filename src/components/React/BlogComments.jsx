@@ -5,6 +5,7 @@ const BlogComments = ({blogId}) => {
     const [comments, setComments] = useState([])
 
     useEffect(() => {
+        if(!blogId) return;
         const getBlogs = async() => {
         try{
             const response = await fetch(`http://localhost:4000/api/blogs/${blogId}`);

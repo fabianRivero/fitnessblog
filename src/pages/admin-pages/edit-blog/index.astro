@@ -2,9 +2,8 @@
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import SearcherBox from "../../../components/SearcherBox.astro";
 import SearchResults from "../../../components/SearchResults.astro";
-import EditArticles from "../../../components/EditArticles.astro";
-import Categories from "../../../components/Categories.astro";
 import EditPagesList from "../../../components/EditPagesList.astro";
+import CABEdit from "../../../components/React/CABEdit.jsx";
 ---
 <div class="greyScreen"></div>
 <AdminLayout>
@@ -20,25 +19,14 @@ import EditPagesList from "../../../components/EditPagesList.astro";
             </div>
         </div>
     </header>
-    <Categories />
     <EditPagesList/>
     <SearcherBox />
     <SearchResults />
-    <EditArticles page="1"/>
-    <div>
-        <div class="confirmationWindow">
-            <p>¿Quieres seleccionar este blog?</p>
-            <div class="answer">
-            <div class="yes Button"><a id="yes" href="">Si</a></div>  <!--En el href va el link a la pagina de edicion de blog -->
-            <div class="no Button">No</div>
-            </div>
-        </div>
-    </div>
+    <CABEdit page=1 client:only/>
 
 </AdminLayout>
 
 <script>
-    import "../../../scripts/editBlog.js";
     import "../../../scripts/searcherScriptForUDBlogs.js";
     import "../../../scripts/categorieFilter.js";
 </script>

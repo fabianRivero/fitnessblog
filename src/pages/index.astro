@@ -7,7 +7,12 @@ import "../scripts/stylesImport.js"
 import Newsletter from "../components/Newsletter.astro";
 import Articles from "../components/Articles.astro";
 import IndexPagesList from "../components/IndexPagesList.astro";
+import LatestBlogs from "../components/LatestBlogs.astro";
 
+const response = await fetch(`http://localhost:4000/api/blogs?limit=6`);
+const data = await response.json();
+const latestBlogs = data.blogs;
+const totalPages = data.pages; 
 ---
 <html lang="en">
 	<head>
@@ -29,8 +34,7 @@ import IndexPagesList from "../components/IndexPagesList.astro";
 			<p>La mejor información sobre fitness y bienestar en un solo lugar</p>
 		</section>
 		<h3 class="latestBlogsTitle">Ultimos blogs</h3>
-		<IndexPagesList />
-		<Articles page="1"/>
+		<LatestBlogs blogs={latestBlogs}/>
 		</main>
 		<Newsletter />
 		<Footer/>

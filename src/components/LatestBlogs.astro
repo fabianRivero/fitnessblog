@@ -1,70 +1,60 @@
 ---
-const response = await fetch('http://localhost:4000/api/blogs');
-const data = await response.json();
-const pages = data.pages;
-const page = data.page;
-const blogs = data.blogs;
-const latestBlogs = [];
-const pagesArray = []; 
-
-for (let i = 1; i < pages; i++) {
-    pagesArray.push(i)        
-}
-
-for (const blog of blogs) {
-    latestBlogs.push(blog);
-}
+let response = await fetch('http://localhost:4000/api/blogs?limit=6');
+    let data = await response.json();
+    const latestBlogs = data.blogs;
 ---
-<h3 class="latestBlogsTitle">Ultimos blogs</h3>
 
-<div>
-    {
-        latestBlogs.map((blog) => (
+<div class="articles">
+    {latestBlogs.map((blog) => {
+      const averageRating = blog.usersLikes.reduce(
+        (acc, calification) => acc + calification.calification,
+        0
+      ) / blog.usersLikes.length;
+      return (
         <div class="article-container">
-            <article class="article">
-                <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
-                <div class="imgContainer">
-                <img src= {`${blog.cardImage}`} alt=""/>
-                </div>
-                <span class="date">fecha de publicacion: {blog.publicationDate}</span>
-                <ul>
-                    {
-                        blog.tags.map((tag) => (
-                            <li class="tag">{tag}</li>
-                        ))
-                    }
+          <article class="article">
+            <a href={`http://localhost:4321/blog/post/${blog.linkTitle}`} class="articleContainer">
+              <div class="imgContainer">
+                <img src={`${blog.cardImage}`} alt="" />
+              </div>
+              <span class="date">Fecha de publicación: {blog.publicationDate}</span>
+              <ul>
+                {blog.tags.map((tag) => (
+                  <li class="tag">{tag}</li>
+                ))}
+              </ul>
+              <h2>{blog.title}</h2>
+              <p>{blog.description}</p>
+  
+              <div>
+                Calificación:
+                <ul class="stars">
+                  {[...Array(5)].map((_, index) => {
+                    const isFull = index + 1 < Math.floor(averageRating) + 1;
+                    const isHalf = !isFull && index < averageRating;
+  
+                    return (
+                      <li
+                        class={`star ${isFull ? "checked" : isHalf ? "half" : ""}`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="12"
+                          height="12"
+                          fill="currentColor"
+                          class="bi bi-star-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+                      </li>
+                    );
+                  })}
                 </ul>
-                <h2>{blog.title}</h2>
-                <p>{blog.description}</p>
-                </a>
-            </article>
-        </div>   
-        ))
-    }
-</div>
-
-<div class="articles"> 
-    { 
-        latestBlogs.map((blog) => (
-            <div class="article-container">
-                <article class="article">
-                    <a href={`http://localhost:4321/blog/${blog.linkTitle}`} class="articleContainer">
-                    <div class="imgContainer">
-                    <img src= {`${blog.cardImage}`} alt=""/>
-                    </div>
-                    <span class="date">fecha de publicacion: {blog.publicationDate}</span>
-                    <ul>
-                        {
-                            blog.tags.map((tag) => (
-                                <li class="tag">{tag}</li>
-                            ))
-                        }
-                    </ul>
-                    <h2>{blog.title}</h2>
-                    <p>{blog.description}</p>
-                    </a>
-                </article>
-            </div>   
-        ))
-    }
-</div> 
+              </div>
+            </a>
+          </article>
+        </div>
+      );
+    })}
+  </div>

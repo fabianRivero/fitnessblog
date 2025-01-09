@@ -1,10 +1,13 @@
 #header{
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-right: 4vw;
     margin-left: 10px;
-
+    @include breakpoint(tablet) { 
+        margin-top: 0;
+    }
     #ctn-searcher{
         z-index: 7;
         display: flex;

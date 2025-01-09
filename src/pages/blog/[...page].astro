@@ -1,0 +1,30 @@
+---
+import Articles from "../../components/Articles.astro";
+import BlogPagesList from "../../components/BlogPagesList.astro";
+import Pagination from "../../components/Pagination.astro";
+import CategoriesAndArticles from "../../components/React/CategoriesAndArticles.jsx";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../scripts/stylesImport.js"
+
+const { page } = Astro.params;
+const currentPage = parseInt(page || "1");
+const pageSize = 2;
+
+const response = await fetch(
+        `http://localhost:4000/api/blogs?page=${currentPage}&pageSize=${pageSize}`
+    );
+const data = await response.json();
+
+const totalPages = data.pages; 
+---
+<BaseLayout>
+    <Articles blogs={data.blogs}/>
+    <Pagination 
+    currentPage={currentPage} 
+    totalPages={totalPages} 
+    />
+</BaseLayout>
+
+<script>
+    import "../../scripts/categorieFilter.js"
+</script>

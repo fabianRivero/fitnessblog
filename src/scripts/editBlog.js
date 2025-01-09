@@ -15,10 +15,9 @@ function denyEdition(){
 }
 
 for (const blog of editableBlogs) {
-    const linkTitle = blog.firstElementChild.innerHTML;
     blog.addEventListener("click", function(){
         (preSelectBlog)();
-        yesButton.href = `http://localhost:4321/admin-pages/edit-blog/${linkTitle}`
+        yesButton.href = `http://localhost:4321/admin-pages/edit-blog/${id}`
     });
 }
 

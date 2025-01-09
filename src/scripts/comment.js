@@ -1,28 +1,35 @@
 import { jwtDecode } from 'jwt-decode';
 import { v4 as uuidv4 } from 'uuid';
 
-const commentary = document.querySelector(".commentary");
-const sendButton = document.querySelector(".send-button");
-const blogId = document.querySelector(".blog-id");
+document.addEventListener("DOMContentLoaded", async() => {
+    const commentary = document.querySelector(".commentary");
+    const sendButton = document.querySelector(".send-button");
+    const blogIdElement = document.querySelector(".blog-id");
 
-const token = localStorage.getItem("key");
+    if (!commentary || !sendButton || !blogId) {
+        console.error("Elementos necesarios no encontrados en el DOM.");
+        return;
+    }
 
-const commentButton= async(event) => {
-    event.preventDefault();
-    if (!token){
-        alert("Debes registrarte para comentar");
-    } else if (token){
+    const token = localStorage.getItem("key");
+
+    const commentButton= async(event) => {
+        event.preventDefault();
+        if (!token){
+            alert("Debes registrarte para comentar");
+            return;
+        } 
+        
         try{
             const decoded = jwtDecode(token);
             const userId = decoded.id;   
-            const getUser = await fetch(`http://localhost:4000/api/users/${userId}`);
-            const getBlog = await fetch(`http://localhost:4000/api/blogs/${blogId.textContent}`);
-            
-            const blogData = await getBlog.json();
-            const blog = blogData.blog
-    
-            const userData = await getUser.json();
-            const user = userData.user;
+            const [getUser, getBlog] = await Promise.all([
+                fetch(`http://localhost:4000/api/users/${userId}`),
+                fetch(`http://localhost:4000/api/blogs/${blogIdElement.textContent}`)
+            ]);
+
+            const { user } = await getUser.json();
+            const { blog } = await getBlog.json();
     
             const newComment = {
                 id: uuidv4(),
@@ -39,30 +46,36 @@ const commentButton= async(event) => {
             const parsedToken = JSON.parse(token).token;
                         
 
-            await fetch(`http://localhost:4000/api/blogs/${blogId.textContent}`, {
-                method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${parsedToken}`
-                },
-                body: JSON.stringify({ usersComments: insertCommentToBlog }),
-            });
+            const [updateBlog, updateUser] = await Promise.all([
+                fetch(`http://localhost:4000/api/blogs/${blogIdElement.textContent}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${JSON.parse(token).token}`
+                    },
+                    body: JSON.stringify({ usersComments: [...blog.usersComments, newComment] }),
+                }),
+                fetch(`http://localhost:4000/api/users/${userId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${JSON.parse(token).token}`
+                    },
+                    body: JSON.stringify({ blogsCommented: [...user.blogsCommented, newComment] }),
+                }),
+            ]);
 
-            await fetch(`http://localhost:4000/api/users/${userId}`, {
-                method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${parsedToken}`
-                },
-                body: JSON.stringify({ blogsCommented: insertCommentToUser }),
-            });
-            commentary.value = "";
+            if (updateBlog.ok && updateUser.ok) {
+                commentary.value = "";
+            }
 
         }catch(error){
-            console.log(error)
+            console.log("Error al enviar el comentario:", error)
         };
     };
-};
 
-sendButton.addEventListener('click', commentButton);
+    sendButton.addEventListener('click', commentButton);
+
+});
+
 

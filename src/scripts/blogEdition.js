@@ -1,7 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 
 let title = document.querySelector("#blogTitle");
-let checkboxes = document.querySelectorAll("#checkbox");
 let content = document.querySelector("#blogContent");
 let messages = document.querySelectorAll(".submitMessage");
 let submit = document.querySelector(".submit");
@@ -12,7 +11,8 @@ let previousValues = document.querySelector(".previousValues");
 let arrowRight = document.querySelector('.arrowRight');
 let arrowLeft = document.querySelector('.arrowLeft');
 let id = document.querySelector(".id");
-
+let imageInput = document.querySelector('.imageUrl');
+let description = document.querySelector("#blogDescription");
 const token = localStorage.getItem("key");
 const decoded = jwtDecode(token);
 
@@ -63,22 +63,11 @@ if (decoded.role !== "admin"){
     async function editBlog(){
     
         messages[0].style.display = "none";
-        let linkTitle = title.value.replace(/ /g, "_"); 
         const selectedTags = Array.from(document.querySelectorAll(".clicked"));
         let validArray = [];
         
         for (let tag of selectedTags) {
             validArray.push(tag.innerText);
-        };
-    
-        const img = () => {
-            let selected;
-            for(const checkbox of checkboxes){
-                if (checkbox.checked) {
-                    selected = checkbox.value;
-                };
-            };
-            return selected;
         };
     
         const response = await fetch(`http://localhost:4000/api/blogs/${id.textContent}`, {
@@ -89,9 +78,9 @@ if (decoded.role !== "admin"){
             },
             body: JSON.stringify({
                 title: title.value,
-                linkTitle: linkTitle,
                 tags: validArray,
-                cardImage: img(),
+                cardImage: imageInput.value,
+                description: description.value,
                 content: content.value
             }),
         });

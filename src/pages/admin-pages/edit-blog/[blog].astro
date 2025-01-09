@@ -1,26 +1,34 @@
 ---
 import AdminLayout from "../../../layouts/AdminLayout.astro";
-import ImagesForBlogArticles from "../../../components/ImagesForBlogArticles.astro";
 import Categories from '../../../components/Categories.astro';
 
 export async function getStaticPaths() {
-    let response = await fetch('http://localhost:4000/api/blogs');
-    let data = await response.json();
-    let blogs = data.blogs;
-
-    return blogs.map(({ id, linkTitle, title, cardImage, tags, publicationDate, content }) => {
-        return{
-            params: {blog: linkTitle},
-            props: {id, title, cardImage, tags, publicationDate, content},
-        }
-    })
-};
+    // Obtén las rutas de blogs existentes desde tu API
+    const response = await fetch('http://localhost:4000/api/blogs');
+    const data = await response.json();
+  console.log(response)
+    return data.blogs.map(blog => ({
+      params: { blog: blog.id.toString() }, // Aquí usamos el `id` del blog
+        }));
+    };
 
 const { blog } = Astro.params;
-const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
----
-<!-- VOY HACIENDO EL TEMA DE CONCORDAR LOS TAGS DEL BLOG A EDITAR AL EDITOR  -->
 
+// Lógica para obtener los datos del blog individual
+const fetchBlogData = async (id) => {
+  console.log("aaaaaaaaaaaaa", id)
+    const response = await fetch(`http://localhost:4000/api/blogs/${id}`);
+    if (!response.ok) {
+        throw new Error("Blog no encontrado");
+    }
+    return await response.json();
+};
+
+const blogData = await fetchBlogData(blog);
+
+// Desestructurar datos del blog
+const { id, title, cardImage, tags, description, content } = blogData;
+---
 
 <div class="greyScreen"></div>
 <AdminLayout>
@@ -43,10 +51,14 @@ const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
     </div>
     <div class="tags container"><h3>Tags previos:</h3><br/>   
           {tags}
-        <!-- <Categories /> -->
+        
     </div>
     <div class="articleImage container"><h3>Imagen de articulo previo:</h3><br/> 
-      <img src=`../../../${cardImage}` alt="">
+      <img src=`../../../${cardImage}` alt=`${cardImage}`>
+    </div>
+
+    <div class="description container"><h3>Descripcion previa:</h3><br/>
+      <p class="descriptionValue">{description}</p>
     </div>
 
     <div class="content container">
@@ -69,18 +81,17 @@ const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
         <Categories />
     </div>
     <div class="articleImage container">Imagen de articulo:<br/> 
-    <!--
-    Aqui va el input para imagenes, por el momento vamos a poner diferentes opciones para escoger
-      -->
-      <ImagesForBlogArticles />  
-    
+  
+      <input class="imageUrl" type="text" id="articleImage" placeholder="ingresa la url de la imagen">
+    </div>
+
+    <div class="description container">Descripcion:<br/>
+      <input class="input" type="text" id="blogDescription" value="">
     </div>
 
     <div class="content container">
       Contenido: <br/>
-    <!--
-    Aqui va el editor de texto, por el momento vamos a poner un espacio para texto plano
-      -->
+   
     <textarea class="input" id="blogContent" value=""></textarea>
     </div>
 
@@ -113,5 +124,4 @@ const { id, title, cardImage, tags, publicationDate, content } = Astro.props;
 <script>
   import '../../../scripts/tagsClicked.js';
   import "../../../scripts/blogEdition.js";
-  import "../../../scripts/imageSelected.js";
 </script>

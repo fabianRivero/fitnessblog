@@ -1,8 +1,12 @@
 ---
-import AdminLayout from "../../../layouts/AdminLayout.astro";
-import SearcherBox from "../../../components/SearcherBox.astro";
-import CABDelete from "../../../components/React/CABDelete.jsx";
-import DeletePagesList from "../../../components/DeletePagesList.astro";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+import SearcherBox from "../../../../components/SearcherBox.astro";
+import SearchResults from "../../../../components/SearchResults.astro";
+import EditPagesList from "../../../../components/EditPagesList.astro";
+import CABEdit from "../../../../components/React/CABEdit.jsx";
+import { fetchPages } from "../../../../scripts/api.js";
+
+const { page } = Astro.props;
 ---
 <div class="greyScreen"></div>
 <AdminLayout>
@@ -18,13 +22,16 @@ import DeletePagesList from "../../../components/DeletePagesList.astro";
             </div>
         </div>
     </header>
+
+    <EditPagesList/>
     <SearcherBox />
-    <DeletePagesList/>
-    <CABDelete page=1 client:only/>
+    <SearchResults />
+    <CABEdit page=1 client:only/>
+
 </AdminLayout>
 
 <script>
-    import "../../../scripts/authVerificator.js";
-    import "../../../scripts/searcherScriptForUDBlogs.js";
-    import "../../../scripts/categorieFilter.js";
+    import "../../../../scripts/editBlog.js";
+    import "../../../../scripts/searcherScriptForUDBlogs.js";
+    import "../../../../scripts/categorieFilter.js";
 </script>

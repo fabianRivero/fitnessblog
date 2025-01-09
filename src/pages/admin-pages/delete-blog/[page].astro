@@ -1,8 +1,7 @@
 ---
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import SearcherBox from "../../../components/SearcherBox.astro";
-import DeleteArticles from "../../../components/DeleteArticles.astro";
-import Categories from "../../../components/Categories.astro";
+import CABDelete from "../../../components/React/CABDelete.jsx";
 import DeletePagesList from "../../../components/DeletePagesList.astro";
 
 export async function getStaticPaths() {
@@ -43,34 +42,12 @@ const { page } = Astro.props;
         </div>
     </header>
     <SearcherBox />
-    <Categories />
-    <DeletePagesList />
-    <DeleteArticles page={page}/>
-    
-    <div class="confirmationWindow">
-        <p>¿Estas seguro que quieres eliminar los blogs seleccionados?</p>
-        <div class="answer">
-        <div class="yes Button">Si</div>
-        <div class="no Button">No</div>
-        </div>
-    </div>
-
-    <div class="submitMessage">
-        <p>Blogs seleccionados eliminados.</p>
-  
-        <div class="answer">
-          <div class="return button"><a href="./">Volver a pagina principal</a></div>
-        </div>
-      </div>
-  
-
-    <div class="submmitButton-container">
-    <div class="submmitButton">Eliminar blogs seleccionados</div>
-    </div>
+    <DeletePagesList/>
+    <CABDelete page={page} client:only/>
 </AdminLayout>
 
 <script>
-    import "../../../scripts/deleteBlogs.js";
+    import "../../../scripts/authVerificator.js";
     import "../../../scripts/searcherScriptForUDBlogs.js";
     import "../../../scripts/categorieFilter.js";
 </script>

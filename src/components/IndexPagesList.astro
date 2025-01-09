@@ -1,19 +1,17 @@
 ---
-const response = await fetch(`http://localhost:4000/api/blogs`);
-const data = await response.json();
-const pages = data.pages;
-const pagesArray = []; 
-
-for (let i = 1; i <= pages; i++) {
-    pagesArray.push(i)        
-}
-
+const { totalPages, currentPage } = Astro.props;
 ---
 
 <div class="pageslist"> 
-    { 
-    pagesArray.map((page) => (
-    <a href={`/page${page}`} class="page-button">{page}</a>   
-    ))
-    }
-</div> 
+    {Array.from({ length: totalPages }, (_, i) => {
+        const pageIndex = i + 1;
+        return (
+            <a
+                href={`/${pageIndex}`}
+                class={`page-button ${currentPage == pageIndex ? 'active' : ''}`}
+            >
+                {pageIndex}
+            </a>
+        );
+    })}
+</div>

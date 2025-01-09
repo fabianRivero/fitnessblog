@@ -2,20 +2,12 @@ import authorization from "./authVerificator";
 
 let title = document.querySelector("#blogTitle");
 let articleImageUrl = document.querySelector("#articleImage");
-let articleImage = document.querySelector(".articleImage");
-let option1 = articleImage.querySelector("#option1");
-let option2 = articleImage.querySelector("#option2");
-let firstOption = articleImage.querySelector(".first-option");
-let secondOption = articleImage.querySelector(".second-option");
-let checkboxes = document.querySelectorAll("#checkbox");
-let imageOptions = document.querySelector(".imageOptions");
 let description = document.querySelector(".description");
 let descriptionContent = description.querySelector("#blogDescription");
 let content = document.querySelector("#blogContent");
 let messages = document.querySelectorAll(".submitMessage");
 let submit = document.querySelector(".submit");
 let reject = document.querySelector(".reject");
-let returnLogin = document.querySelector("return-login");
 let noButton = document.querySelector(".no");
 let yesButton = document.querySelector(".yes");
 let greyScreen = document.querySelector(".greyScreen");
@@ -34,36 +26,12 @@ tinymce.init({
     plugins: "image",
   });
 
-option1.addEventListener("click", function(){
-    if(option1.checked){
-        firstOption.style.display = 'block';
-        secondOption.style.display = 'none';
-    }
-    if(option2.checked){
-        firstOption.style.display = 'none';
-        secondOption.style.display = 'block';
-    }     
-});
-
-option2.addEventListener("click", function(){
-    if(option1.checked){
-        firstOption.style.display = 'block';
-        secondOption.style.display = 'none';
-    }
-    if(option2.checked){
-        firstOption.style.display = 'none';
-        secondOption.style.display = 'block';
-    }     
-});
-
-
 submit.addEventListener("click", submitFunction);
 noButton.addEventListener("click", rejectMessage);
 yesButton.addEventListener("click", createNewBlog);
 
 function submitFunction(){
     let key = localStorage.getItem("key");
-    console.log(key)
     if (!key){
         reject.style.display = "block";
         greyScreen.style.display = "block";
@@ -78,31 +46,48 @@ function rejectMessage(){
     greyScreen.style.display = "none";
 }
 
-async function createNewBlog(){
+function generateUrlTitle(blogTitle) {
+    return blogTitle
+        .toLowerCase() 
+        .replace(/á|à|ä|â/g, "a") 
+        .replace(/é|è|ë|ê/g, "e")
+        .replace(/í|ì|ï|î/g, "i")
+        .replace(/ó|ò|ö|ô/g, "o")
+        .replace(/ú|ù|ü|û/g, "u")
+        .replace(/ñ/g, "n") 
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-") 
+        .replace(/^-|-$/g, ""); 
+}
+
+async function createNewBlog() {
     messages[0].style.display = "none";
+
     let blogTitle = title.value.trim();
-    let linkTitle = blogTitle.replace(/ /g, "_"); 
+    let linkTitle = generateUrlTitle(blogTitle);
     const selectedTags = Array.from(document.querySelectorAll(".clicked"));
     let validArray = [];
-    
+
     for (let tag of selectedTags) {
         validArray.push(tag.innerText);
-    }; 
+    }
 
     const img = () => {
-        let selected;
-        if(option1.checked){
-            for(const checkbox of checkboxes){
-                if (checkbox.checked) {
-                    selected = `../${checkbox.value}`;
-                };
-            };
-        };
-        if(option2.checked){
-            selected = articleImageUrl.value;
-        };
+        let selected = articleImageUrl.value.trim();
         return selected; 
     };
+
+    const imageUrl = img();
+    const imageUrlPattern = /^https?:\/\/.*\.(jpeg|jpg|png|gif|webp|svg)(\?.*)?$/i;
+    const isValidUrl = imageUrlPattern.test(imageUrl);
+
+    if (!isValidUrl) {
+        alert("Por favor, ingresa una URL válida de imagen (terminada en .jpg, .png, .gif, etc.).");
+        greyScreen.style.display = "none";
+        return; 
+    }
+
     const contentResult = tinymce.activeEditor.getContent();
     const token = authorization();
 
@@ -116,24 +101,28 @@ async function createNewBlog(){
             title: blogTitle,
             linkTitle: linkTitle,
             tags: validArray,
-            cardImage: img(),
+            cardImage: imageUrl,
             content: contentResult,
-            description: descriptionContent.value
+            description: descriptionContent.value.trim(),
         }),
     });
-    const jsonresponse = await response.json(); 
+    
+    const jsonresponse = await response.json();
     console.log(jsonresponse);
 
-    title.value = "";
-    content.value = "";
-    descriptionContent.value = "";
-    articleImageUrl.value = "";
-    
-    let tagsClicked = document.querySelectorAll(".clicked");
+    if (response.ok) {
+        title.value = "";
+        content.value = "";
+        descriptionContent.value = "";
+        articleImageUrl.value = "";
 
-    for (const tag of tagsClicked) {
-        tag.classList.toggle("clicked");
+        let tagsClicked = document.querySelectorAll(".clicked");
+        for (const tag of tagsClicked) {
+            tag.classList.toggle("clicked");
+        }
+
+        messages[1].style.display = "block";
+    } else {
+        alert("Hubo un error al crear el blog. Revisa los datos e inténtalo nuevamente.");
     }
-    
-    messages[1].style.display = "block";
 };

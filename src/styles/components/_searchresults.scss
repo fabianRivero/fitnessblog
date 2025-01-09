@@ -42,6 +42,7 @@
     width: 100%;
     background: rgb(233, 233, 233);
     z-index: 10;
+    right: 0%;
     display: none;
     li{
         list-style: none;
@@ -59,7 +60,7 @@
             }
         }
         .selected{
-            display: inline-block;
+            display: block;
         }
     }
     @include breakpoint(tablethorizontal) {

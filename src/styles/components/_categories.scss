@@ -11,14 +11,19 @@
             font-size: 11px;
             border-radius: 12px;
             background-color: #ffffff;
-            &:hover{
-                background-color: #b8b8b8;
-                cursor: pointer;
-            }
+    
         }
-        .clicked{
-            background-color: #b8b8b8;
+        .categorie.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
         }
+        .categorie.clicked {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
     }
     @include breakpoint(tablet) {
         #tags{

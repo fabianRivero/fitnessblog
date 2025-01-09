@@ -14,34 +14,32 @@ const blogPunctuation = ({blogId}) => {
     const [calificationId, setCalificationId] = useState("");
 
     useEffect(() => {
+        if(!blogId) return;
         const initialCalification = async() => {
             try{
                 const getToken = localStorage.getItem("key");
-                if(getToken){
-                    const decoded = jwtDecode(token);
-                    setToken(token);
-                    const userId = decoded.id;
-                    const userData = await fetch(`http://localhost:4000/api/users/${userId}`);
-                    const uData = await userData.json();
-                    setUser(uData.user);
-                    console.log(user)
-                    const userCalifications = uData.user.blogsLiked; 
-                    const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
+                const decoded = jwtDecode(getToken);
+                setToken(getToken);
+                const userId = decoded.id;
+                const userData = await fetch(`http://localhost:4000/api/users/${userId}`);
+                const uData = await userData.json();
+                setUser(uData.user);
+                const userCalifications = uData.user.blogsLiked; 
+                const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
 
-                    for (let blogCalification of blogCalifications) {
-                        if (userCalificationsSet.has(blogCalification.id)) {
-                            setVerificator(true);
-                            setCalification(blogCalification.calification);
-                            setCalificationId(blogCalification.id);
-                            break;
-                        }
-                    }
-                }
-            
                 const blogData = await fetch(`http://localhost:4000/api/blogs/${blogId}`);
                 const bData = await blogData.json();
                 setBlog(bData.blog);
                 const blogCalifications = bData.blog.usersLikes;
+
+                for (let blogCalification of blogCalifications) {
+                    if (userCalificationsSet.has(blogCalification.id)) {
+                        setVerificator(true);
+                        setCalification(blogCalification.calification);
+                        setCalificationId(blogCalification.id);
+                        break;
+                    }
+                }
 
 
             }catch(error) {

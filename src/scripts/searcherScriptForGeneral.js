@@ -42,7 +42,7 @@ function ocultar_buscador(){
         searcherbox.style.top = '-100px';
         inputSearch.value = "";
         searchresultsGeneral.style.display = "none"; 
-        searcherbox.classList.toggle('extended');
+        searcherbox.className = "";
     }
 }
 
@@ -68,10 +68,10 @@ document.addEventListener('keyup', (e) =>{
         ? resultado.className = "searchResult selected"
         : resultado.className ="searchResult";
         })
-    }
-    if (document.getElementById("inputSearch").value.length === 0) {
-        for (const resultado of document.querySelectorAll('.searchResult')) {
-            resultado.className ="searchResult";
+        if (document.getElementById("inputSearch").value.length === 0) {
+            for (const resultado of document.querySelectorAll('.searchResult')) {
+                resultado.className ="searchResult";
+            }
         }
     }
 
@@ -81,10 +81,10 @@ document.addEventListener('keyup', (e) =>{
         ? resultado.className = "searchResult selected"
         : resultado.className ="searchResult";
         })
-    }
-    if (document.getElementById("headerSearch").value.length === 0) {
-        for (const resultado of document.querySelectorAll('.searchResult')) {
-            resultado.className ="searchResult";
+        if (document.getElementById("headerSearch").value.length === 0) {
+            for (const resultado of document.querySelectorAll('.searchResult')) {
+                resultado.className ="searchResult";
+            }
         }
     }
 })

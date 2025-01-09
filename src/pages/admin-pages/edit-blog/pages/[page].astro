@@ -1,15 +1,16 @@
 ---
-import AdminLayout from "../../../layouts/AdminLayout.astro";
-import SearcherBox from "../../../components/SearcherBox.astro";
-import SearchResults from "../../../components/SearchResults.astro";
-import EditArticles from "../../../components/EditArticles.astro";
-import Categories from "../../../components/Categories.astro";
-import EditPagesList from "../../../components/EditPagesList.astro";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+import SearcherBox from "../../../../components/SearcherBox.astro";
+import SearchResults from "../../../../components/SearchResults.astro";
+import EditPagesList from "../../../../components/EditPagesList.astro";
+import CABEdit from "../../../../components/React/CABEdit.jsx";
+import { fetchPages } from "../../../../scripts/api.js";
 
 export async function getStaticPaths() {
     let response = await fetch('http://localhost:4000/api/blogs');
     let data = await response.json();
     const pages = data.pages;
+    // const pages = await fetchPages();
     const pagesArray = []; 
 
 
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
         return{
             params: {page: `page${page}`},
             props: {page},
-            fallback: false
+            fallback: true
         };
     })
 };
@@ -42,25 +43,16 @@ const { page } = Astro.props;
             </div>
         </div>
     </header>
-    <Categories />
+
     <EditPagesList/>
     <SearcherBox />
     <SearchResults />
-    <EditArticles page={page}/>
-    <div>
-        <div class="confirmationWindow">
-            <p>¿Quieres seleccionar este blog?</p>
-            <div class="answer">
-            <div class="yes Button"><a id="yes" href="">Si</a></div>  <!--En el href va el link a la pagina de edicion de blog -->
-            <div class="no Button">No</div>
-            </div>
-        </div>
-    </div>
+    <CABEdit page={page} client:only/>
 
 </AdminLayout>
 
 <script>
-    import "../../../scripts/editBlog.js";
-    import "../../../scripts/searcherScriptForUDBlogs.js";
-    import "../../../scripts/categorieFilter.js";
+    import "../../../../scripts/editBlog.js";
+    import "../../../../scripts/searcherScriptForUDBlogs.js";
+    import "../../../../scripts/categorieFilter.js";
 </script>

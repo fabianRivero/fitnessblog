@@ -1,8 +1,8 @@
 import { jwtDecode } from 'jwt-decode';
 
-function isTokenExpired(token) {
+const token = localStorage.getItem("key");
 
-  if (!token) return true;
+function isTokenExpired(token) {
 
   try {
     const decoded = jwtDecode(token);
@@ -13,10 +13,9 @@ function isTokenExpired(token) {
     return true;
   }
 }
-
-const token = localStorage.getItem("key");
-
-if (isTokenExpired(token)) {
+if (!token) {
+  console.warn("No se encontró un token en el almacenamiento local.");
+} else if (isTokenExpired(token)) {
   console.log('El token ha expirado');
   localStorage.removeItem('key');
 } else {
