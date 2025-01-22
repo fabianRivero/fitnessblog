@@ -108,7 +108,6 @@ async function createNewBlog() {
     });
     
     const jsonresponse = await response.json();
-    console.log(jsonresponse);
 
     if (response.ok) {
         title.value = "";

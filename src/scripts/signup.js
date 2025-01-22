@@ -8,7 +8,6 @@ signupForm.addEventListener("submit", async (event) => {
 
   try {
     // Primer fetch para obtener los usuarios actuales
-    console.log("Consultando usuarios...");
     const usersResponse = await fetch('http://localhost:4000/api/users');
     const responseInfo = await usersResponse.json();
     const actualUsers = responseInfo.users;

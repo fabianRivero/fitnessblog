@@ -59,6 +59,21 @@ if (decoded.role !== "admin"){
         messages[0].style.display = "none";
         greyScreen.style.display = "none";
     }
+
+    function generateUrlTitle(blogTitle) {
+        return blogTitle
+            .toLowerCase() 
+            .replace(/á|à|ä|â/g, "a") 
+            .replace(/é|è|ë|ê/g, "e")
+            .replace(/í|ì|ï|î/g, "i")
+            .replace(/ó|ò|ö|ô/g, "o")
+            .replace(/ú|ù|ü|û/g, "u")
+            .replace(/ñ/g, "n") 
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-") 
+            .replace(/^-|-$/g, ""); 
+    }
     
     async function editBlog(){
     
@@ -69,6 +84,8 @@ if (decoded.role !== "admin"){
         for (let tag of selectedTags) {
             validArray.push(tag.innerText);
         };
+
+        const contentValue= tinymce.get('blogContent').getContent();
     
         const response = await fetch(`http://localhost:4000/api/blogs/${id.textContent}`, {
             method: 'PUT',
@@ -78,14 +95,14 @@ if (decoded.role !== "admin"){
             },
             body: JSON.stringify({
                 title: title.value,
+                linkTitle: generateUrlTitle(title.value.trim()),
                 tags: validArray,
                 cardImage: imageInput.value,
                 description: description.value,
-                content: content.value
+                content: contentValue
             }),
         });
         const jsonresponse = await response.json(); 
-        console.log(jsonresponse);
         
         let tagsClicked = document.querySelectorAll(".clicked");
     

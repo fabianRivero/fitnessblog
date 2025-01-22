@@ -16,35 +16,39 @@ const blogPunctuation = ({blogId}) => {
     useEffect(() => {
         if(!blogId) return;
         const initialCalification = async() => {
-            try{
+
                 const getToken = localStorage.getItem("key");
-                const decoded = jwtDecode(getToken);
-                setToken(getToken);
-                const userId = decoded.id;
-                const userData = await fetch(`http://localhost:4000/api/users/${userId}`);
-                const uData = await userData.json();
-                setUser(uData.user);
-                const userCalifications = uData.user.blogsLiked; 
-                const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
-
-                const blogData = await fetch(`http://localhost:4000/api/blogs/${blogId}`);
-                const bData = await blogData.json();
-                setBlog(bData.blog);
-                const blogCalifications = bData.blog.usersLikes;
-
-                for (let blogCalification of blogCalifications) {
-                    if (userCalificationsSet.has(blogCalification.id)) {
-                        setVerificator(true);
-                        setCalification(blogCalification.calification);
-                        setCalificationId(blogCalification.id);
-                        break;
-                    }
+                if(getToken){
+                    try{
+                        const decoded = jwtDecode(getToken);
+                        setToken(getToken);
+                        const userId = decoded.id;
+                        const userData = await fetch(`http://localhost:4000/api/users/${userId}`);
+                        const uData = await userData.json();
+                        setUser(uData.user);
+                        const userCalifications = uData.user.blogsLiked; 
+                        const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
+        
+                        const blogData = await fetch(`http://localhost:4000/api/blogs/${blogId}`);
+                        const bData = await blogData.json();
+                        setBlog(bData.blog);
+                        const blogCalifications = bData.blog.usersLikes;
+        
+                        for (let blogCalification of blogCalifications) {
+                            if (userCalificationsSet.has(blogCalification.id)) {
+                                setVerificator(true);
+                                setCalification(blogCalification.calification);
+                                setCalificationId(blogCalification.id);
+                                break;
+                            }
+                        }
+        
+        
+                    }catch(error) {
+                        console.error('Error al obtener los datos:', error);
+                      };
                 }
 
-
-            }catch(error) {
-                console.error('Error al obtener los datos:', error);
-              };
         };
         initialCalification();
     },[blogId]);
@@ -98,7 +102,6 @@ const blogPunctuation = ({blogId}) => {
                 setThanksMessageStyle({display: "block", color: 'green'});
                 setThanksMessage("¡Gracias por tu calificación!")
             } catch (error) {
-                console.log(error)
             };
         };
     };
@@ -139,7 +142,6 @@ const blogPunctuation = ({blogId}) => {
             setThanksMessageStyle({display: "none"});
             setThanksMessage("")
         } catch (error) {
-            console.log(error)
         };
     };
 

@@ -2,36 +2,17 @@
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import Categories from '../../../components/Categories.astro';
 
-export async function getStaticPaths() {
-    // Obtén las rutas de blogs existentes desde tu API
-    const response = await fetch('http://localhost:4000/api/blogs');
-    const data = await response.json();
-  console.log(response)
-    return data.blogs.map(blog => ({
-      params: { blog: blog.id.toString() }, // Aquí usamos el `id` del blog
-        }));
-    };
-
 const { blog } = Astro.params;
 
-// Lógica para obtener los datos del blog individual
-const fetchBlogData = async (id) => {
-  console.log("aaaaaaaaaaaaa", id)
-    const response = await fetch(`http://localhost:4000/api/blogs/${id}`);
-    if (!response.ok) {
-        throw new Error("Blog no encontrado");
-    }
-    return await response.json();
-};
+const response = await fetch(`http://localhost:4000/api/blogs/${blog}`);
 
-const blogData = await fetchBlogData(blog);
+const data = await response.json();
+const blogData = data.blog;
 
-// Desestructurar datos del blog
 const { id, title, cardImage, tags, description, content } = blogData;
 ---
-
 <div class="greyScreen"></div>
-<AdminLayout>
+<AdminLayout title={title}>
   <h2 class="pageTitle">Editor de blog</h2>
   <div class="contentContainer">
     <div class="arrows">
@@ -54,7 +35,7 @@ const { id, title, cardImage, tags, description, content } = blogData;
         
     </div>
     <div class="articleImage container"><h3>Imagen de articulo previo:</h3><br/> 
-      <img src=`../../../${cardImage}` alt=`${cardImage}`>
+      <img src=`${cardImage}` alt=`${cardImage}`>
     </div>
 
     <div class="description container"><h3>Descripcion previa:</h3><br/>

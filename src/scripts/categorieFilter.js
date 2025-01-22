@@ -22,8 +22,6 @@ for(let categorie of categories){
                     for (const tag of selectedTags) {
                     if (blogTag.textContent === tag.textContent) {
                         counter++;
-                        console.log(counter)
-                        console.log(selectedTags)
                         if(counter === selectedTags.length){
                             tagVerificator = true;
                         }

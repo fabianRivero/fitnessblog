@@ -14,7 +14,7 @@ const DeleteArticles = ({ page }) => {
             try {
                 const getToken = localStorage.getItem("key");
                 setToken(getToken);
-                const response = await fetch(`http://localhost:4000/api/blogs`);
+                const response = await fetch(`http://localhost:4000/api/blogs?pageSize=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             } catch (error) {
@@ -28,13 +28,13 @@ const DeleteArticles = ({ page }) => {
         const getFilteredBlogs = async () => {
             try {
                 if (tags.length === 0) {
-                    const response = await fetch(`http://localhost:4000/api/blogs/?page=${page}`);
+                    const response = await fetch(`http://localhost:4000/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
                 } else {
                     const tagsSelected = tags.join(",");
                     const response = await fetch(
-                        `http://localhost:4000/api/blogs/?tags=${tagsSelected}&page=${page}`
+                        `http://localhost:4000/api/blogs?pageSize=${page}&tags=${tagsSelected}`
                     );
                     const data = await response.json();
                     setBlogs(data.blogs);
@@ -44,11 +44,9 @@ const DeleteArticles = ({ page }) => {
             }
         };
         getFilteredBlogs();
-    }, [tags, page]);
+    }, [tags]);
 
     useEffect(() => {
-        console.log("selectedIds:", selectedIds);
-        console.log("showConfirmation:", showConfirmation);
     }, [selectedIds, showConfirmation]);
 
 
@@ -128,7 +126,7 @@ const DeleteArticles = ({ page }) => {
                         />
                         <article className="article">
                             <p className="id">{blog.id}</p>
-                            <a href={`http://localhost:4321/blog/${blog.id}`} className="articleContainer">
+                            <a href={`http://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
                                 <div className="imgContainer">
                                     <img src={`${blog.cardImage}`} alt="" />
                                 </div>

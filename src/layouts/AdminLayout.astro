@@ -1,10 +1,8 @@
 ---
 import Authorization from "../components/Authorization.astro";
 import "../scripts/stylesImport.js";
+const {title} = Astro.props;
 ---
-
-<Authorization />
-
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -12,8 +10,8 @@ import "../scripts/stylesImport.js";
 		<meta name="viewport" content="width=device-width" />
 		<script src="../../node_modules/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 		<meta name="generator" content={Astro.generator} />
-		
-		<title>Astro</title>
+		<Authorization />	
+		<title>{title}</title>
 	</head>
 	<body>
 

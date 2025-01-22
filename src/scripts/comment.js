@@ -6,11 +6,6 @@ document.addEventListener("DOMContentLoaded", async() => {
     const sendButton = document.querySelector(".send-button");
     const blogIdElement = document.querySelector(".blog-id");
 
-    if (!commentary || !sendButton || !blogId) {
-        console.error("Elementos necesarios no encontrados en el DOM.");
-        return;
-    }
-
     const token = localStorage.getItem("key");
 
     const commentButton= async(event) => {
@@ -70,7 +65,6 @@ document.addEventListener("DOMContentLoaded", async() => {
             }
 
         }catch(error){
-            console.log("Error al enviar el comentario:", error)
         };
     };
 

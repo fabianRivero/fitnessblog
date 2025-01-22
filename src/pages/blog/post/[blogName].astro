@@ -5,22 +5,30 @@ import BlogComments from '../../../components/React/BlogComments.jsx';
 import BlogPunctuation from '../../../components/React/BlogPunctuation.jsx';
 
 const { blogName } = Astro.params;
-  const response = await fetch('http://localhost:4000/api/blogs');
-  const data = await response.json();
+const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 
-  const blog = data.blogs?.find((blog) => blog.linkTitle === blogName);
-  
-  // console.log("Blog cargado:", blog);
-  // console.log("Parámetro blogName:", blogName);
-  // console.log("CardImage:", blog.cardImage);
+const getPages = await fetch(
+        `http://localhost:4000/api/blogs`
+    );
+const pagesData = await getPages.json();
+const pages = pagesData.pages;
+const actualPage = pages - currentPage + 1;
 
-  if (!blog) {
-    console.error(`No se encontró un blog con el linkTitle: ${blogName}`);
-    return new Response('Blog not found', { status: 404 });
-  }
+
+const response = await fetch(`http://localhost:4000/api/blogs?page=${actualPage}`);
+const data = await response.json();
+
+
+const blog = data.blogs?.find((blog) => blog.linkTitle === blogName);
+
+
+if (!blog) {
+  console.error(`No se encontró un blog con el linkTitle: ${blogName}`);
+  return new Response('Blog not found', { status: 404 });
+}
 
 --- 
-<BaseLayout>
+<BaseLayout title={blog.title}>
   <div class="blogPost">
     <h1 class="blogTitle">{blog.title}</h1>
     <p class="blog-id" style="display: none;">{blog.id}</p>
@@ -37,3 +45,5 @@ const { blogName } = Astro.params;
     <BlogPunctuation blogId={blog.id} client:load />
 </div>
 </BaseLayout>
+
+<script>import "../../../scripts/comment.js"</script>

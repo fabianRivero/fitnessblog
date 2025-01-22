@@ -1,26 +1,10 @@
 ---
-// const {prevUrl, nextUrl} = Astro.props;
 const { currentPage, totalPages } = Astro.props;
 const prevPage = currentPage > 1 ? `/blog/${currentPage - 1}` : null;
 const nextPage = currentPage < totalPages ? `/blog/${currentPage + 1}` : null;
 
-console.log(prevPage)
-console.log(nextPage)
 ---
 <nav class="pagination">
     {prevPage && <a href={prevPage} class="pageUrl">Previous</a>}
     {nextPage && <a href={nextPage} class="pageUrl">Next</a>}
 </nav>
-
-<!-- <nav class="pagination">
-    {
-        prevUrl && (
-            <a href={prevUrl} class="pageUrl">Previous</a>
-        )
-    }
-    {
-        nextUrl && (
-            <a href={nextUrl} class="pageUrl">Next</a>
-        )
-    }
-</nav> -->
