@@ -1,6 +1,6 @@
 ---
 
-let response = await fetch(`http://localhost:4000/api/blogs?pageSize=9999999`);
+let response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=9999999`);
 let data = await response.json();
 
 const latestBlogs = data.blogs.slice(-6).reverse();
@@ -16,7 +16,7 @@ const latestBlogs = data.blogs.slice(-6).reverse();
       return (
         <div class="article-container">
           <article class="article">
-            <a href={`http://localhost:4321/post/${blog.linkTitle}`} class="articleContainer">
+            <a href={`https://myfirstfitnessblog.netlify.app/post/${blog.linkTitle}`} class="articleContainer">
               <div class="imgContainer">
                 <img src={`${blog.cardImage}`} alt="" />
               </div>

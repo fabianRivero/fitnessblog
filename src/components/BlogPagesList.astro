@@ -1,5 +1,5 @@
 ---
-const response = await fetch(`http://localhost:4000/api/blogs`);
+const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs`);
 const data = await response.json();
 const pages = data.pages;
 const pagesArray = []; 
@@ -7,7 +7,7 @@ const pagesArray = [];
 for (let i = 1; i <= pages; i++) {
     pagesArray.push(i)        
 }
-const { url = "http://localhost:4321/blog/page" } = Astro.props
+const { url = "https://myfirstfitnessblog.netlify.app/blog/page" } = Astro.props
 ---
 
 <div class="pageslist"> 

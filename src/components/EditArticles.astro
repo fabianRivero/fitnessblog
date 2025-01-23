@@ -1,5 +1,5 @@
 ---
-const response = await fetch('http://localhost:4000/api/blogs');
+const response = await fetch('https://apiblog-zzj1.onrender.com/api/blogs');
 const data = await response.json();
 const blogs = data.blogs;
 ---
@@ -25,7 +25,7 @@ const blogs = data.blogs;
             <h2>{blog.title}</h2>
         </div>
         </article>
-        <a href={`http://localhost:4321/blog/${blog.id}`}>Ir al blog</a>
+        <a href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`}>Ir al blog</a>
     </div>
     ))
     }

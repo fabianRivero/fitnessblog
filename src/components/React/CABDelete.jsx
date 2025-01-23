@@ -14,7 +14,7 @@ const DeleteArticles = ({ page }) => {
             try {
                 const getToken = localStorage.getItem("key");
                 setToken(getToken);
-                const response = await fetch(`http://localhost:4000/api/blogs?pageSize=${page}`);
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             } catch (error) {
@@ -28,13 +28,13 @@ const DeleteArticles = ({ page }) => {
         const getFilteredBlogs = async () => {
             try {
                 if (tags.length === 0) {
-                    const response = await fetch(`http://localhost:4000/api/blogs?pageSize=${page}/`);
+                    const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
                 } else {
                     const tagsSelected = tags.join(",");
                     const response = await fetch(
-                        `http://localhost:4000/api/blogs?pageSize=${page}&tags=${tagsSelected}`
+                        `https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}&tags=${tagsSelected}`
                     );
                     const data = await response.json();
                     setBlogs(data.blogs);
@@ -78,7 +78,7 @@ const DeleteArticles = ({ page }) => {
     const confirmDelete = async () => {
         try {
             for (const id of selectedIds) {
-                const response = await fetch(`http://localhost:4000/api/blogs/${id}`, {
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`, {
                     method: "DELETE",
                     headers: {
                         Authorization: `Bearer ${JSON.parse(token).token}`,
@@ -126,7 +126,7 @@ const DeleteArticles = ({ page }) => {
                         />
                         <article className="article">
                             <p className="id">{blog.id}</p>
-                            <a href={`http://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
+                            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
                                 <div className="imgContainer">
                                     <img src={`${blog.cardImage}`} alt="" />
                                 </div>

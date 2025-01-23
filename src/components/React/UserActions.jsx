@@ -13,16 +13,16 @@ const UserLogin = () => {
 
     const handleLoginRedirect = (event) => {
       event.preventDefault()
-      window.location.href = "http://localhost:4321/login"; 
+      window.location.href = "https://myfirstfitnessblog.netlify.app/login"; 
     };
     const handleSignupRedirect = (event) => {
       event.preventDefault()
-      window.location.href = "http://localhost:4321/signup";
+      window.location.href = "https://myfirstfitnessblog.netlify.app/signup";
     };
     const handleLogout = (event) => {
       event.preventDefault()
       window.localStorage.removeItem("key")
-      window.location.href = "http://localhost:4321/";
+      window.location.href = "https://myfirstfitnessblog.netlify.app/";
     };
 
   return (

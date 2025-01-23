@@ -8,14 +8,14 @@ const { blogName } = Astro.params;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 
 const getPages = await fetch(
-        `http://localhost:4000/api/blogs`
+        `https://apiblog-zzj1.onrender.com/api/blogs`
     );
 const pagesData = await getPages.json();
 const pages = pagesData.pages;
 const actualPage = pages - currentPage + 1;
 
 
-const response = await fetch(`http://localhost:4000/api/blogs?page=${actualPage}`);
+const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?page=${actualPage}`);
 const data = await response.json();
 
 

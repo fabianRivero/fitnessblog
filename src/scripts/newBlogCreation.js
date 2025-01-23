@@ -91,7 +91,7 @@ async function createNewBlog() {
     const contentResult = tinymce.activeEditor.getContent();
     const token = authorization();
 
-    const response = await fetch('http://localhost:4000/api/blogs', {
+    const response = await fetch('https://apiblog-zzj1.onrender.com/api/blogs', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',

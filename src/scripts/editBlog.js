@@ -17,7 +17,7 @@ function denyEdition(){
 for (const blog of editableBlogs) {
     blog.addEventListener("click", function(){
         (preSelectBlog)();
-        yesButton.href = `http://localhost:4321/admin-pages/edit-blog/${id}`
+        yesButton.href = `https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/${id}`
     });
 }
 

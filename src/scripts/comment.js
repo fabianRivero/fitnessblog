@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", async() => {
             const decoded = jwtDecode(token);
             const userId = decoded.id;   
             const [getUser, getBlog] = await Promise.all([
-                fetch(`http://localhost:4000/api/users/${userId}`),
-                fetch(`http://localhost:4000/api/blogs/${blogIdElement.textContent}`)
+                fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`),
+                fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogIdElement.textContent}`)
             ]);
 
             const { user } = await getUser.json();
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                         
 
             const [updateBlog, updateUser] = await Promise.all([
-                fetch(`http://localhost:4000/api/blogs/${blogIdElement.textContent}`, {
+                fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogIdElement.textContent}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                     },
                     body: JSON.stringify({ usersComments: [...blog.usersComments, newComment] }),
                 }),
-                fetch(`http://localhost:4000/api/users/${userId}`, {
+                fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',

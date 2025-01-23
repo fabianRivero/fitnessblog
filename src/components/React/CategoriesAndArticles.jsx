@@ -9,7 +9,7 @@ const Articles = ({ page }) => {
     useEffect(() => {
         const getInitialBlogs = async() => {
             try{
-                const response = await fetch(`http://localhost:4000/api/blogs`);
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs`);
                 const data = await response.json();
                 setBlogs(data.blogs)
             }catch(error) {
@@ -23,12 +23,12 @@ const Articles = ({ page }) => {
     const getFilteredBlogs = async() => {
         try{
             if(tags.length === 0) {
-                const response = await fetch(`http://localhost:4000/api/blogs/?page=${page}`);
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/?page=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             } else{
                 const tagsSelected = tags.join(","); 
-                const response = await fetch(`http://localhost:4000/api/blogs/?tags=${tagsSelected}&page=${page}`);
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/?tags=${tagsSelected}&page=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             }
@@ -56,7 +56,7 @@ const Articles = ({ page }) => {
             blogs.map((blog) => (
             <div className="article-container" key={blog.id}>
                 <article className="article">
-                    <a href={`http://localhost:4321/blog/${blog.id}`} className="articleContainer">
+                    <a href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`} className="articleContainer">
                     <div className="imgContainer">
                     <img src= {`${blog.cardImage}`} alt=""/>
                     </div>

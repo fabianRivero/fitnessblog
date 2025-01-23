@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", async (event) => {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
 
-    const response = await fetch('http://localhost:4000/api/users/login', {
+    const response = await fetch('https://apiblog-zzj1.onrender.com/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            window.location.href = "http://localhost:4321/admin-pages";
+            window.location.href = "https://myfirstfitnessblog.netlify.app/admin-pages";
     
         } else if(payload.role === "user"){
             const now = new Date();
@@ -48,7 +48,7 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            window.location.href = "http://localhost:4321/";
+            window.location.href = "https://myfirstfitnessblog.netlify.app/";
         }else{
             document.getElementById("error").textContent = "Usuario o contraseña incorrectos.";
         }

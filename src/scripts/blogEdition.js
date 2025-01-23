@@ -87,7 +87,7 @@ if (decoded.role !== "admin"){
 
         const contentValue= tinymce.get('blogContent').getContent();
     
-        const response = await fetch(`http://localhost:4000/api/blogs/${id.textContent}`, {
+        const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id.textContent}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',

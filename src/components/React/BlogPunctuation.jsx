@@ -23,13 +23,13 @@ const blogPunctuation = ({blogId}) => {
                         const decoded = jwtDecode(getToken);
                         setToken(getToken);
                         const userId = decoded.id;
-                        const userData = await fetch(`http://localhost:4000/api/users/${userId}`);
+                        const userData = await fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`);
                         const uData = await userData.json();
                         setUser(uData.user);
                         const userCalifications = uData.user.blogsLiked; 
                         const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
         
-                        const blogData = await fetch(`http://localhost:4000/api/blogs/${blogId}`);
+                        const blogData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`);
                         const bData = await blogData.json();
                         setBlog(bData.blog);
                         const blogCalifications = bData.blog.usersLikes;
@@ -79,7 +79,7 @@ const blogPunctuation = ({blogId}) => {
             
             const parsedToken = JSON.parse(token).token;                    
             try {
-                await fetch(`http://localhost:4000/api/blogs/${blogId}`, {
+                await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`, {
                     method: 'PATCH',
                     headers: {
                       'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const blogPunctuation = ({blogId}) => {
                     body: JSON.stringify({ usersLikes: insertCalificationToBlog }),
                 });
         
-                await fetch(`http://localhost:4000/api/users/${user.id}`, {
+                await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
                     method: 'PATCH',
                     headers: {
                       'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const blogPunctuation = ({blogId}) => {
             const deleteCalificationToUser = [...user.blogsLiked.filter(item => item.id !== deletedCalification.id)];
 
             const parsedToken = JSON.parse(token).token; 
-            await fetch(`http://localhost:4000/api/blogs/${blogId}`, {
+            await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const blogPunctuation = ({blogId}) => {
                 body: JSON.stringify({ usersLikes: deleteCalificationToBlog }),
             });
     
-            await fetch(`http://localhost:4000/api/users/${user.id}`, {
+            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ const NewsletterInput = () => {
     useEffect(() => {
         const getMails = async () => {
             try {
-                const response = await fetch("http://localhost:4000/api/emails");
+                const response = await fetch("https://apiblog-zzj1.onrender.com/api/emails");
                 const result = await response.json();
                 setAllMails(result);
               } catch (error) {
@@ -30,7 +30,7 @@ const NewsletterInput = () => {
             }, 4000)
         }else{
             try {
-                await fetch('http://localhost:4000/api/emails', {
+                await fetch('https://apiblog-zzj1.onrender.com/api/emails', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',

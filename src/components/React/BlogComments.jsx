@@ -8,7 +8,7 @@ const BlogComments = ({blogId}) => {
         if(!blogId) return;
         const getBlogs = async() => {
         try{
-            const response = await fetch(`http://localhost:4000/api/blogs/${blogId}`);
+            const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`);
             const data = await response.json();
             setComments(data.blog.usersComments)
         }catch(error) {
