@@ -14,15 +14,18 @@ const UserLogin = () => {
     const handleLoginRedirect = (event) => {
       event.preventDefault()
       window.location.href = "https://myfirstfitnessblog.netlify.app/login"; 
+      // window.location.href = "https://localhost:4321/login"; 
     };
     const handleSignupRedirect = (event) => {
       event.preventDefault()
       window.location.href = "https://myfirstfitnessblog.netlify.app/signup";
+      // window.location.href = "https://localhost:4321/signup";
     };
     const handleLogout = (event) => {
       event.preventDefault()
       window.localStorage.removeItem("key")
       window.location.href = "https://myfirstfitnessblog.netlify.app/";
+      // window.location.href = "https://localhost:4321/";
     };
 
   return (

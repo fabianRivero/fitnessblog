@@ -64,6 +64,7 @@ const blogPunctuation = ({blogId}) => {
         const newCalification = {
             id: newId,
             userId: user.id,
+            blogId: blog.id,
             calification: calification,
         };
 
@@ -112,6 +113,7 @@ const blogPunctuation = ({blogId}) => {
             const deletedCalification = {
                 id: calificationId,
                 userId: user.id,
+                blogId: blog.id,
                 calification: calification,
             };
 

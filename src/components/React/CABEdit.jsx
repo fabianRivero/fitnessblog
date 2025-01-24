@@ -57,6 +57,7 @@ const EditArticles = ({ page }) => {
         <div className="article-container" key={blog.id}>
             <article className="article" id="article">
             <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/${blog.id}`}>
+            {/* <a href={`https://localhost:4321/admin-pages/edit-blog/${blog.id}`}> */}
             <p className="linkId">{blog.id}</p>
             <div className="articleContainer">
                 <div className="imgContainer">
@@ -75,6 +76,7 @@ const EditArticles = ({ page }) => {
             </a>
             </article>
             <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a>
+            {/* <a href={`https://localhost:4321/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> */}
         </div>   
         ))
         }

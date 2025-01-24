@@ -13,7 +13,7 @@ export default defineConfig({
   integrations:[react()],
   server: {
     proxy: {
-      '/login': 'https://myfirstfitnessblog.netlify.app/', // Redirige las solicitudes de login
+      '/login': 'https://myfirstfitnessblog.netlify.app/',
     },
   },
 });

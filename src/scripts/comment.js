@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             const newComment = {
                 id: uuidv4(),
                 userId: user.id,
+                blogId: blog.id,
                 publicationDate: `${+new Date().getDate()}/${+new Date().getMonth()+1}/${+new Date().getFullYear()} ${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`,
                 username: user.name,
                 email: user.email,

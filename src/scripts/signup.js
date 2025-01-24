@@ -24,6 +24,7 @@ signupForm.addEventListener("submit", async (event) => {
       if (signupResponse.ok) {
         alert("Registro exitoso");
         window.location.href = "https://myfirstfitnessblog.netlify.app/";
+        // window.location.href = "https://localhost:4321/";
       } else {
         console.error("Error al registrar:", await signupResponse.text());
         alert("Hubo un problema al registrar");
@@ -45,6 +46,7 @@ signupForm.addEventListener("submit", async (event) => {
         if (signupResponse.ok) {
           alert("Registro exitoso");
           window.location.href = "https://myfirstfitnessblog.netlify.app/";
+          // window.location.href = "https://localhost:4321/";
         } else {
           console.error("Error al registrar:", await signupResponse.text());
           alert("Hubo un problema al registrar");

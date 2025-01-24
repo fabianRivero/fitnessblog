@@ -31,6 +31,9 @@ const DeleteArticles = ({ page }) => {
                     const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
+                    setBlogComments(data.blogs.usersComments);
+                    setBlogCalifications(data.blogs.usersLikes);
+
                 } else {
                     const tagsSelected = tags.join(",");
                     const response = await fetch(
@@ -77,7 +80,19 @@ const DeleteArticles = ({ page }) => {
 
     const confirmDelete = async () => {
         try {
+            let calificactionsArray = [];
+            let commentsArray = [];
+
             for (const id of selectedIds) {
+  
+                const getData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`)
+                const data = await getData.JSON();
+                const califications = data.blog.usersLikes;
+                calificactionsArray = [...calificactionsArray, califications];
+                 
+                const comments = data.blog.usersComments;
+                commentsArray = [...commentsArray, comments];
+
                 const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`, {
                     method: "DELETE",
                     headers: {
@@ -87,8 +102,67 @@ const DeleteArticles = ({ page }) => {
 
                 if (!response.ok) {
                     throw new Error("Error al eliminar los blogs.");
-                }
-            }
+                };
+            };
+
+            let usersForCalifications = [];
+            let usersForComments = [];
+            let removeComments = [];
+            let removeCalifications = [];
+
+            for (const calification of calificactionsArray){
+                const response = await fetch((`https://apiblog-zzj1.onrender.com/api/users/${calification.userId}`));
+                const getUser = await response.JSON();
+                const user = getUser.user;
+                usersForCalifications = [...usersForCalifications, user];
+            };
+
+            for (const comment of commentsArray){
+                const response = await fetch((`https://apiblog-zzj1.onrender.com/api/users/${comment.userId}`));
+                const getUser = await response.JSON();
+                const user = getUser.user;
+                usersForComments = [...usersForComments, user];
+            };
+
+            for (const user of usersForComments){
+                for(const comment of commentsArray){
+                    removeComments = [...user.blogsCommented.filter(item => item.id !== comment.id)];
+                };
+            };
+
+            for (const user of usersForCalifications){
+                for(const calification of calificactionsArray){
+                    removeCalifications = [...user.blogsLiked.filter(item => item.id !== calification.id)];
+                };
+            };
+
+            const parsedToken = JSON.parse(token).token; 
+            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${parsedToken}`
+                },
+                body: JSON.stringify({ usersComments: removeComments }),
+            });
+            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${parsedToken}`
+                },
+                body: JSON.stringify({ usersForCalifications: removeCalifications }),
+            });
+    
+            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${parsedToken}`
+                },
+                body: JSON.stringify({ blogsLiked: deleteCalificationToUser }),
+            });
+
 
             // Actualizar la lista de blogs eliminando los seleccionados
             setBlogs((prevBlogs) =>
@@ -127,6 +201,7 @@ const DeleteArticles = ({ page }) => {
                         <article className="article">
                             <p className="id">{blog.id}</p>
                             <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
+                            {/* <a href={`https://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer"> */}
                                 <div className="imgContainer">
                                     <img src={`${blog.cardImage}`} alt="" />
                                 </div>
