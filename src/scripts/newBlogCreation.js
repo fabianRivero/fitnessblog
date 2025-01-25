@@ -17,6 +17,8 @@ content.value = "";
 articleImageUrl.value = "";
 descriptionContent.value = "";
 
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof tinymce !== 'undefined') {
 tinymce.init({
     selector: 'textarea#blogContent',
     branding: false,
@@ -25,6 +27,10 @@ tinymce.init({
     statusbar: false,
     plugins: "image",
   });
+} else {
+    console.error('TinyMCE no está definido. Asegúrate de que el script se haya cargado correctamente.');
+  }
+});
 
 submit.addEventListener("click", submitFunction);
 noButton.addEventListener("click", rejectMessage);
