@@ -150,6 +150,7 @@ const blogPunctuation = ({blogId}) => {
             setThanksMessageStyle({display: "none"});
             setThanksMessage("")
         } catch (error) {
+            console.log(error)
         };
     };
 
