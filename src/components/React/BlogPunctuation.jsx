@@ -122,8 +122,8 @@ const blogPunctuation = ({blogId}) => {
             const deleteCalificationToUser = [...user.blogsLiked.filter(item => item.id !== deletedCalification.id)];
             console.log("despues")
             
-            console.log(deletedCalificationToBlog)
-            console.log(deletedCalificationToUser)
+            console.log(deleteCalificationToBlog)
+            console.log(deleteCalificationToUser)
 
             
             const parsedToken = JSON.parse(token).token; 
