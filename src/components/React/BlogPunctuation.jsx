@@ -117,10 +117,14 @@ const blogPunctuation = ({blogId}) => {
                 calification: calification,
             };
 
+            console.log("principio")
             const deleteCalificationToBlog = [...blog.usersLikes.filter(item => item.id !== deletedCalification.id)];
             const deleteCalificationToUser = [...user.blogsLiked.filter(item => item.id !== deletedCalification.id)];
+            console.log("despues")
+            
             console.log(deletedCalificationToBlog)
             console.log(deletedCalificationToUser)
+
             
             const parsedToken = JSON.parse(token).token; 
             await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`, {
