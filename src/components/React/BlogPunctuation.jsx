@@ -117,8 +117,6 @@ const blogPunctuation = ({blogId}) => {
                 calification: calification,
             };
 
-            console.log(deletedCalification)
-
             const deleteCalificationToBlog = [...blog.usersLikes.filter(item => item.id !== deletedCalification.id)];
             const deleteCalificationToUser = [...user.blogsLiked.filter(item => item.id !== deletedCalification.id)];
             console.log(deletedCalificationToBlog)
