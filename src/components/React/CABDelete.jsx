@@ -31,8 +31,6 @@ const DeleteArticles = ({ page }) => {
                     const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
-                    setBlogComments(data.blogs.usersComments);
-                    setBlogCalifications(data.blogs.usersLikes);
 
                 } else {
                     const tagsSelected = tags.join(",");
