@@ -29,8 +29,6 @@ const blogPunctuation = ({blogId}) => {
                         setUser(uData.user);
                         const userCalifications = uData.user.blogsLiked; 
                         const userCalificationsSet = new Set(userCalifications.map((cal) => cal.id));
-                        console.log(userCalifications)
-                        console.log(userCalificationsSet)
 
                         const blogData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogId}`);
                         const bData = await blogData.json();
@@ -54,8 +52,6 @@ const blogPunctuation = ({blogId}) => {
         };
         initialCalification();
     },[blogId]);
-
-    console.log()
    
     const handleStarClick = (index) => {
         setCalification(index + 1);
