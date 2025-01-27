@@ -1,5 +1,5 @@
 ---
-const response = await fetch('https://apiblog-zzj1.onrender.com/api/blogs');
+const response = await fetch('https://apiblog-zzj1.onrender.com/api/blogs?pagesize=9999');
 const data = await response.json();
 const blogs = data.blogs;
 ---
