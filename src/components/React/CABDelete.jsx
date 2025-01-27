@@ -8,6 +8,7 @@ const DeleteArticles = ({ page }) => {
     const [token, setToken] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false); // Controla el diálogo de confirmación
     const [selectedIds, setSelectedIds] = useState([]); // IDs seleccionados para eliminar
+    const [successMessage, setSuccessMessage] = useState(false);
 
     useEffect(() => {
         const getInitialBlogs = async () => {
@@ -160,6 +161,15 @@ const DeleteArticles = ({ page }) => {
         }
 
         console.log("Actualización completada con éxito.");
+
+        setShowConfirmation(false);
+        setSuccessMessage(true);
+
+            // Refrescar los blogs
+        const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+        const data = await response.json();
+        setBlogs(data.blogs);
+        
     } catch (error) {
         console.error("Ocurrió un error:", error);
     }
@@ -226,6 +236,12 @@ const DeleteArticles = ({ page }) => {
                             No
                         </button>
                     </div>
+                </div>
+            )}
+                {successMessage && (
+                <div className="successMessage">
+                    <p>Blogs eliminados con éxito.</p>
+                    <button onClick={() => setSuccessMessage(false)}>OK</button>
                 </div>
             )}
         </>
