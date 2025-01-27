@@ -211,7 +211,7 @@ const blogPunctuation = ({blogId}) => {
                 </li>
             ))}
             </ul>
-            <button className="button" onClick={changeCalification} disabled={isSubmitting}>
+            <button className="button" onClick={ChangeCalification} disabled={isSubmitting}>
             Cambiar calificación
             </button>
             <p className="thanks" style={{display: "block", color: "green"}}>¡Gracias por tu calificación!</p>
