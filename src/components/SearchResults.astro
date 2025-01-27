@@ -8,7 +8,7 @@ const blogs = data.blogs;
 <ul id="searchResultsIndex">
     {
     blogs.map((blog)=> (
-        <li><a class="searchResult" href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`}>
+        <li><a class="searchResult" href={`https://myfirstfitnessblog.netlify.app/post/${blog.id}`}>
         {/* <li><a class="searchResult" href={`https://localhost:4321/blog/${blog.id}`}> */}
             <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 
@@ -24,7 +24,7 @@ const blogs = data.blogs;
 <ul id="searchResultsGeneral">
     {
         blogs.map((blog)=> (
-            <li><a class="searchResult" href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`}>
+            <li><a class="searchResult" href={`https://myfirstfitnessblog.netlify.app/post/${blog.id}`}>
             {/* <li><a class="searchResult" href={`https://localhost:4321/blog/${blog.id}`}> */}
                 <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 
