@@ -198,8 +198,8 @@ const DeleteArticles = ({ page }) => {
                         />
                         <article className="article">
                             <p className="id">{blog.id}</p>
-                            {/* <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer"> */}
-                            <a href={`https://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
+                            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
+                            {/* <a href={`https://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer"> */}
                                 <div className="imgContainer">
                                     <img src={`${blog.cardImage}`} alt="" />
                                 </div>

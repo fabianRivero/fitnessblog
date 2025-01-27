@@ -56,8 +56,8 @@ const Articles = ({ page }) => {
             blogs.map((blog) => (
             <div className="article-container" key={blog.id}>
                 <article className="article">
-                    {/* <a href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`} className="articleContainer"> */}
-                    <a href={`https://localhost:4321/blog/${blog.id}`} className="articleContainer">
+                    <a href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`} className="articleContainer">
+                    {/* <a href={`https://localhost:4321/blog/${blog.id}`} className="articleContainer"> */}
                     <div className="imgContainer">
                     <img src= {`${blog.cardImage}`} alt=""/>
                     </div>

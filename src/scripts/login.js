@@ -37,8 +37,8 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            // window.location.href = "https://myfirstfitnessblog.netlify.app/admin-pages";
-            window.location.href = "https://localhost:4321/admin-pages";
+            window.location.href = "https://myfirstfitnessblog.netlify.app/admin-pages";
+            // window.location.href = "https://localhost:4321/admin-pages";
     
         } else if(payload.role === "user"){
             const now = new Date();
@@ -49,8 +49,8 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            // window.location.href = "https://myfirstfitnessblog.netlify.app/";
-            window.location.href = "https://localhost:4321/";
+            window.location.href = "https://myfirstfitnessblog.netlify.app/";
+            // window.location.href = "https://localhost:4321/";
         }else{
             document.getElementById("error").textContent = "Usuario o contraseña incorrectos.";
         }
