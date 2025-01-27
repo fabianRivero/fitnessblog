@@ -12,6 +12,7 @@ const blogPunctuation = ({blogId}) => {
     const [thanksMessageStyle, setThanksMessageStyle] = useState({display: "none"});
     const [thanksMessage, setThanksMessage] = useState("");
     const [calificationId, setCalificationId] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         if(!blogId) return;
@@ -62,7 +63,7 @@ const blogPunctuation = ({blogId}) => {
 
     const submitCalification = async (event) => {
         event.preventDefault();
-
+        setIsSubmitting(true);
         let newId = uuidv4();
         const newCalification = {
             id: newId,
@@ -74,9 +75,11 @@ const blogPunctuation = ({blogId}) => {
         if (!user.id){
             setThanksMessageStyle({display: "block", color: "red"});
             setThanksMessage("Debes estar registrado para calificar un blog.");
+            setIsSubmitting(false);
         }else if(calification === 0){
             setThanksMessageStyle({display: "block", color: "red"});
             setThanksMessage("Debes puntuar el blog con las estrellas para calificar.");
+            setIsSubmitting(false);
         }else{
             const insertCalificationToBlog = [...blog.usersLikes, newCalification];
             const insertCalificationToUser = [...user.blogsLiked, newCalification];
@@ -105,8 +108,11 @@ const blogPunctuation = ({blogId}) => {
                 setCalificationId(newId);
                 setThanksMessageStyle({display: "block", color: 'green'});
                 setThanksMessage("¡Gracias por tu calificación!")
-            } catch (error) {
-            };
+                } catch (error) {
+                    console.error("Error al calificar:", error);
+                } finally {
+                    setIsSubmitting(false); 
+                };
         };
     };
 
@@ -177,7 +183,9 @@ const blogPunctuation = ({blogId}) => {
                 </li>
             ))}
             </ul>
-            <button className="button" onClick={submitCalification}>Calificar</button>
+            <button className="button" onClick={submitCalification} disabled={isSubmitting}>
+            {isSubmitting ? "Calificando..." : "Calificar"}
+            </button>
             <p className="thanks" style={thanksMessageStyle}>{thanksMessage}</p>
         </div>
         ) : (
@@ -203,7 +211,9 @@ const blogPunctuation = ({blogId}) => {
                 </li>
             ))}
             </ul>
-            <button className="button" onClick={ChangeCalification}>Cambiar calificación</button>
+            <button className="button" onClick={submitCalification} disabled={isSubmitting}>
+            Cambiar calificación
+            </button>
             <p className="thanks" style={{display: "block", color: "green"}}>¡Gracias por tu calificación!</p>
         </div>
         )}
