@@ -75,7 +75,11 @@ const EditArticles = ({ page }) => {
             </div>
             </a>
             </article>
+<<<<<<< HEAD
             <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a>
+=======
+            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> 
+>>>>>>> e068bfae238feb0b5f6655ea70fe8591edbd6262
             {/* <a href={`https://localhost:4321/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> */}
         </div>   
         ))
