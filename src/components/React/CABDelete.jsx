@@ -160,15 +160,17 @@ const DeleteArticles = ({ page }) => {
             await updateUser(user.id, { blogsLiked: updatedCalifications });
         }
 
-        console.log("Actualización completada con éxito.");
+       alert("¡Blogs eliminados con éxito!");
 
-        setShowConfirmation(false);
-        setSuccessMessage(true);
-
-            // Refrescar los blogs
+        // Recargar la lista de blogs actualizada
         const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
         const data = await response.json();
         setBlogs(data.blogs);
+
+        // Reiniciar los estados relacionados
+        setSelectedCheckboxes({});
+        setSelectedIds([]);
+        setShowConfirmation(false);
         
     } catch (error) {
         console.error("Ocurrió un error:", error);
@@ -236,12 +238,6 @@ const DeleteArticles = ({ page }) => {
                             No
                         </button>
                     </div>
-                </div>
-            )}
-                {successMessage && (
-                <div className="successMessage">
-                    <p>Blogs eliminados con éxito.</p>
-                    <button onClick={() => setSuccessMessage(false)}>OK</button>
                 </div>
             )}
         </>
