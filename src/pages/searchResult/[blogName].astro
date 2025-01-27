@@ -9,15 +9,15 @@ const { blogName } = Astro.params;
 let response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=9999999`);
 let data = await response.json();
 
-const latestBlogs = data.blogs.slice(-6).reverse();
+const blogs = data.blogs;
 
-const blog = latestBlogs?.find((blog) => blog.linkTitle === blogName);
+const blog = blogs?.find((blog) => blog.linkTitle === blogName);
 
 
 if (!blog) {
   console.error(`No se encontró un blog con el linkTitle: ${blogName}`);
   return new Response('Blog not found', { status: 404 });
-}
+};
 
 --- 
 <BaseLayout title={blog.title}>
