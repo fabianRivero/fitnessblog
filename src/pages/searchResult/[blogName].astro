@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CommentBox from "../../components/CommentBox.astro";
+import BlogComments from '../../components/React/BlogComments.jsx';
+import BlogPunctuation from '../../components/React/BlogPunctuation.jsx';
+
+const { blogName } = Astro.params;
+
+let response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=9999999`);
+let data = await response.json();
+
+const latestBlogs = data.blogs.slice(-6).reverse();
+
+const blog = latestBlogs?.find((blog) => blog.linkTitle === blogName);
+
+
+if (!blog) {
+  console.error(`No se encontró un blog con el linkTitle: ${blogName}`);
+  return new Response('Blog not found', { status: 404 });
+}
+
+--- 
+<BaseLayout title={blog.title}>
+  <div class="blogPost">
+    <h1 class="blogTitle">{blog.title}</h1>
+    <p class="blog-id" style="display: none;">{blog.id}</p>
+    <span class="blogDate">publicado el {blog.publicationDate}</span>
+
+    <img src= {`${blog.cardImage}`} alt="Imagen del blog" />
+
+    <div class="blogContent" set:html={blog.content}></div>
+
+    <div class="division"></div>
+
+    <CommentBox />
+    <BlogComments blogId={blog.id} client:load />
+    <BlogPunctuation blogId={blog.id} client:load />
+</div>
+</BaseLayout>
+
+<script>import "../../scripts/comment.js"</script>

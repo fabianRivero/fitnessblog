@@ -8,6 +8,7 @@ const DeleteArticles = ({ page }) => {
     const [token, setToken] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false); // Controla el diálogo de confirmación
     const [selectedIds, setSelectedIds] = useState([]); // IDs seleccionados para eliminar
+    const [successMessage, setSuccessMessage] = useState(false);
 
     useEffect(() => {
         const getInitialBlogs = async () => {
@@ -31,8 +32,6 @@ const DeleteArticles = ({ page }) => {
                     const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
-                    setBlogComments(data.blogs.usersComments);
-                    setBlogCalifications(data.blogs.usersLikes);
 
                 } else {
                     const tagsSelected = tags.join(",");
@@ -79,106 +78,105 @@ const DeleteArticles = ({ page }) => {
     };
 
     const confirmDelete = async () => {
-        try {
-            let calificactionsArray = [];
-            let commentsArray = [];
+    try {
+        let calificactionsArray = [];
+        let commentsArray = [];
+        const parsedToken = JSON.parse(token).token;
 
-            for (const id of selectedIds) {
-  
-                const getData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`)
-                const data = await getData.JSON();
-                const califications = data.blog.usersLikes;
-                calificactionsArray = [...calificactionsArray, califications];
-                 
-                const comments = data.blog.usersComments;
-                commentsArray = [...commentsArray, comments];
+        // 1. Eliminar los blogs seleccionados y recopilar datos relacionados
+        for (const id of selectedIds) {
+            const getData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`);
+            const data = await getData.json();
 
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`, {
-                    method: "DELETE",
-                    headers: {
-                        Authorization: `Bearer ${JSON.parse(token).token}`,
-                    },
-                });
+            calificactionsArray = [...calificactionsArray, ...data.blog.usersLikes];
+            commentsArray = [...commentsArray, ...data.blog.usersComments];
 
-                if (!response.ok) {
-                    throw new Error("Error al eliminar los blogs.");
-                };
-            };
-
-            let usersForCalifications = [];
-            let usersForComments = [];
-            let removeComments = [];
-            let removeCalifications = [];
-
-            for (const calification of calificactionsArray){
-                const response = await fetch((`https://apiblog-zzj1.onrender.com/api/users/${calification.userId}`));
-                const getUser = await response.JSON();
-                const user = getUser.user;
-                usersForCalifications = [...usersForCalifications, user];
-            };
-
-            for (const comment of commentsArray){
-                const response = await fetch((`https://apiblog-zzj1.onrender.com/api/users/${comment.userId}`));
-                const getUser = await response.JSON();
-                const user = getUser.user;
-                usersForComments = [...usersForComments, user];
-            };
-
-            for (const user of usersForComments){
-                for(const comment of commentsArray){
-                    removeComments = [...user.blogsCommented.filter(item => item.id !== comment.id)];
-                };
-            };
-
-            for (const user of usersForCalifications){
-                for(const calification of calificactionsArray){
-                    removeCalifications = [...user.blogsLiked.filter(item => item.id !== calification.id)];
-                };
-            };
-
-            const parsedToken = JSON.parse(token).token; 
-            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
-                method: 'PATCH',
+            const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`, {
+                method: "DELETE",
                 headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${parsedToken}`
+                    Authorization: `Bearer ${parsedToken}`,
                 },
-                body: JSON.stringify({ usersComments: removeComments }),
-            });
-            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
-                method: 'PATCH',
-                headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${parsedToken}`
-                },
-                body: JSON.stringify({ usersForCalifications: removeCalifications }),
-            });
-    
-            await fetch(`https://apiblog-zzj1.onrender.com/api/users/${user.id}`, {
-                method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${parsedToken}`
-                },
-                body: JSON.stringify({ blogsLiked: deleteCalificationToUser }),
             });
 
+            if (!response.ok) {
+                throw new Error("Error al eliminar los blogs.");
+            }
+        }
 
-            // Actualizar la lista de blogs eliminando los seleccionados
-            setBlogs((prevBlogs) =>
-                prevBlogs.filter((blog) => !selectedIds.includes(blog.id.toString()))
+        console.log("Calificaciones recopiladas:", calificactionsArray);
+        console.log("Comentarios recopilados:", commentsArray);
+
+        // 2. Obtener usuarios únicos que interactuaron con los blogs (calificaciones y comentarios)
+        const getUsersFromInteractions = async (interactionsArray) => {
+            const users = [];
+            for (const interaction of interactionsArray) {
+                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/users/${interaction.userId}`);
+                const getUser = await response.json();
+                users.push(getUser.user);
+            }
+            // Filtrar usuarios únicos por ID
+            return users.filter((obj, index, self) => index === self.findIndex((t) => t.id === obj.id));
+        };
+
+        const usersForCalifications = await getUsersFromInteractions(calificactionsArray);
+        const usersForComments = await getUsersFromInteractions(commentsArray);
+
+        console.log("Usuarios para calificaciones:", usersForCalifications);
+        console.log("Usuarios para comentarios:", usersForComments);
+
+        // 3. Actualizar los usuarios eliminando las referencias a las calificaciones y comentarios
+        const updateUser = async (userId, updatedField) => {
+            const response = await fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${parsedToken}`,
+                },
+                body: JSON.stringify(updatedField),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error al actualizar el usuario ${userId}.`);
+            }
+        };
+
+        // 3.1 Actualizar comentarios
+        for (const user of usersForComments) {
+            const commentsToRemove = commentsArray.map(comment => comment.id);
+            const updatedComments = user.blogsCommented.filter(
+                comment => !commentsToRemove.includes(comment.id)
             );
 
-            // Limpiar los checkboxes seleccionados
-            setSelectedCheckboxes({});
-            alert("Blogs eliminados exitosamente.");
-        } catch (error) {
-            console.error("Error al eliminar los blogs:", error);
-            alert("Hubo un error al eliminar los blogs.");
-        } finally {
-            setShowConfirmation(false); // Oculta el aviso de confirmación
+            await updateUser(user.id, { blogsCommented: updatedComments });
         }
-    };
+
+        // 3.2 Actualizar calificaciones
+        for (const user of usersForCalifications) {
+            const calificationsToRemove = calificactionsArray.map(calification => calification.id);
+            const updatedCalifications = user.blogsLiked.filter(
+                calification => !calificationsToRemove.includes(calification.id)
+            );
+
+            await updateUser(user.id, { blogsLiked: updatedCalifications });
+        }
+
+       alert("¡Blogs eliminados con éxito!");
+
+        // Recargar la lista de blogs actualizada
+        const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+        const data = await response.json();
+        setBlogs(data.blogs);
+
+        // Reiniciar los estados relacionados
+        setSelectedCheckboxes({});
+        setSelectedIds([]);
+        setShowConfirmation(false);
+        
+    } catch (error) {
+        console.error("Ocurrió un error:", error);
+    }
+};
+
 
     const cancelDelete = () => {
         setShowConfirmation(false); // Cierra el aviso sin eliminar
