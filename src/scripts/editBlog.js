@@ -1,3 +1,5 @@
+import { currentDomain } from "./urlDomains.js";
+
 const editableBlogs = document.querySelectorAll(".article");
 const confirmationWindow = document.querySelector(".confirmationWindow"); 
 const greyScreen = document.querySelector(".greyScreen");
@@ -17,8 +19,7 @@ function denyEdition(){
 for (const blog of editableBlogs) {
     blog.addEventListener("click", function(){
         (preSelectBlog)();
-        yesButton.href = `https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/${id}`
-        //yesButton.href = `https://localhost:4321/admin-pages/edit-blog/${id}`
+        yesButton.href = `${currentDomain}/admin-pages/edit-blog/${id}`
     });
 }
 

@@ -1,5 +1,7 @@
 ---
-const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs`);
+import { backendDomain } from "../scripts/urlDomains";
+
+const response = await fetch(`${backendDomain}/api/blogs`);
 const data = await response.json();
 const pages = data.pages;
 const pagesArray = []; 

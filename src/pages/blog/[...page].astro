@@ -3,12 +3,13 @@ import Articles from "../../components/Articles.astro";
 import Pagination from "../../components/Pagination.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../scripts/stylesImport.js"
+import { backendDomain } from "../../scripts/urlDomains.js";
 
 const { page } = Astro.params;
 const currentPage = parseInt(page || "1");
 
 const getPages = await fetch(
-        `https://apiblog-zzj1.onrender.com/api/blogs`
+        `${backendDomain}/api/blogs`
     );
 const pagesData = await getPages.json();
 const pages = pagesData.pages;
@@ -16,7 +17,7 @@ const actualPage = pages - currentPage + 1;
 
 
 const response = await fetch(
-        `https://apiblog-zzj1.onrender.com/api/blogs?page=${actualPage}`
+        `${backendDomain}/api/blogs?page=${actualPage}`
     );
 const data = await response.json();
 const blogs = data.blogs.reverse();

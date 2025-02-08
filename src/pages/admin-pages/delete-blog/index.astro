@@ -1,8 +1,10 @@
 ---
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import CABDelete from "../../../components/React/CABDelete.jsx";
+import { backendDomain } from "../../../scripts/urlDomains.js";
+
 const getBlogsLength = await fetch(
-        `https://apiblog-zzj1.onrender.com/api/blogs?pageSize=99999`
+        `${backendDomain}/api/blogs?pageSize=99999`
     );
 const pagesData = await getBlogsLength.json();
 const pages = pagesData.blogs.length;

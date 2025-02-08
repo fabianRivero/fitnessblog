@@ -1,5 +1,7 @@
-const loginForm = document.querySelector(".form");
 import { jwtDecode } from 'jwt-decode';
+import { currentDomain, backendDomain } from './urlDomains.js';
+
+const loginForm = document.querySelector(".form");
 
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -7,7 +9,7 @@ loginForm.addEventListener("submit", async (event) => {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
 
-    const response = await fetch('https://apiblog-zzj1.onrender.com/api/users/login', {
+    const response = await fetch(`${backendDomain}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +27,6 @@ loginForm.addEventListener("submit", async (event) => {
     const token = data.token;
     const payload = jwtDecode(token);
 
-    // Simulando autenticación correcta
     if(!payload){
     }else{
         if (payload.role === "admin") {
@@ -37,8 +38,7 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            window.location.href = "https://myfirstfitnessblog.netlify.app/admin-pages";
-            // window.location.href = "https://localhost:4321/admin-pages";
+            window.location.href = `${currentDomain}/admin-pages`;    
     
         } else if(payload.role === "user"){
             const now = new Date();
@@ -49,8 +49,7 @@ loginForm.addEventListener("submit", async (event) => {
             }
             alert("Login exitoso");
             localStorage.setItem('key', JSON.stringify(item));
-            window.location.href = "https://myfirstfitnessblog.netlify.app/";
-            // window.location.href = "https://localhost:4321/";
+            window.location.href = `${currentDomain}/`;
         }else{
             document.getElementById("error").textContent = "Usuario o contraseña incorrectos.";
         }

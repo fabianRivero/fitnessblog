@@ -1,5 +1,7 @@
 ---
-const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs`);
+import { currentDomain, backendDomain } from "../scripts/urlDomains.js";
+
+const response = await fetch(`${backendDomain}/api/blogs`);
 const data = await response.json();
 const pages = data.pages;
 const pagesArray = []; 
@@ -7,12 +9,7 @@ const pagesArray = [];
 for (let i = 1; i <= pages; i++) {
     pagesArray.push(i)        
 }
-const { url = "https://myfirstfitnessblog.netlify.app/blog/page" } = Astro.props
-<<<<<<< HEAD
-// const { url = `http://localhost:4321/blog/page`} = Astro.props
-=======
-//const { url = `http://localhost:4321/blog/page`} = Astro.props
->>>>>>> e068bfae238feb0b5f6655ea70fe8591edbd6262
+const { url = `${currentDomain}/blog/page` } = Astro.props
 ---
 
 <div class="pageslist"> 

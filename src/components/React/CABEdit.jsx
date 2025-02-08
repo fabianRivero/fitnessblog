@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Categories from "../React/Categories.jsx";
+import { currentDomain, backendDomain } from "../../scripts/urlDomains.js";
 
 const EditArticles = ({ page }) => {
 
@@ -9,7 +10,7 @@ const EditArticles = ({ page }) => {
     useEffect(() => {
         const getInitialBlogs = async() => {
             try{
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+                const response = await fetch(`${backendDomain}/api/blogs?pageSize=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs)
             }catch(error) {
@@ -23,12 +24,12 @@ const EditArticles = ({ page }) => {
     const getFilteredBlogs = async() => {
         try{
             if(tags.length === 0) {
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+                const response = await fetch(`${backendDomain}/api/blogs?pageSize=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             } else{
                 const tagsSelected = tags.join(","); 
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/?pageSize=${page}&tags=${tagsSelected}`);
+                const response = await fetch(`${backendDomain}/api/blogs/?pageSize=${page}&tags=${tagsSelected}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             }
@@ -56,8 +57,7 @@ const EditArticles = ({ page }) => {
         blogs.map((blog) => (
         <div className="article-container" key={blog.id}>
             <article className="article" id="article">
-            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/${blog.id}`}>
-            {/* <a href={`https://localhost:4321/admin-pages/edit-blog/${blog.id}`}> */}
+            <a href={`${currentDomain}/admin-pages/edit-blog/${blog.id}`}>
             <p className="linkId">{blog.id}</p>
             <div className="articleContainer">
                 <div className="imgContainer">
@@ -75,8 +75,7 @@ const EditArticles = ({ page }) => {
             </div>
             </a>
             </article>
-            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> 
-            {/* <a href={`https://localhost:4321/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> */}
+            <a href={`${currentDomain}/admin-pages/edit-blog/post/${blog.linkTitle}`}>Ir al blog</a> 
         </div>   
         ))
         }

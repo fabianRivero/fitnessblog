@@ -1,3 +1,5 @@
+import { currentDomain, backendDomain } from "./urlDomains.js";
+
 const signupForm = document.querySelector(".form");
 
 signupForm.addEventListener("submit", async (event) => {
@@ -8,12 +10,12 @@ signupForm.addEventListener("submit", async (event) => {
 
   try {
     // Primer fetch para obtener los usuarios actuales
-    const usersResponse = await fetch('https://apiblog-zzj1.onrender.com/api/users');
+    const usersResponse = await fetch(`/api/users`);
     const responseInfo = await usersResponse.json();
     const actualUsers = responseInfo.users;
 
     if (actualUsers.length === 0) {
-      const signupResponse = await fetch('https://apiblog-zzj1.onrender.com/api/users/signup', {
+      const signupResponse = await fetch(`${backendDomain}/api/users/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,8 +25,7 @@ signupForm.addEventListener("submit", async (event) => {
 
       if (signupResponse.ok) {
         alert("Registro exitoso");
-        window.location.href = "https://myfirstfitnessblog.netlify.app/";
-        // window.location.href = "https://localhost:4321/";
+        window.location.href = `${currentDomain}/`;
       } else {
         console.error("Error al registrar:", await signupResponse.text());
         alert("Hubo un problema al registrar");
@@ -35,7 +36,7 @@ signupForm.addEventListener("submit", async (event) => {
       if (userExists) {
         alert("Este usuario ya existe");
       } else {
-        const signupResponse = await fetch('https://apiblog-zzj1.onrender.com/api/users/signup', {
+        const signupResponse = await fetch(`${backendDomain}/api/users/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -45,8 +46,7 @@ signupForm.addEventListener("submit", async (event) => {
 
         if (signupResponse.ok) {
           alert("Registro exitoso");
-          window.location.href = "https://myfirstfitnessblog.netlify.app/";
-          // window.location.href = "https://localhost:4321/";
+          window.location.href = `${currentDomain}/`;
         } else {
           console.error("Error al registrar:", await signupResponse.text());
           alert("Hubo un problema al registrar");

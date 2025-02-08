@@ -1,4 +1,5 @@
 import authorization from "./authVerificator";
+import { backendDomain } from "./urlDomains.js";
 
 let title = document.querySelector("#blogTitle");
 let articleImageUrl = document.querySelector("#articleImage");
@@ -97,7 +98,7 @@ async function createNewBlog() {
     const contentResult = tinymce.activeEditor.getContent();
     const token = authorization();
 
-    const response = await fetch('https://apiblog-zzj1.onrender.com/api/blogs', {
+    const response = await fetch(`${backendDomain}/api/blogs`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',

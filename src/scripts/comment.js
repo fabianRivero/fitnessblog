@@ -1,5 +1,6 @@
 import { jwtDecode } from 'jwt-decode';
 import { v4 as uuidv4 } from 'uuid';
+import { backendDomain } from './urlDomains.js';
 
 document.addEventListener("DOMContentLoaded", async() => {
     const commentary = document.querySelector(".commentary");
@@ -19,8 +20,8 @@ document.addEventListener("DOMContentLoaded", async() => {
             const decoded = jwtDecode(token);
             const userId = decoded.id;   
             const [getUser, getBlog] = await Promise.all([
-                fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`),
-                fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogIdElement.textContent}`)
+                fetch(`${backendDomain}/api/users/${userId}`),
+                fetch(`${backendDomain}/api/blogs/${blogIdElement.textContent}`)
             ]);
 
             const { user } = await getUser.json();
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                         
 
             const [updateBlog, updateUser] = await Promise.all([
-                fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${blogIdElement.textContent}`, {
+                fetch(`${backendDomain}/api/blogs/${blogIdElement.textContent}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                     },
                     body: JSON.stringify({ usersComments: [...blog.usersComments, newComment] }),
                 }),
-                fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`, {
+                fetch(`${backendDomain}/api/users/${userId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',

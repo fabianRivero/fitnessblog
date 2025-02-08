@@ -1,6 +1,8 @@
 ---
+import { currentDomain, backendDomain } from "../scripts/urlDomains.js";
+
 const { page } = Astro.props;
-const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?page=${page}`);
+const response = await fetch(`${backendDomain}/api/blogs?page=${page}`);
 const data = await response.json();
 const blogs = data.blogs;
 ---
@@ -12,8 +14,7 @@ const blogs = data.blogs;
         <input type="checkbox" class="" id="eraseCheckbox">
         <article class="article">
             <p class="id">{blog.id}</p>
-            <a href={`https://myfirstfitnessblog.netlify.app/blog/${blog.id}`}>
-            {/* <a href={`http://localhost:4321/blog/${blog.id}`}> */}
+            <a href={`${currentDomain}/blog/${blog.id}`}>
             <div class="articleContainer">
             <div class="imgContainer">
             <img src= {`${blog.cardImage}`} alt=""/>

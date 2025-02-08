@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { currentDomain } from '../../scripts/urlDomains.js';
 
 const UserLogin = () => {
   const [user, setUser] = useState(null);
@@ -13,19 +14,16 @@ const UserLogin = () => {
 
     const handleLoginRedirect = (event) => {
       event.preventDefault()
-      window.location.href = "https://myfirstfitnessblog.netlify.app/login"; 
-      // window.location.href = "https://localhost:4321/login"; 
+      window.location.href = `${currentDomain}/login`; 
     };
     const handleSignupRedirect = (event) => {
       event.preventDefault()
-      window.location.href = "https://myfirstfitnessblog.netlify.app/signup";
-      // window.location.href = "https://localhost:4321/signup";
+      window.location.href = `${currentDomain}/signup`;
     };
     const handleLogout = (event) => {
       event.preventDefault()
       window.localStorage.removeItem("key")
-      window.location.href = "https://myfirstfitnessblog.netlify.app/";
-      // window.location.href = "https://localhost:4321/";
+      window.location.href = `${currentDomain}/`;
     };
 
   return (

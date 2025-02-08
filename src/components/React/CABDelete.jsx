@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import Categories from "../React/Categories.jsx";
+import { currentDomain, backendDomain } from "../../scripts/urlDomains.js";
 
 const DeleteArticles = ({ page }) => {
     const [blogs, setBlogs] = useState([]);
     const [tags, setTags] = useState([]);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
     const [token, setToken] = useState(null);
-    const [showConfirmation, setShowConfirmation] = useState(false); // Controla el diálogo de confirmación
-    const [selectedIds, setSelectedIds] = useState([]); // IDs seleccionados para eliminar
-    const [successMessage, setSuccessMessage] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false); 
+    const [selectedIds, setSelectedIds] = useState([]); 
 
     useEffect(() => {
         const getInitialBlogs = async () => {
             try {
                 const getToken = localStorage.getItem("key");
                 setToken(getToken);
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+                const response = await fetch(`${backendDomain}/api/blogs?pageSize=${page}`);
                 const data = await response.json();
                 setBlogs(data.blogs);
             } catch (error) {
@@ -29,14 +29,14 @@ const DeleteArticles = ({ page }) => {
         const getFilteredBlogs = async () => {
             try {
                 if (tags.length === 0) {
-                    const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}/`);
+                    const response = await fetch(`${backendDomain}/api/blogs?pageSize=${page}/`);
                     const data = await response.json();
                     setBlogs(data.blogs);
 
                 } else {
                     const tagsSelected = tags.join(",");
                     const response = await fetch(
-                        `https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}&tags=${tagsSelected}`
+                        `${backendDomain}/api/blogs?pageSize=${page}&tags=${tagsSelected}`
                     );
                     const data = await response.json();
                     setBlogs(data.blogs);
@@ -66,15 +66,14 @@ const DeleteArticles = ({ page }) => {
     };
 
     const handleDeleteClick = () => {
-        // Obtén los IDs seleccionados
         const ids = Object.keys(selectedCheckboxes).filter((id) => selectedCheckboxes[id]);
         if (ids.length === 0) {
             alert("No has seleccionado ningún blog.");
             return;
         }
     
-        setSelectedIds(ids); // Actualiza el estado con los IDs seleccionados
-        setShowConfirmation(true); // Muestra el cuadro de confirmación
+        setSelectedIds(ids); 
+        setShowConfirmation(true);
     };
 
     const confirmDelete = async () => {
@@ -85,13 +84,13 @@ const DeleteArticles = ({ page }) => {
 
         // 1. Eliminar los blogs seleccionados y recopilar datos relacionados
         for (const id of selectedIds) {
-            const getData = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`);
+            const getData = await fetch(`${backendDomain}/api/blogs/${id}`);
             const data = await getData.json();
 
             calificactionsArray = [...calificactionsArray, ...data.blog.usersLikes];
             commentsArray = [...commentsArray, ...data.blog.usersComments];
 
-            const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id}`, {
+            const response = await fetch(`${backendDomain}/api/blogs/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${parsedToken}`,
@@ -110,7 +109,7 @@ const DeleteArticles = ({ page }) => {
         const getUsersFromInteractions = async (interactionsArray) => {
             const users = [];
             for (const interaction of interactionsArray) {
-                const response = await fetch(`https://apiblog-zzj1.onrender.com/api/users/${interaction.userId}`);
+                const response = await fetch(`${backendDomain}/api/users/${interaction.userId}`);
                 const getUser = await response.json();
                 users.push(getUser.user);
             }
@@ -126,7 +125,7 @@ const DeleteArticles = ({ page }) => {
 
         // 3. Actualizar los usuarios eliminando las referencias a las calificaciones y comentarios
         const updateUser = async (userId, updatedField) => {
-            const response = await fetch(`https://apiblog-zzj1.onrender.com/api/users/${userId}`, {
+            const response = await fetch(`${backendDomain}/api/users/${userId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -163,7 +162,7 @@ const DeleteArticles = ({ page }) => {
        alert("¡Blogs eliminados con éxito!");
 
         // Recargar la lista de blogs actualizada
-        const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=${page}`);
+        const response = await fetch(`${backendDomain}/api/blogs?pageSize=${page}`);
         const data = await response.json();
         setBlogs(data.blogs);
 
@@ -198,8 +197,7 @@ const DeleteArticles = ({ page }) => {
                         />
                         <article className="article">
                             <p className="id">{blog.id}</p>
-                            <a href={`https://myfirstfitnessblog.netlify.app/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
-                            {/* <a href={`https://localhost:4321/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer"> */}
+                            <a href={`${currentDomain}/admin-pages/delete-blog/post/${blog.linkTitle}`} className="articleContainer">
                                 <div className="imgContainer">
                                     <img src={`${blog.cardImage}`} alt="" />
                                 </div>

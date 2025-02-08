@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { backendDomain } from "../../../../scripts/urlDomains.js";
 
 const { blogName } = Astro.params;
 
-const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?pageSize=99999`);
+const response = await fetch(`${backendDomain}/api/blogs?pageSize=99999`);
 const data = await response.json();
 
 

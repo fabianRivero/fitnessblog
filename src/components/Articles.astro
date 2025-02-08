@@ -1,5 +1,6 @@
 ---
 const { blogs, currentPage } = Astro.props;
+import { currentDomain } from "../scripts/urlDomains.js";
 ---
 
 <div class="articles">
@@ -11,8 +12,7 @@ const { blogs, currentPage } = Astro.props;
       return (
         <div class="article-container">
           <article class="article">
-            {/*<a href={`http://localhost:4321/blog/post/${blog.linkTitle}?page=${currentPage}`} class="articleContainer"></a>*/} 
-            <a href={`https://myfirstfitnessblog.netlify.app/blog/post/${blog.linkTitle}?page=${currentPage}`} class="articleContainer">
+            <a href={`${currentDomain}/blog/post/${blog.linkTitle}?page=${currentPage}`} class="articleContainer">
               <div class="imgContainer">
                 <img src={`${blog.cardImage}`} alt="" />
               </div>

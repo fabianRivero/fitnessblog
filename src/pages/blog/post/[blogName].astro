@@ -3,19 +3,20 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CommentBox from "../../../components/CommentBox.astro";
 import BlogComments from '../../../components/React/BlogComments.jsx';
 import BlogPunctuation from '../../../components/React/BlogPunctuation.jsx';
+import { backendDomain } from "../../../scripts/urlDomains.js";
 
 const { blogName } = Astro.params;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 
 const getPages = await fetch(
-        `https://apiblog-zzj1.onrender.com/api/blogs`
+        `${backendDomain}/api/blogs`
     );
 const pagesData = await getPages.json();
 const pages = pagesData.pages;
 const actualPage = pages - currentPage + 1;
 
 
-const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs?page=${actualPage}`);
+const response = await fetch(`${backendDomain}/api/blogs?page=${actualPage}`);
 const data = await response.json();
 
 

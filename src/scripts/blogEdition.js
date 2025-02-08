@@ -1,4 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
+import { backendDomain } from './urlDomains.js';
 
 let title = document.querySelector("#blogTitle");
 let content = document.querySelector("#blogContent");
@@ -87,7 +88,7 @@ if (decoded.role !== "admin"){
 
         const contentValue= tinymce.get('blogContent').getContent();
     
-        const response = await fetch(`https://apiblog-zzj1.onrender.com/api/blogs/${id.textContent}`, {
+        const response = await fetch(`${backendDomain}/api/blogs/${id.textContent}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',

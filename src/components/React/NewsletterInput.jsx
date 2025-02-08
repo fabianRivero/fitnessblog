@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { backendDomain } from "../../scripts/urlDomains.js";
 
 const NewsletterInput = () => {
     const [input, setInput] = useState("");
@@ -9,7 +10,7 @@ const NewsletterInput = () => {
     useEffect(() => {
         const getMails = async () => {
             try {
-                const response = await fetch("https://apiblog-zzj1.onrender.com/api/emails");
+                const response = await fetch(`${backendDomain}/api/emails`);
                 const result = await response.json();
                 setAllMails(result);
               } catch (error) {
@@ -30,7 +31,7 @@ const NewsletterInput = () => {
             }, 4000)
         }else{
             try {
-                await fetch('https://apiblog-zzj1.onrender.com/api/emails', {
+                await fetch(`${backendDomain}/api/emails`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
