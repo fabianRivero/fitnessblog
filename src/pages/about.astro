@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { currentDomain } from "../scripts/urlDomains.js";
+
+const page = currentDomain; 
 ---
 
 <BaseLayout title="About">
@@ -8,46 +11,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p>
             ¡Bienvenidos a nuestro Blog!
 
-            Somos un equipo apasionado por el bienestar y la vida saludable, y estamos 
-            aquí para ayudarte a alcanzar tus objetivos de fitness y sentirte 
-            increíble en cada paso del camino. Creemos que el 
-            fitness no es solo una actividad, sino un estilo de vida que puede 
-            transformar todos los aspectos de tu vida.
+            En esta parte quiero explicar brevemente como funciona este blog por si te interesa probar sus funcionalidades.    
         </p>
 
         <h2>¿Quiénes Somos?</h2>
 
         <p>
-            Nuestro equipo está compuesto por entrenadores certificados, 
-            nutricionistas y entusiastas del fitness que combinan sus conocimientos 
-            y experiencias para ofrecerte contenido de alta calidad y asesoramiento 
-            experto. Con años de experiencia en el campo, nos dedicamos a 
-            proporcionarte recursos prácticos y motivadores para que puedas mejorar 
-            tu salud y bienestar.
+            Creé este blog para que un administrador pueda escribir nuevos blogs, eliminar los existentes y editarlos desde la misma aplicación web. Para ello, accede a páginas de administración que solo están disponibles para usuarios con el rol de "admin".
         </p>
 
-        <h2>Nuestro Equipo</h2>
-
-        <ul>
-            <li><img src="" alt="">Entrenador</li>
-            <li><img src="" alt="">Nutricionista</li>
-            <li><img src="" alt="">Entrenador</li>
-        </ul>
-
-        <h2>¿Qué Ofrecemos?</h2>
-
-        <ul>
-            <li><h3>Rutinas de Ejercicio:</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid adipisci explicabo ipsum a dolor fuga quos repellendus eos ab modi.</p></li>
-            <li><h3>Consejos de Nutrición:</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid adipisci explicabo ipsum a dolor fuga quos repellendus eos ab modi.</p></li>
-            <li><h3>Motivación e Inspiración:</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid adipisci explicabo ipsum a dolor fuga quos repellendus eos ab modi.</p></li>
-            <li><h3>Artículos Educativos:</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid adipisci explicabo ipsum a dolor fuga quos repellendus eos ab modi.</p></li>
-        </ul>
-
-        <h2>Únete a Nosotros</h2>
-
-        <p>Estamos emocionados de que formes parte de nuestra comunidad. 
-            Únete a nosotros en las redes sociales, suscríbete a nuestro boletín y 
-            comienza tu viaje hacia una vida más saludable hoy mismo.
+        <p>
+            Todos los usuarios que se registran en el blog a través del "sign up" obtienen automáticamente el rol de "user". Estos pueden comentar y calificar los blogs.
+        </p>
+        <p>
+            Si deseas probar las funciones de administrador, puedes iniciar sesión con:
+            Email: admin@email.com
+            Contraseña: 12345678
+        </p>
+        <p>
+            Si accedes como administrador, después de iniciar sesión, la página te redireccionará a {page}/admin-pages. Tanto esta página como las que se acceden desde ella no están disponibles para usuarios con rol "user". Desde estas páginas, puedes crear nuevos blogs, eliminar los existentes o editarlos.
+        </p>
+        <p>
+            Si deseas probar las funciones de usuario, puedes iniciar sesión con:
+            Email: user1@email.com
+            Contraseña: 12345678
+        </p>
+        <p>
+            Las funciones del usuario incluyen comentar y calificar los blogs. Cada usuario puede calificar un blog una vez, otorgándole de 1 a 5 estrellas. Además, puede modificar su calificación posteriormente si así lo desea.
         </p>
     </span>
 </BaseLayout>
