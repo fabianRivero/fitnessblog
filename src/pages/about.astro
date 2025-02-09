@@ -3,19 +3,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { currentDomain } from "../scripts/urlDomains.js";
 
 const page = currentDomain; 
+console.log(page);
 ---
 
 <BaseLayout title="About">
     <section class="about">
-        <h1 class="about__title">Sobre Nosotros</h1>
+        <h1 class="about__title">¿Como usar este blog?</h1>
         
         <article class="about__intro">
-            <p>¡Bienvenidos a nuestro Blog!</p>
-            <p>En esta sección te explicamos cómo funciona el blog y sus principales funcionalidades.</p>
+            <p>¡Bienvenidos a nuestro Blog!</p> <br>
+            <p>En esta sección te explicamos brevemente cómo funciona el blog y sus principales funcionalidades. 
+
+            </p>
         </article>
 
         <article class="about__section">
-            <h2 class="about__subtitle">¿Quiénes Somos?</h2>
             <p>
                 Este blog fue creado para que un administrador pueda gestionar contenido a través de una interfaz web sencilla. Los administradores pueden crear, editar y eliminar blogs desde una sección exclusiva para ellos.
             </p>
@@ -31,7 +33,6 @@ const page = currentDomain;
                     <li>Crear nuevos blogs</li>
                     <li>Editar publicaciones existentes</li>
                     <li>Eliminar blogs</li>
-                    <li>Gestionar comentarios y calificaciones</li>
                 </ul>
             </div>
 
@@ -55,7 +56,7 @@ const page = currentDomain;
                     <li><strong>Email:</strong> admin@email.com</li>
                     <li><strong>Contraseña:</strong> 12345678</li>
                 </ul>
-                <p>Después de iniciar sesión, serás redirigido a <code>/admin-pages</code>, donde podrás gestionar los blogs.</p>
+                <p>Después de iniciar sesión, serás redirigido a {page}/admin-pages, donde podrás gestionar los blogs.</p>
             </div>
 
             <div class="access__card">
