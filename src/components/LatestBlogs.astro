@@ -1,10 +1,13 @@
 ---
 import { currentDomain, backendDomain } from "../scripts/urlDomains.js";
 
-let response = await fetch(`${backendDomain}/api/blogs?pageSize=9999999`);
-let data = await response.json();
+const fetchBlogs = async () => {
+  let response = await fetch(`${backendDomain}/api/blogs?pageSize=9999999`);
+  let data = await response.json();
+  return data.blogs.slice(-6).reverse();
+};
 
-const latestBlogs = data.blogs.slice(-6).reverse();
+const latestBlogs = await fetchBlogs();
 
 ---
 
