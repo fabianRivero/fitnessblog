@@ -1,7 +1,7 @@
 # Fitness Blog
 
 ## Descripción:
-[English](#description:)  
+[English](#description)  
 [Link a la página](https://myfirstfitnessblog.netlify.app/)
 
 Este proyecto es un blog desarrollado en Astro con componentes React. Permite registrar usuarios con diferentes roles dentro del blog.
@@ -50,7 +50,7 @@ Esta página lista todos los blogs disponibles. Para eliminar uno o varios blogs
 Para editar un blog, selecciónalo de la lista. Esto abrirá el editor de blogs con una opción adicional para visualizar el contenido actual antes de hacer cambios.
 
 ## Description:
-[Español](#descripción:)  
+[Español](#descripción)  
 [Link to the page](https://myfirstfitnessblog.netlify.app/)
 
 This project is a blog developed in Astro with React components. It allows users to register with different roles within the blog.
