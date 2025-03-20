@@ -49,6 +49,8 @@ Esta página lista todos los blogs disponibles. Para eliminar uno o varios blogs
 #### Editar blog existente:
 Para editar un blog, selecciónalo de la lista. Esto abrirá el editor de blogs con una opción adicional para visualizar el contenido actual antes de hacer cambios.
 
+---
+
 ## Description:
 [Español](#descripción)  
 [Link to the page](https://myfirstfitnessblog.netlify.app/)
