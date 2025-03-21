@@ -66,12 +66,18 @@ This project is a blog developed in Astro with React components. It allows users
 ### Roles:
 The available user roles are:  
 
-#### - **Users:**
-These users register through the **Create Account** button in the page header. They can comment and rate blog posts.
+#### Users:
+These users register through the **Create Account** button in the website header. They can comment and rate blogs.
+**IMPORTANT:** If you want to test the functionalities of this role without creating a new account, you can log in by clicking the "Log In" button with the following credentials:
+**Email:** user1@email.com
+**Password:** 12345678
 
-#### - **Administrator:**
-This role is assigned to a specific user, and new administrators cannot be created.  
-Administrators have access to all user functions and, additionally, can access the **admin pages**, where they can create, edit, and delete blogs.  
+#### Administrator:
+This role is assigned to a specific user, and new administrators cannot be created.
+Administrators have access to all user functionalities and can also access the admin pages, where they can create, edit, and delete blogs.
+**IMPORTANT:** If you want to test the functionalities of this role without creating a new account, you can log in by clicking the "Log In" button with the following credentials:
+**Email:** admin@email.com
+**Password:** 12345678
 
 ---
 
