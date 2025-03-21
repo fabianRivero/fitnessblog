@@ -11,15 +11,21 @@ Los roles de usuario que admite son:
 
 #### - **Usuarios:**
 Estos usuarios se registran a través del botón **Crear cuenta** en el header de la página. Tienen acceso a hacer comentarios y calificar los blogs.
+
 **IMPORTANTE:** Si quieres probar las funcionalidades de este rol sin tener que crear una cuenta nueva, puedes acceder pulsando el boton **Iniciar Sesión** con los siguientes datos:
+
 **Email:** user1@email.com
+
 **Contraseña:** 12345678
 
 #### - **Administrador:**
 Este rol está asignado a un usuario específico y no se pueden crear nuevos administradores.  
 Tiene acceso a las funciones del rol de usuario y, además, puede acceder a las **páginas de administrador**, donde puede crear, editar y borrar blogs.  
+
 **IMPORTANTE:** Si quieres probar las funcionalidades de este rol sin tener que crear una cuenta nueva, puedes acceder pulsando el boton **Iniciar Sesión** con los siguientes datos:
+
 **Email:** admin@email.com
+
 **Contraseña:** 12345678
 
 ---
@@ -68,15 +74,21 @@ The available user roles are:
 
 #### Users:
 These users register through the **Create Account** button in the website header. They can comment and rate blogs.
+
 **IMPORTANT:** If you want to test the functionalities of this role without creating a new account, you can log in by clicking the "Log In" button with the following credentials:
+
 **Email:** user1@email.com
+
 **Password:** 12345678
 
 #### Administrator:
 This role is assigned to a specific user, and new administrators cannot be created.
 Administrators have access to all user functionalities and can also access the admin pages, where they can create, edit, and delete blogs.
+
 **IMPORTANT:** If you want to test the functionalities of this role without creating a new account, you can log in by clicking the "Log In" button with the following credentials:
+
 **Email:** admin@email.com
+
 **Password:** 12345678
 
 ---
