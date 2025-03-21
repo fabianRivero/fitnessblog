@@ -21,6 +21,7 @@ Tiene acceso a las funciones del rol de usuario y, además, puede acceder a las 
 **IMPORTANTE:** Si quieres probar las funcionalidades de este rol sin tener que crear una cuenta nueva, puedes acceder pulsando el boton **Iniciar Sesión** con los siguientes datos:
 **Email:** admin@email.com
 **Contraseña:** 12345678
+
 ---
 
 ### Páginas de administrador:
